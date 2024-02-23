@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-SITE_ID = 1 #identifies which site we are using for login 
+SITE_ID = 2 #identifies which site we are using for login 
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'login.apps.LoginConfig' #should be LoginConfig but following video tutorial for now
+    'login.apps.LoginConfig', #should be LoginConfig but following video tutorial for now
     "django.contrib.sites",
     "allauth", #allows other forms of authentication
     "allauth.account",
@@ -64,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'whistleblowingsite.urls'
