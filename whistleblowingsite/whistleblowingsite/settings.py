@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+SITE_ID = 1 #identifies which site we are using for login 
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,7 +37,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'login' #should be LoginConfig but following video tutorial for now
+    "django.contrib.sites",
+    "allauth", #allows other forms of authentication
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
 ]
+
+#specify variable for social account provider
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "SCOPE": [ #from when google credential was created
+            "profile",
+            "email", 
+        ],
+        "AUTH_PARAMS": {"access_type": "online"}
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -121,3 +138,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend", #using standard django backend
+    "allauth.accounts.auth_backends.AuthenticationBackend" #and allauth backend
+)
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
