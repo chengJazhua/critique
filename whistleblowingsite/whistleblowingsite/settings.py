@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'login.apps.LoginConfig' #should be LoginConfig but following video tutorial for now
+    'login.apps.LoginConfig', #should be LoginConfig but following video tutorial for now
     "django.contrib.sites",
     "allauth", #allows other forms of authentication
     "allauth.account",
@@ -64,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'whistleblowingsite.urls'
