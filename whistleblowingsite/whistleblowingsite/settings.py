@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'login' #should be LoginConfig but following video tutorial for now
+    'login.apps.LoginConfig' #should be LoginConfig but following video tutorial for now
     "django.contrib.sites",
     "allauth", #allows other forms of authentication
     "allauth.account",
