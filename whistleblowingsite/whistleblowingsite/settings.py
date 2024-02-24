@@ -27,7 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-SITE_ID = 1 #identifies which site we are using for login 
+SITE_ID = 2 #identifies which site we are using for login 
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 # Application definition
 
 INSTALLED_APPS = [
@@ -72,7 +75,7 @@ ROOT_URLCONF = 'whistleblowingsite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -142,8 +145,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend", #using standard django backend
-    "allauth.accounts.auth_backends.AuthenticationBackend" #and allauth backend
+    "allauth.account.auth_backends.AuthenticationBackend" #and allauth backend
 )
 
-LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/"
