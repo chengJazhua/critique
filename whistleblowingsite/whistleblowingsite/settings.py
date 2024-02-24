@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'login.apps.LoginConfig', #should be LoginConfig but following video tutorial for now
+    'login.apps.LoginConfig', 
     "django.contrib.sites",
     "allauth", #allows other forms of authentication
     "allauth.account",
@@ -68,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "allauth.account.middleware.AccountMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'whistleblowingsite.urls'
@@ -152,7 +153,8 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
 #configure static files
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / "staticfiles"  #collect static files
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 
-django_heroku.settings(locals())
+django_heroku.settings(locals(), staticfiles=False)
