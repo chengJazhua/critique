@@ -20,5 +20,5 @@ def user_landing_view(request):
 def admin_landing_view(request):
     return render(
         request, 
-        "user_admin_page.html",
+        "admin_landing_page.html",
     )
