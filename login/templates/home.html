@@ -8,6 +8,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Google Login</title>
     </head>
+    {% if user.is_authenticated %}
+      <meta http-equiv = "refresh" content = "0; url = /userlanding/" />
+    {% endif %}
 
     <!--navbar from bootstrap-->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -29,7 +32,7 @@
               <li class="nav-item">
               </li>
             </ul> <!-- to change based on login status -->
-            <a class="nav-link" href="#">Login</a>
+            <a class="nav-link" href="{% provider_login_url 'google' %}" method="oauth2">Login</a>
           </div>
         </div>
       </nav>
