@@ -20,3 +20,14 @@ def user_landing_view(request, username):
             "name": name,
         },
     )
+
+def admin_landing_view(request, username):
+    name = "name"
+    return render(
+        request, 
+        "admin_landing_page.html", 
+        {
+            "username": username,
+            "name": name,
+        },
+    )

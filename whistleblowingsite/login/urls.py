@@ -10,4 +10,5 @@ urlpatterns = [
     path("", TemplateView.as_view(template_name="home.html")),
     path('logout/', LogoutView.as_view()),
     path('userlanding/<str:username>/', views.user_landing_view),
+    path('adminlanding/<str:username>/',views.admin_landing_view),
 ]
