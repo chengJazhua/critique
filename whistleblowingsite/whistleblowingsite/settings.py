@@ -30,7 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-SITE_ID = 2 #identifies which site we are using for login 
+SITE_ID = 3 #identifies which site we are using for login 
 # Application definition
 
 INSTALLED_APPS = [
@@ -96,11 +96,14 @@ WSGI_APPLICATION = 'whistleblowingsite.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": dj_database_url.config(
-            conn_max_age=600,
-            conn_health_checks=True,
-            ssl_require=True,
-        ),
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME': "d2kip5ta1daa7b",
+       'USER': 'qzjjkbarorajem',
+       'PASSWORD': '083fdfa0178875986a8e055e649531431ee079923c6a92773fb729c19be7980d',
+       'HOST': 'ec2-34-236-199-229.compute-1.amazonaws.com',
+       'PORT': '5432',
+   }
 }
 
 
@@ -147,7 +150,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend", #using standard django backend
-    "allauth.accounts.auth_backends.AuthenticationBackend" #and allauth backend
+    "allauth.account.auth_backends.AuthenticationBackend" #and allauth backend
 )
 
 LOGIN_REDIRECT_URL = "/"
