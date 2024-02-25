@@ -1,2 +1,2 @@
 web: gunicorn a-08.wsgi
-release: python manage.py migrate
+release: python /whistleblowingsite/manage.py migrate
