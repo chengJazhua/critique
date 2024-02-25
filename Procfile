@@ -1,1 +1,1 @@
-web: gunicorn whistleblowingsite\whistleblowingsite.wsgi
+web: gunicorn whistleblowingsite\whistleblowingsite\wsgi.py
