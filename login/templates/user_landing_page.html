@@ -32,7 +32,14 @@
       </nav>
     <body>
         <div class="position-absolute top-50 start-50 translate-middle">
-          <p class="fs-1 d-flex justify-content-center">You are a user</p>
+          {% for group in request.user.groups.all %}
+          {% if group.name == 'site admin' %}
+          <p class="fs-1 d-flex justify-content-center">You are an admin!</p>
+          {% else %}
+          <p class="fs-1 d-flex justify-content-center">You are a user!</p>
+          {% endif %}
+          {% endfor %}
+          <!-- <p class="fs-1 d-flex justify-content-center">You are a user</p> -->
             <p class="fs-1 d-flex justify-content-center">Email: {{user.email}}</p>
             <p class="fs-1 d-flex justify-content-center">Name: {{user}}</p>
 
