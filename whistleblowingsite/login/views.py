@@ -8,3 +8,26 @@ def home(request):
 def logout_view(request):
     logout(request)
     return redirect("/")
+
+def user_landing_view(request, username):
+    ## retrieve user's name through database lookup
+    name = "name"
+    return render(
+        request, 
+        "user_landing_page.html", 
+        {
+            "username": username,
+            "name": name,
+        },
+    )
+
+def admin_landing_view(request, username):
+    name = "name"
+    return render(
+        request, 
+        "admin_landing_page.html", 
+        {
+            "username": username,
+            "name": name,
+        },
+    )
