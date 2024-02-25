@@ -1,1 +1,1 @@
-web: gunicorn a-08.wsgi
+web: gunicorn whistleblowingsite\whistleblowingsite.wsgi
