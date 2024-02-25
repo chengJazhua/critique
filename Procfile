@@ -1,2 +1,2 @@
-release: python whistleblowingsite\manage.py migrate
+release: python whistleblowingsite/manage.py migrate
 web: gunicorn whistleblowingsite.wsgi
