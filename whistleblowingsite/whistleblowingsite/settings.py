@@ -9,6 +9,9 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+import os
+import django_heroku
+import dj_database_url
 
 from pathlib import Path
 
@@ -27,10 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-SITE_ID = 2 #identifies which site we are using for login 
-
-LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/"
+SITE_ID = 3 #identifies which site we are using for login 
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'login.apps.LoginConfig', #should be LoginConfig but following video tutorial for now
+    'login.apps.LoginConfig', 
     "django.contrib.sites",
     "allauth", #allows other forms of authentication
     "allauth.account",
@@ -67,7 +67,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'allauth.account.middleware.AccountMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'whistleblowingsite.urls'
@@ -75,7 +76,7 @@ ROOT_URLCONF = 'whistleblowingsite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -95,10 +96,14 @@ WSGI_APPLICATION = 'whistleblowingsite.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME': "d2kip5ta1daa7b",
+       'USER': 'qzjjkbarorajem',
+       'PASSWORD': '083fdfa0178875986a8e055e649531431ee079923c6a92773fb729c19be7980d',
+       'HOST': 'ec2-34-236-199-229.compute-1.amazonaws.com',
+       'PORT': '5432',
+   }
 }
 
 
@@ -148,3 +153,12 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend" #and allauth backend
 )
 
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+
+#configure static files
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / "staticfiles"  #collect static files
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
+
+django_heroku.settings(locals(), staticfiles=False)
