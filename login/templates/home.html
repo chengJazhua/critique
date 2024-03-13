@@ -9,13 +9,15 @@
         <title>Google Login</title>
     </head>
     {% if user.is_authenticated %}
-    {% for group in user.groups.all %}
-        {% if group.name == 'site admin' %}
-            <meta http-equiv="refresh" content="0; url=adminlanding/" />
-        {% else %}
-            <meta http-equiv="refresh" content="0; url=userlanding/" />
-        {% endif %}
-    {% endfor %}
+    {% if user.groups.exists %}
+        {% for group in user.groups.all %}
+            {% if group.name == 'site admin' %}
+                <meta http-equiv="refresh" content="0; url=/adminlanding/" />
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <meta http-equiv="refresh" content="0; url=/userlanding/" />
+    {% endif %}
 {% endif %}
 
     <!--navbar from bootstrap-->
