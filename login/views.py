@@ -27,6 +27,9 @@ def logout_view(request):
     logout(request)
     return redirect("/")
 
+def admin_view_reviews(request):
+    return render(request, "admin_view_reviews.html")
+
 
 def user_landing_view(request):
     ## retrieve user's name through database lookup
