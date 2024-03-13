@@ -12,4 +12,5 @@ urlpatterns = [
     path('userlanding/', views.user_landing_view),
     path('adminlanding/',views.admin_landing_view),
     path('report/', views.report)
+    #path('viewreports/', views.admin_view_reviews),
 ]

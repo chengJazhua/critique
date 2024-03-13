@@ -14,7 +14,7 @@ def redirect_after_google_login(sender, request, user, **kwargs):
     #return redirect('adminlanding/')
     if user.groups.filter(name='site admin').exists():
         print(f"I am an admin")
-        return redirect('/adminlanding')
+        return redirect('adminlanding/')
     else:
         print(f"I am a user")
         return redirect('userlanding/')
@@ -26,6 +26,9 @@ def home(request):
 def logout_view(request):
     logout(request)
     return redirect("/")
+
+def admin_view_reviews(request):
+    return render(request, "admin_view_reviews.html")
 
 
 def user_landing_view(request):
