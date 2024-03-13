@@ -157,6 +157,16 @@ AWS_STORAGE_BUCKET_NAME = 'a-08.bucket'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_FILE_OVERWRITE = False
 
+STORAGES = {  
+    "default": { #for media files
+        "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
+    },
+    
+    "staticfiles": {
+        "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
+    },
+}
+
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend", #using standard django backend
     "allauth.account.auth_backends.AuthenticationBackend" #and allauth backend
