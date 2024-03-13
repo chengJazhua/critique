@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
+    'storages'
 ]
 
 #specify variable for social account provider
@@ -147,6 +148,14 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#AWS S3 config
+AWS_ACCESS_KEY_ID = 'AKIATCKATD5QB2C3CAHZ ' 
+AWS_SECRET_ACCESS_KEY = '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' 
+
+AWS_STORAGE_BUCKET_NAME = 'a-08.bucket'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_FILE_OVERWRITE = False
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend", #using standard django backend
