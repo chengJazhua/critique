@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-4&94zqgd0qrf&7xi)e=g@(!gc-a_cmlrk++(q60sp*a7lqzt63
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'https://a-08-3e91aaebfb2c.herokuapp.com/']
+ALLOWED_HOSTS = ['localhost', 'a-08-3e91aaebfb2c.herokuapp.com']
 
 SITE_ID = 3 #identifies which site we are using for login 
 # Application definition

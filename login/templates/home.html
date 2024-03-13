@@ -9,8 +9,14 @@
         <title>Google Login</title>
     </head>
     {% if user.is_authenticated %}
-      <meta http-equiv = "refresh" content = "0; url = /userlanding/" />
-    {% endif %}
+    {% for group in user.groups.all %}
+        {% if group.name == 'site admin' %}
+            <meta http-equiv="refresh" content="0; url=adminlanding/" />
+        {% else %}
+            <meta http-equiv="refresh" content="0; url=userlanding/" />
+        {% endif %}
+    {% endfor %}
+{% endif %}
 
     <!--navbar from bootstrap-->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
