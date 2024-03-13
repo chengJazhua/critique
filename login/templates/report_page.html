@@ -29,20 +29,37 @@
             {% endif %}
           </div>
         </div>
-      </nav>
+    </nav>
     <body>
         <div class="position-absolute top-50 start-50 translate-middle">
-          {% for group in request.user.groups.all %}
-            {% if group.name == 'site admin' %}
-              <p class="fs-1 d-flex justify-content-center">You are an admin!</p>
-            {% else %}
-              <p class="fs-1 d-flex justify-content-center">You are a user!</p> <!--this doesnt work?-->
-            {% endif %}
-          {% endfor %}
-          <!-- <p class="fs-1 d-flex justify-content-center">You are a user</p> -->
-            <p class="fs-1 d-flex justify-content-center">Email: {{user.email}}</p>
-            <p class="fs-1 d-flex justify-content-center">Name: {{user}}</p>
-
+            <form action="">
+                <div name="textInputs">
+                    <label for="className">Class:</label><br>
+                    <input type="text" id="class" name="className"><br>
+                    <label for="professorName">Professor:</label><br>
+                    <input type="text" id="fname" name="professorName"><br>
+                </div>
+                <div name="rating">
+                    <input type="radio" id="positive" name="rating" value="positive">
+                    <label for="positive">Positive</label><br>
+                    <input type="radio" id="neutral" name="rating" value="neutral">
+                    <label for="neutral">Neutral</label><br>
+                    <input type="radio" id="negative" name="rating" value="negative">
+                    <label for="negative">Negative</label>
+                </div>
+                <div name="workType">
+                    <input type="checkbox" id="inClass" name="inClass" value="inClass">
+                    <label for="inClass"> In Class Assignment</label><br>
+                    <input type="checkbox" id="project" name="project" value="project">
+                    <label for="project"> Project</label><br>
+                    <input type="checkbox" id="groupAssignment" name="groupAssignment" value="groupAssignment">
+                    <label for="vehicle3"> Group Assignment</label><br>
+                </div>
+                <div name="fileSubmit">
+                    <input type="file" id="fileUpload" name="filename">
+                </div>
+                <input type="submit">
+            </form>
         </div>
     </body>
 </html>

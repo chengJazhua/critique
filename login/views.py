@@ -44,3 +44,26 @@ def admin_landing_view(request):
         request, 
         "admin_landing_page.html",
     )
+
+def report(request):
+    '''if request.method == 'POST':
+        image_file = request.FILES['image_file']
+        image_type = request.POST['image_type']
+        if settings.USE_S3:
+            if image_type == 'private':
+                upload = UploadPrivate(file=image_file)
+            else:
+                upload = Upload(file=image_file)
+            upload.save()
+            image_url = upload.file.url
+        else:
+            fs = FileSystemStorage()
+            filename = fs.save(image_file.name, image_file)
+            image_url = fs.url(filename)
+        return render(request, 'upload.html', {
+            'image_url': image_url
+        })'''
+    return render(
+        request,
+        "report_page.html"
+    )
