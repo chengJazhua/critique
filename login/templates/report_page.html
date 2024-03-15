@@ -32,14 +32,17 @@
     </nav>
     <body>
         <div class="position-absolute top-50 start-50 translate-middle">
-            <form action="">
+            <form method="post">
+              {% csrf_token %}
                 <div name="textInputs">
                     <label for="className">Class:</label><br>
                     <input type="text" id="class" name="className"><br>
                     <label for="professorName">Professor:</label><br>
-                    <input type="text" id="fname" name="professorName"><br>
+                    <input type="text" id="professor" name="professorName"><br>
+                    <label for="studetnName"> Student Name:</label><br>
+                    <input type="text" id="student" name="studentName"><br>
                 </div>
-                <div name="rating">
+                <div name="selectRating">
                     <input type="radio" id="positive" name="rating" value="positive">
                     <label for="positive">Positive</label><br>
                     <input type="radio" id="neutral" name="rating" value="neutral">
@@ -47,12 +50,12 @@
                     <input type="radio" id="negative" name="rating" value="negative">
                     <label for="negative">Negative</label>
                 </div>
-                <div name="workType">
-                    <input type="checkbox" id="inClass" name="inClass" value="inClass">
+                <div name="selectWorkType">
+                    <input type="checkbox" id="inClass" name="workType" value="inClass">
                     <label for="inClass"> In Class Assignment</label><br>
-                    <input type="checkbox" id="project" name="project" value="project">
+                    <input type="checkbox" id="project" name="workType" value="project">
                     <label for="project"> Project</label><br>
-                    <input type="checkbox" id="groupAssignment" name="groupAssignment" value="groupAssignment">
+                    <input type="checkbox" id="groupAssignment" name="workType" value="groupAssignment">
                     <label for="vehicle3"> Group Assignment</label><br>
                 </div>
                 <div name="fileSubmit">

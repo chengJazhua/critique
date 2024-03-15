@@ -34,6 +34,7 @@ SITE_ID = 3 #identifies which site we are using for login
 # Application definition
 
 INSTALLED_APPS = [
+    #'login.apps.LoginConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -49,8 +49,8 @@ def admin_landing_view(request):
     )
 
 def report(request):
-    '''if request.method == 'POST':
-        image_file = request.FILES['image_file']
+    if request.method == 'POST':
+        '''image_file = request.FILES['image_file']
         image_type = request.POST['image_type']
         if settings.USE_S3:
             if image_type == 'private':
@@ -66,6 +66,12 @@ def report(request):
         return render(request, 'upload.html', {
             'image_url': image_url
         })'''
+        className = request.POST['className']
+        professorName = request.POST['professorName']
+        studentName = request.POST['studentName']
+        rating = request.POST.get('rating')
+        workType = request.POST.getlist('workType')
+        # TODO: upload file and error checking (make sure all inputs are valid)
     return render(
         request,
         "report_page.html"
