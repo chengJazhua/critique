@@ -3,9 +3,24 @@ from django.contrib.auth import logout
 from django.contrib.auth.signals import user_logged_in
 from django.dispatch import receiver
 #from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
+
+from .models import Document
 
 
 # Create your views here.
+class DocumentCreateView(CreateView):
+    model = Document
+    fields = ['upload', ]
+    success_url = reverse_lazy('home')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        documents = Document.objects.all()
+        context['documents'] = documents
+        return context
 
 @receiver(user_logged_in)
 def redirect_after_google_login(sender, request, user, **kwargs):

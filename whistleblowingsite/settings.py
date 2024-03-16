@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
-    'storages'
+    'storages',
 ]
 
 #specify variable for social account provider
@@ -163,15 +163,15 @@ AWS_SECRET_ACCESS_KEY = '1Ijc7aE18OtJxmBzr/qOIUW5ZSFmio1a9nBURSnc'
 AWS_STORAGE_BUCKET_NAME = 'a-08.bucket'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_FILE_OVERWRITE = False
+AWS_LOCATION = 'static'
+
 
 STORAGES = {  
     "default": { #for media files
-        "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
+        "BACKEND": "storages.backends.s3.S3Storage",
     },
     
-    "staticfiles": {
-        "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
-    },
+
 }
 
 AUTHENTICATION_BACKENDS = (
@@ -186,6 +186,10 @@ LOGOUT_REDIRECT_URL = "/"
 #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_ROOT = BASE_DIR / "staticfiles"  #collect static files
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+# DEFAULT_FILE_STORAGE = 'whistleblowingsite.storage_backends.MediaStorage'
+
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 django_heroku.settings(locals(), staticfiles=False)
