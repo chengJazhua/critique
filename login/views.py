@@ -28,8 +28,11 @@ def logout_view(request):
     logout(request)
     return redirect("/")
 
-def admin_view_reviews(request):
-    return render(request, "admin_view_reviews.html")
+def admin_view_reports(request):
+    return render(request, "admin_view_reports.html")
+
+def user_reports(request):
+    return render(request, "user_reports.html")
 
 
 def user_landing_view(request):
