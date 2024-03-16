@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.contrib.auth.signals import user_logged_in
 from django.dispatch import receiver
+from login.models import Report
 #from django.contrib.auth.decorators import login_required, user_passes_test
 
 
@@ -66,11 +67,14 @@ def report(request):
         return render(request, 'upload.html', {
             'image_url': image_url
         })'''
+        userID = request.POST['userID']
         className = request.POST['className']
         professorName = request.POST['professorName']
         studentName = request.POST['studentName']
         rating = request.POST.get('rating')
         workType = request.POST.getlist('workType')
+        fileLink = "temp"
+        Report.objects.create(userID = userID, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink)
         # TODO: upload file and error checking (make sure all inputs are valid)
     return render(
         request,

@@ -5,6 +5,6 @@ class Report(models.Model):
     className = models.CharField(max_length = 200)
     professorName = models.CharField(max_length = 200)
     studentName = models.CharField(max_length = 200)
-    ratings = models.CharField(max_length = 200)
+    rating = models.CharField(max_length = 200)
     workType = models.CharField(max_length = 200)
     fileLink = models.CharField(max_length = 500)

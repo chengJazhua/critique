@@ -34,14 +34,13 @@ SITE_ID = 3 #identifies which site we are using for login
 # Application definition
 
 INSTALLED_APPS = [
-    #'login.apps.LoginConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'login.apps.LoginConfig', 
+    'login.apps.LoginConfig',
     "django.contrib.sites",
     "allauth", #allows other forms of authentication
     "allauth.account",
