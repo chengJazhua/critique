@@ -89,3 +89,11 @@ def report(request):
         request,
         "report_page.html"
         )
+    
+def admin_report_view(request):
+    reports = Report.objects.all()
+    return render(
+        request,
+        "admin_report_view.html",
+        {'reports' : reports},
+        )

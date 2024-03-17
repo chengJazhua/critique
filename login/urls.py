@@ -14,4 +14,5 @@ urlpatterns = [
     path('adminlanding/',views.admin_landing_view),
     path('report/', views.report),
     path('viewreports/', views.admin_view_reports),
+    path('adminreportview/', views.admin_report_view),
 ]
