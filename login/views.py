@@ -7,18 +7,18 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 
-from .models import Test
+from .models import Evidence
 
 
 # Create your views here.
 class DocumentCreateView(CreateView):
-    model = Test
+    model = Evidence
     fields = ['upload', ]
     success_url = '/home'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        documents = Test.objects.all()
+        documents = Evidence.objects.all()
         context['documents'] = documents
         return context
 
