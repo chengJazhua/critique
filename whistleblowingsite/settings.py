@@ -14,6 +14,8 @@ import django_heroku
 import dj_database_url
 
 from pathlib import Path
+import django
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,7 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'a-08-3e91aaebfb2c.herokuapp.com']
 
-SITE_ID = 3 #identifies which site we are using for login 
+SITE_ID = 5 #identifies which site we are using for login 
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,11 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login.apps.LoginConfig', 
+    'storages',
     "django.contrib.sites",
     "allauth", #allows other forms of authentication
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
+    
 ]
 
 #specify variable for social account provider
@@ -109,7 +113,11 @@ DATABASES = {
         conn_max_age=600,
         conn_health_checks=True,
         ssl_require=True,
-    )
+    ),
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
 }
 
 
@@ -155,6 +163,24 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#AWS S3 config
+AWS_ACCESS_KEY_ID = 'AKIATCKATD5QB2C3CAHZ ' 
+AWS_SECRET_ACCESS_KEY = '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' 
+
+AWS_STORAGE_BUCKET_NAME = 'a-08.bucket'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_FILE_OVERWRITE = False
+AWS_LOCATION = 'static'
+
+
+# STORAGES = {  
+#     "default": { #for media files
+#         "BACKEND": "storages.backends.s3.S3Storage",
+#     },
+    
+
+# }
+
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend", #using standard django backend
     "allauth.account.auth_backends.AuthenticationBackend" #and allauth backend
@@ -168,5 +194,9 @@ LOGOUT_REDIRECT_URL = "/"
 STATIC_ROOT = BASE_DIR / "staticfiles"  #collect static files
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 django_heroku.settings(locals(), staticfiles=False)
