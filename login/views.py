@@ -82,7 +82,9 @@ def report(request):
         fileLink = evidence.upload.url
         print(fileLink)
        
-
+        if userID == "":
+            userID = "Anonymous"
+            
         Report.objects.create(userID = userID, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink)
         # TODO: upload file and error checking (make sure all inputs are valid)
     return render(
