@@ -11,7 +11,7 @@ jobs:
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v4
-      
+
     - run: |
         wget https://sqlite.org/2022/sqlite-autoconf-3380500.tar.gz
         tar -xvf sqlite-autoconf-3380500.tar.gz
@@ -37,3 +37,5 @@ jobs:
         python manage.py makemigrations
         python manage.py migrate
         python manage.py test --keepdb
+      env:
+        LD_LIBRARY_PATH: /usr/local/lib
