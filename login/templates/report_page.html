@@ -30,8 +30,11 @@
           </div>
         </div>
     </nav>
+
     <body>
+      
         <div class="position-absolute top-50 start-50 translate-middle">
+
             <form method="post">
               {% csrf_token %}
                 <div name="textInputs">
@@ -63,9 +66,9 @@
                 </div>
                 <input type="hidden" name="userID" value="{{ user.email }}">
                 <input type="submit">
-                {% include 'login/evidence_form.html' %}
 
             </form>
+            
         </div>
     </body>
 </html>

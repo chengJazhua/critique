@@ -69,22 +69,7 @@ def admin_landing_view(request):
 
 def report(request):
     if request.method == 'POST':
-        '''image_file = request.FILES['image_file']
-        image_type = request.POST['image_type']
-        if settings.USE_S3:
-            if image_type == 'private':
-                upload = UploadPrivate(file=image_file)
-            else:
-                upload = Upload(file=image_file)
-            upload.save()
-            image_url = upload.file.url
-        else:
-            fs = FileSystemStorage()
-            filename = fs.save(image_file.name, image_file)
-            image_url = fs.url(filename)
-        return render(request, 'upload.html', {
-            'image_url': image_url
-        })'''
+   
         userID = request.POST['userID']
         className = request.POST['className']
         professorName = request.POST['professorName']
@@ -94,7 +79,7 @@ def report(request):
         fileLink = "temp"
         Report.objects.create(userID = userID, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink)
         # TODO: upload file and error checking (make sure all inputs are valid)
-        return render(
-            request,
-            "report_page.html"
-            )
+    return render(
+        request,
+        "report_page.html"
+        )
