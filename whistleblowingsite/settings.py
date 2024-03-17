@@ -99,7 +99,7 @@ WSGI_APPLICATION = 'whistleblowingsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if (os.environ.get("DYNO")):
+if "DYNO" in os.environ and not "CI" in os.environ:
     DATABASES = {
     #    "default": {
     #         "ENGINE": "django.db.backends.postgresql",
@@ -116,31 +116,12 @@ if (os.environ.get("DYNO")):
             conn_health_checks=True,
             ssl_require=True,
         ),
-        # 'default': {
-        #     'ENGINE': 'django.db.backends.sqlite3',
-        #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        # }
     }
 else:
     DATABASES = {
-    #    "default": {
-    #         "ENGINE": "django.db.backends.postgresql",
-    #         "NAME": "d2kip5ta1daa7b",
-    #         "USER": "qzjjkbarorajem",
-    #         "PASSWORD": "083fdfa0178875986a8e055e649531431ee079923c6a92773fb729c19be7980d",
-    #         "HOST": "ec2-34-236-199-229.compute-1.amazonaws.com",
-    #         "PORT": "5432",
-    #     }
-        
-        # "default": dj_database_url.config(
-        #     default='postgres://rgpazisydbriod:754dc0a3685fb9a29c962b376f0576de023ae257f119c2f93453a44a8d3ec7d3@ec2-52-6-117-96.compute-1.amazonaws.com:5432/dao2pqt1ft1n89',
-        #     conn_max_age=600,
-        #     conn_health_checks=True,
-        #     ssl_require=True,
-        # ),
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 
