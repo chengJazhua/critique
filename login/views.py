@@ -69,14 +69,20 @@ def admin_landing_view(request):
 
 def report(request):
     if request.method == 'POST':
-   
+        
+        
+        evidence = Evidence(upload=request.FILES['filename'])
+        evidence.save()
         userID = request.POST['userID']
         className = request.POST['className']
         professorName = request.POST['professorName']
         studentName = request.POST['studentName']
         rating = request.POST.get('rating')
         workType = request.POST.getlist('workType')
-        fileLink = "temp"
+        fileLink = evidence.upload.url
+        print(fileLink)
+       
+
         Report.objects.create(userID = userID, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink)
         # TODO: upload file and error checking (make sure all inputs are valid)
     return render(
