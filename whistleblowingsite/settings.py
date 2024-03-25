@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     
 ]
 
+
 #specify variable for social account provider
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
@@ -59,7 +60,11 @@ SOCIALACCOUNT_PROVIDERS = {
             "profile",
             "email", 
         ],
-        "AUTH_PARAMS": {"access_type": "online"}
+        "AUTH_PARAMS": {"access_type": "online"},
+        'APP': {
+        'CLIENT_ID': os.environ.get('GOOGLE_OAUTH_CLIENT_ID'),
+        'SECRET': os.environ.get('GOOGLE_OAUTH_SECRET'),
+        }
     }
 }
 
