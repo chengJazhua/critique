@@ -14,9 +14,9 @@ class Evidence(models.Model):
 
 class Report(models.Model):
     class Statuses(models.TextChoices):
-        NEW = "NEW", _("New")
-        INPROGRESS = "INP", _("In Progress")
-        RESOLVED = "RES", _("Resolved")
+        NEW = 'NEW', 'New'
+        IN_PROGRESS = 'INP', 'In Progress'
+        RESOLVED = 'RES', 'Resolved'
     userID = models.CharField(max_length = 200)
     className = models.CharField(max_length = 200)
     professorName = models.CharField(max_length = 200)
@@ -24,5 +24,5 @@ class Report(models.Model):
     rating = models.CharField(max_length = 200)
     workType = models.CharField(max_length = 200)
     fileLink = models.CharField(max_length = 500)
-    status = models.CharField(max_length = 3, choices=Statuses, default=Statuses.NEW)
-    feedback = models.TextField(max_length = 500)
+    status = models.CharField(max_length = 3, choices=Statuses.choices, default=Statuses.NEW)
+    feedback = models.TextField(max_length = 500, default="")
