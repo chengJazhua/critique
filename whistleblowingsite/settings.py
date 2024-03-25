@@ -111,7 +111,8 @@ if "DYNO" in os.environ and not "CI" in os.environ:
     #     }
         
         "default": dj_database_url.config(
-            default='postgres://rgpazisydbriod:754dc0a3685fb9a29c962b376f0576de023ae257f119c2f93453a44a8d3ec7d3@ec2-52-6-117-96.compute-1.amazonaws.com:5432/dao2pqt1ft1n89',
+            #default='postgres://rgpazisydbriod:754dc0a3685fb9a29c962b376f0576de023ae257f119c2f93453a44a8d3ec7d3@ec2-52-6-117-96.compute-1.amazonaws.com:5432/dao2pqt1ft1n89',
+            default=os.environ.get('DATABASE_URL'),
             conn_max_age=600,
             conn_health_checks=True,
             ssl_require=True,
