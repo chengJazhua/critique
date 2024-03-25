@@ -18,6 +18,21 @@
             <p class="fs-1 d-flex justify-content-center">Email: {{user.email}}</p>
             <p class="fs-1 d-flex justify-content-center">Name: {{user}}</p>
         </div>
-        
+        <h1>Your Reports List</h1>
+        <ul>
+            {% for report in reports %}
+            <li>
+                <strong>User ID:</strong> {{ report.userID }}<br>
+                <strong>Class Name:</strong> {{ report.className }}<br>
+                <strong>Professor Name:</strong> {{ report.professorName }}<br>
+                <strong>Student Name:</strong> {{ report.studentName }}<br>
+                <strong>Rating:</strong> {{ report.rating }}<br>
+                <strong>Work Type:</strong> {{ report.workType }}<br>
+                <strong>File Link:</strong> <a href="{{ report.fileLink }}">{{ report.fileLink }}</a><br>
+                <strong>Status:</strong> {{ report.get_status_display }}<br>
+                <strong>Feedback:</strong> {{ report.feedback }}<br>
+            </li>
+            {% endfor %}
+        </ul>
     </body>
 </html>

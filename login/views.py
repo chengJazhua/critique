@@ -9,7 +9,7 @@ from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 
 from .models import Evidence
-
+from .forms import ReportForm
 
 # Create your views here.
 class DocumentCreateView(CreateView):
@@ -90,8 +90,10 @@ def report(request):
         "report_page.html"
         )
 
-def user_view_reports(request, userID):
-    
+def user_view_reports(request):
+    reports = Report.objects.all()
+    return render(request, 'user_landing.html', {'reports': reports})
+
     
 def admin_report_view(request):
     reports = Report.objects.all()
