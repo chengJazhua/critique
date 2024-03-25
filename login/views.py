@@ -69,8 +69,6 @@ def admin_landing_view(request):
 
 def report(request):
     if request.method == 'POST':
-        
-        
         evidence = Evidence(upload=request.FILES['filename'])
         evidence.save()
         userID = request.POST['userID']
@@ -91,6 +89,9 @@ def report(request):
         request,
         "report_page.html"
         )
+
+def user_view_reports(request, userID):
+    
     
 def admin_report_view(request):
     reports = Report.objects.all()
