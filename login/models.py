@@ -11,9 +11,12 @@ class Evidence(models.Model):
     def was_published_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.uploaded_at <= now
-    
 
 class Report(models.Model):
+    class Statuses(models.TextChoices):
+        NEW = "NEW", _("New")
+        INPROGRESS = "INP", _("In Progress")
+        RESOLVED = "RES", _("Resolved")
     userID = models.CharField(max_length = 200)
     className = models.CharField(max_length = 200)
     professorName = models.CharField(max_length = 200)
@@ -21,3 +24,5 @@ class Report(models.Model):
     rating = models.CharField(max_length = 200)
     workType = models.CharField(max_length = 200)
     fileLink = models.CharField(max_length = 500)
+    status = models.CharField(max_length = 3, choices=Statuses, default=Statuses.NEW)
+    feedback = models.TextField(max_length = 500)
