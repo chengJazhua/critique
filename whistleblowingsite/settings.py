@@ -32,7 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'a-08-3e91aaebfb2c.herokuapp.com']
 
-SITE_ID = 1 #identifies which site we are using for login 
+SITE_ID = 5 #identifies which site we are using for login 
 # Application definition
 
 INSTALLED_APPS = [
@@ -78,7 +78,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "allauth.account.middleware.AccountMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    'whistleblowingsite.middleware.DynamicSiteMiddleware',
 ]
 
 ROOT_URLCONF = 'whistleblowingsite.urls'
