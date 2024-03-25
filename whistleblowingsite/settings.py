@@ -78,7 +78,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "allauth.account.middleware.AccountMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    'whistleblowingsite.middleware.DynamicSiteMiddleware',
+    # 'whistleblowingsite.middleware.DynamicSiteMiddleware',
 ]
 
 ROOT_URLCONF = 'whistleblowingsite.urls'
