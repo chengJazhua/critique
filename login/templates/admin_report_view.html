@@ -8,16 +8,16 @@
 <body>
     <div class="container"
         style="display: flex; align-items: center; justify-content: space-between; width: 710px; height: 100px; background-color: #f0f0f0; border-radius: 10px; margin-bottom: 20px;">
-        <button
-            style="display: flex; align-items: center; justify-content: center; height: 80px; width: 216.66px; padding: 10px; border-radius: 10px; background-color: #ccc; border: 0px;">
+        <button onclick="clickedStyle('newreport')"
+            id="newreport" style="display: flex; align-items: center; justify-content: center; height: 80px; width: 216.66px; padding: 10px; border-radius: 10px; background-color: #6c6c6c; border: 0px;">
             <p style="font-size: 50px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px;">New</p>
         </button>
-        <button
-            style="display: flex; align-items: center; justify-content: center; height: 80px; width: 216.66px; padding: 10px; border-radius: 10px; background-color: #ccc; border: 0px;">
+        <button onclick="clickedStyle('seen')"
+            id="seen" style="display: flex; align-items: center; justify-content: center; height: 80px; width: 216.66px; padding: 10px; border-radius: 10px; background-color: #ccc; border: 0px;">
             <p style="font-size: 50px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px;">Seen</p>
         </button>
-        <button
-            style="display: flex; align-items: center; justify-content: center; height: 80px; width: 216.66px; padding: 10px; border-radius: 10px; background-color: #ccc; border: 0px;">
+        <button onclick="clickedStyle('approved')"
+            id="approved" style="display: flex; align-items: center; justify-content: center; height: 80px; width: 216.66px; padding: 10px; border-radius: 10px; background-color: #ccc; border: 0px;">
             <p style="font-size: 50px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px;">Approved</p>
         </button>
     </div>
@@ -63,6 +63,23 @@
             
         </div>
     {% endfor %}
+    <script>
+        function clickedStyle(changedStyle) {
+            var newreport = document.getElementById("newreport");
+            var seen = document.getElementById("seen");
+            var approved = document.getElementById("approved");
+
+            newreport.style.backgroundColor = "#ccc";
+            seen.style.backgroundColor = "#ccc";
+            approved.style.backgroundColor = "#ccc";
+
+            var changedStyle = document.getElementById(changedStyle);
+
+            changedStyle.style.backgroundColor = "#6c6c6c";
+        }
+    </script>
 </body>
+
+</html>
 
 </html>
