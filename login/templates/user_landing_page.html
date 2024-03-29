@@ -4,23 +4,18 @@
 <html lang="en">
   {% include 'login/user_navbar.html' %}
     <body>
-        <div class="position-absolute top-50 start-50 translate-middle">
+        <!-- <div class="position-absolute top-50 start-50 translate-middle">
             <p class="fs-1 d-flex justify-content-center">You are a user</p>
-          {% for group in request.user.groups.all %}
-            {% if group.name == 'site admin' %}
-              <p class="fs-1 d-flex justify-content-center">You are an admin!</p>
-            {% else %}
-              <p class="fs-1 d-flex justify-content-center">You are a user!</p> <!--this doesnt work?-->
-            {% endif %}
-          {% endfor %}
-          <!-- <p class="fs-1 d-flex justify-content-center">You are a user</p> -->
             <p class="fs-1 d-flex justify-content-center">Email: {{user.email}}</p>
             <p class="fs-1 d-flex justify-content-center">Name: {{user}}</p>
-        </div>
-        <h1>Your Reports List</h1>
-        <ul>
+        </div> -->
+        <div class="container mt-5">
+          <h1 class="mb-4">Your Reports List</h1>
+          <div class="row row-cols-1 row-cols-md-2 g-4">
             {% for report in reports %}
-            <li>
+            <div class="col">
+              <div class="card bg-light">
+                  <div class="card-body">
                 <strong>User ID:</strong> {{ report.userID }}<br>
                 <strong>Class Name:</strong> {{ report.className }}<br>
                 <strong>Professor Name:</strong> {{ report.professorName }}<br>
@@ -30,10 +25,16 @@
                 <strong>File Link:</strong> <a href="{{ report.fileLink }}">{{ report.fileLink }}</a><br>
                 <strong>Status:</strong> {{ report.get_status_display }}<br>
                 <strong>Feedback:</strong> {{ report.feedback }}<br>
-            </li>
+                  </div></div></div>
             {% empty %}
-            <li>No reports found.</li>
+            <div class="col">
+              <div class="card">
+                  <div class="card-body">
+                      <p class="card-text">No reports found.</p>
+                  </div>
+              </div>
+          </div>
             {% endfor %}
-        </ul>
+          </div></div>
     </body>
 </html>
