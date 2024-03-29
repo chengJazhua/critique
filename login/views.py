@@ -90,9 +90,12 @@ def report(request):
         "report_page.html"
         )
 
+@login_required
 def user_view_reports(request):
-    reports = Report.objects.all()
-    return render(request, 'user_landing.html', {'reports': reports})
+    print(f"requested user view reports")
+    name = "name"
+    reports = Report.objects.filter(userID=request.user.email)
+    return render(request, 'user_landing_page.html', {'reports': reports})
 
     
 def admin_report_view(request):
