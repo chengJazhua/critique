@@ -12,11 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 import django_heroku
 import dj_database_url
-from dotenv import load_dotenv
+
 from pathlib import Path
 import django
 
-load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,7 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'a-08-3e91aaebfb2c.herokuapp.com']
 
-SITE_ID = 6 #identifies which site we are using for login 
+SITE_ID = 5 #identifies which site we are using for login 
 # Application definition
 
 INSTALLED_APPS = [
@@ -116,7 +116,6 @@ if "DYNO" in os.environ and not "CI" in os.environ:
         "default": dj_database_url.config(
             #default='postgres://rgpazisydbriod:754dc0a3685fb9a29c962b376f0576de023ae257f119c2f93453a44a8d3ec7d3@ec2-52-6-117-96.compute-1.amazonaws.com:5432/dao2pqt1ft1n89',
             default=os.environ.get('DATABASE_URL'),
-            
             conn_max_age=600,
             conn_health_checks=True,
             ssl_require=True,
@@ -129,6 +128,7 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -174,6 +174,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #AWS S3 config
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID') 
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY') 
+
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_FILE_OVERWRITE = False
@@ -206,4 +207,4 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-django_heroku.settings(locals(), test_runner=False)
+django_heroku.settings(locals(), staticfiles=False, test_runner=False)
