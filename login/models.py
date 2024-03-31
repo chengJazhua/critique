@@ -24,5 +24,5 @@ class Report(models.Model):
     rating = models.CharField(max_length = 200)
     workType = models.CharField(max_length = 200)
     fileLink = models.CharField(max_length = 500)
-    status = models.CharField(max_length = 3, choices=Statuses.choices, default=Statuses.NEW)
-    feedback = models.TextField(max_length = 500, default="")
+    status = models.CharField(max_length = 10)
+    feedback = models.TextField(max_length = 500)

@@ -7,6 +7,7 @@ from login.models import Report, Evidence
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
 
 from .forms import ReportForm
 
@@ -77,12 +78,14 @@ def report(request):
         studentName = request.POST['studentName']
         rating = request.POST.get('rating')
         workType = request.POST.getlist('workType')
+        status = "New"
+        feedback = ""
         print(fileLink)
        
         if userID == "":
             userID = "Anonymous"
             
-        Report.objects.create(userID = userID, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink)
+        Report.objects.create(userID = userID, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink, status=status, feedback=feedback)
         # TODO: upload file and error checking (make sure all inputs are valid)
     return render(
         request,
@@ -101,6 +104,22 @@ def admin_report_view(request):
     reports = Report.objects.all()
     return render(
         request,
-        "admin_report_view.html",
+        "temp_admin_report_view.html",
         {'reports' : reports},
+        )
+    
+def admin_specific_report_view(request, pk):
+    report = get_object_or_404(Report, pk=pk)
+    if(report.status == "New"):
+        report.status = "Seen"
+        report.save()
+    # add error checking
+    if request.method == 'POST':
+        report.feedback = request.POST.get('feedback')
+        report.status = "Resolved"
+        report.save()
+    return render(
+        request, 
+        'admin_specific_report_view.html', 
+        {'report': report},
         )
