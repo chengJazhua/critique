@@ -24,7 +24,7 @@
     <body>
         <div class="position-absolute top-50 start-50 translate-middle">
             <p class="fs-1 d-flex justify-content-center">Login</p>
-            <button type="button" class="shadow p-2 btn btn-light d-flex gap-2">
+            <a href="{% provider_login_url 'google' %}" method="oauth2" type="button" class="shadow p-2 btn btn-light d-flex gap-2">
                 <span class="mx-auto" style="width: 20px;">
                     <!-- from google branding guidelines -->
                     <div class="">
@@ -38,9 +38,9 @@
                     </div>
                 </span>
                 <div>
-                  <a href="{% provider_login_url 'google' %}" method="oauth2">Login With Google</a>
+                  Login With Google
                 </div>
-            </button>
+            </a>
         </div>
     </body>
 </html>
