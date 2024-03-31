@@ -23,10 +23,9 @@
                 <strong>Rating:</strong> {{ report.rating }}<br>
                 <strong>Work Type:</strong> {{ report.workType }}<br>
                 <div class="iframe-wrapper" width="500" height="600">
-                  <strong>test iframes:</strong>
+                  <strong>Attached Evidence:</strong>
                   <iframe id="display" src="{{ report.fileLink}}" overflow="hidden" frameborder="0" width="500" height="600" scrolling="yes"></iframe><br>
                 </div>
-                <strong>Attached Evidence:</strong> <img id="display" src="{{ report.fileLink}}" width="500" height="600"><br>
                 <strong>Status:</strong> {{ report.get_status_display }}<br>
                 <strong>Feedback:</strong> {{ report.feedback }}<br>
                   </div></div></div>
