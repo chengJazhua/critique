@@ -16,4 +16,5 @@ urlpatterns = [
     path('viewreports/', views.user_reports),
     path('viewreports/', views.admin_view_reports),
     path('adminreportview/', views.admin_report_view),
+    path('adminreportview/<int:pk>/', views.admin_specific_report_view, name='admin_specific_report_view'),
 ]
