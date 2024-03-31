@@ -12,9 +12,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 import django_heroku
 import dj_database_url
-
 from pathlib import Path
 import django
+from dotenv import load_dotenv
+load_dotenv()
+
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -32,7 +35,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'a-08-3e91aaebfb2c.herokuapp.com']
 
-SITE_ID = 5 #identifies which site we are using for login 
+SITE_ID = 6 #identifies which site we are using for login 
 # Application definition
 
 INSTALLED_APPS = [
@@ -179,6 +182,7 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_FILE_OVERWRITE = False
 AWS_LOCATION = 'static'
+AWS_DEFAULT_ACL = None
 
 
 # STORAGES = {  
