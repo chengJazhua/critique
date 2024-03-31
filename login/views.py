@@ -111,7 +111,7 @@ def admin_report_view(request):
 def admin_specific_report_view(request, pk):
     report = get_object_or_404(Report, pk=pk)
     if(report.status == "New"):
-        report.status = "In-Progress"
+        report.status = "Seen"
         report.save()
     # add error checking
     if request.method == 'POST':
