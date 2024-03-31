@@ -2,13 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.contrib.auth.signals import user_logged_in
 from django.dispatch import receiver
-from login.models import Report
+from login.models import Report, Evidence
 #from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 
-from .models import Evidence
 from .forms import ReportForm
 
 # Create your views here.
@@ -70,6 +69,7 @@ def admin_landing_view(request):
 def report(request):
     if request.method == 'POST':
         evidence = Evidence(upload=request.FILES['filename'])
+        fileLink = evidence.upload.url
         evidence.save()
         userID = request.POST['userID']
         className = request.POST['className']
@@ -77,7 +77,6 @@ def report(request):
         studentName = request.POST['studentName']
         rating = request.POST.get('rating')
         workType = request.POST.getlist('workType')
-        fileLink = evidence.upload.url
         print(fileLink)
        
         if userID == "":
