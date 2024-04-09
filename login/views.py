@@ -45,9 +45,6 @@ def logout_view(request):
 def admin_view_reports(request):
     return render(request, "admin_view_reports.html")
 
-#def user_reports(request):
- #   return render(request, "user_reports.html")
-
 def public_reports(request):
     return render(request, "public_reports.html")
 
@@ -96,7 +93,7 @@ def user_reports(request):
     print(f"requested user view reports")
     name = "name"
     reports = Report.objects.filter(userID=request.user.email)
-    return render(request, 'user_landing_page.html', {'reports': reports})
+    return render(request, 'user_reports.html', {'reports': reports})
 
     
 def review_reports(request):

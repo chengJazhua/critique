@@ -15,6 +15,5 @@ urlpatterns = [
     path('report/', views.report),
     path('viewreports/', views.public_reports),
     path('viewreports/', views.admin_view_reports),
-    #path('adminreportview/', views.admin_report_view),
     path('adminreportview/', views.review_reports),
 ]
