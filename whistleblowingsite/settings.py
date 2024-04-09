@@ -199,6 +199,7 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend" #and allauth backend
 )
 
+SOCIALACCOUNT_LOGIN_ON_GET = True
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
