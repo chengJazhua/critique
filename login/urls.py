@@ -10,10 +10,11 @@ app_name = "login"
 urlpatterns = [
     path("", TemplateView.as_view(template_name="home.html")),
     path('logout/', LogoutView.as_view()),
-    path('userlanding/', views.user_view_reports),
+    path('userlanding/', views.user_reports),
     path('adminlanding/',views.admin_landing_view),
     path('report/', views.report),
-    path('viewreports/', views.user_reports),
+    path('viewreports/', views.public_reports),
     path('viewreports/', views.admin_view_reports),
-    path('adminreportview/', views.admin_report_view),
+    #path('adminreportview/', views.admin_report_view),
+    path('adminreportview/', views.review_reports),
 ]
