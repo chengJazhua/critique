@@ -4,19 +4,9 @@
   integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <html lang="en">
 {% if user.is_authenticated %}
-{% include 'login/user_navbar.html' %}
+  {% include 'login/user_navbar.html' %}
 {% endif %}
-
 <body>
-  {% if error_message %}
-    <div class="container"
-          style="display: flex; justify-content: center; width: 710px; height: 100px0px; background-color: #ED4337; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-          <label for="className"
-              style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45);">
-            Error: {{ error_message }}
-          </label>
-    </div>
-  {% endif %}
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
       <div class="container"
@@ -60,11 +50,11 @@
               <label for="neutral" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 13px;">Neutral</label><br>
               <input type="radio" id="negative" name="rating" value="negative" style="width: 18px; height: 18px;">
               <label for="negative" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 70px;">Negative</label><br>
-              <input type="radio" id="inClass" name="workType" value="inClass" style="width: 18px; height: 18px;">
-              <label for="inClass" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 13px;">Email</label><br>
-              <input type="radio" id="inClass" name="workType" value="inClass" style="width: 18px; height: 18px;">
-              <label for="inClass" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 70px;">Don't Email</label><br>
-              <input type="radio" id="inClass" name="workType" value="inClass" style="width: 18px; height: 18px;">
+              <input type="radio" id="email" name="emailStatus" value="email" style="width: 18px; height: 18px;">
+              <label for="email" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 13px;">Email</label><br>
+              <input type="radio" id="dontEmail" name="emailStatus" value="dontEmail" style="width: 18px; height: 18px;">
+              <label for="dontEmail" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 70px;">Don't Email</label><br>
+              <input type="radio" id="inClass" name="workType" value="assignment" style="width: 18px; height: 18px;">
               <label for="inClass" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 13px;">Assignment</label><br>
               <input type="radio" id="project" name="workType" value="project" style="width: 18px; height: 18px;">
               <label for="project" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 0px;">Project</label><br>
@@ -73,8 +63,8 @@
         </div>
       </div>
       <div style="display: fixed; bottom: 100%; transform: translate3d(calc(50vw - 355px), 0px, 0px); width: 710px; height: 50px;">
-        <button type="button" for="private" name="private" id="private" class="private" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(100, 100, 255); width: 350px; height: 50px; margin-right: 2.9px; color: white;">Private</button>
-        <button type="button" for="public" name="public" id="public" class="public" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); width: 350px; height: 50px; margin-left: 2.9px;">Public</button>
+        <button type="button" for="private" name="private" id="privateButton" class="private" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(100, 100, 255); width: 350px; height: 50px; margin-right: 2.9px; color: white;">Private</button>
+        <button type="button" for="public" name="public" id="publicButton" class="public" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); width: 350px; height: 50px; margin-left: 2.9px;">Public</button>
       </div>
       <div style="display: fixed; bottom: 100%; transform: translate3d(calc(50vw - 355px), 20px, 0px); width: 710px; height: 50px;">
         <input type="file" id="fileUpload" name="filename" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); border-radius: 5px; width: 350px; height: 50px; margin-right: 2px;">
@@ -111,3 +101,4 @@
     });
 </script>
 </html>
+
