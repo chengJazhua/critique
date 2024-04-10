@@ -73,7 +73,6 @@ def report(request):
             fileLink = evidence.upload.url
             evidence.save()
         except Exception as e:
-            print("broke 1")
             return render(
                 request,
                 "report_page.html",
@@ -87,14 +86,17 @@ def report(request):
         studentName = request.POST['studentName']
         rating = request.POST.get('rating')
         workType = request.POST.getlist('workType')
+        professor_email = request.POST['professor_email']
+        email_prof = request.get('email_prof')
+        report = request.get('report')
+        
         status = "New"
         feedback = ""
        
         if userID == "":
             userID = "Anonymous"
         
-        if fileLink == "" or className == "" or professorName == "" or studentName == "" or rating == "" or workType == "" or status == "":
-            print("broken here")
+        if professor_email == "" or email_prof == "" or report == "" or fileLink == "" or className == "" or professorName == "" or studentName == "" or rating == "" or workType == "" or status == "":
             return render(
                 request,
                 "report_page.html",
@@ -103,7 +105,7 @@ def report(request):
                 },
                 )
             
-        Report.objects.create(userID = userID, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink, status=status, feedback=feedback)
+        Report.objects.create(userID = userID, report = report, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink, status=status, feedback=feedback, email_prof = email_prof, professor_email = professor_email)
     return render(
         request,
         "report_page.html"
