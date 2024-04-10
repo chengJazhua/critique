@@ -4,196 +4,203 @@
   integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <html lang="en">
 {% if user.is_authenticated %}
-  {% include 'login/user_navbar.html' %}
+{% include 'login/user_navbar.html' %}
 {% endif %}
+
 <body>
   {% if error_message %}
-  <div class="container"
-        style="display: flex; justify-content: center; width: 710px; height: 100px0px; background-color: #ED4337; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-        <label for="className"
-            style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45);">
-          Error: {{ error_message }}
-        </label>
+  <div id="errorDiv"
+    style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 852px; height: 120px; background-color: #ED4337; padding: 20px; border-radius: 15px; margin-bottom: 20px; z-index: 9999; text-align: center; opacity: 1; transition: opacity 1s;">
+    <label for="className" style="font-size: 45px; font-weight: 100; color:rgb(45, 45, 45);">
+      Error: {{ error_message }}
+    </label>
   </div>
-{% endif %}
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  <div class="container"
-    style="display: flex; justify-content: space-between; width: 710px; height: 480px; background-color: #f0f0f0; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-    <div class="inner-square"
-      style="width: 500px; height: 440px; background-color: #ccc; border-radius: 10px; padding: 20px;">
-      <div name="textInputs" style="display: flex; flex-direction: column; align-items: center; margin-top: -15px;">
-        <label for="className"
-          style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;">Class:</label><br>
-        <input type="text" id="class" name="className"
-          style="height: 40px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -15px;"><br>
+  {% endif %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="container"
+      style="display: flex; justify-content: space-between; width: 710px; height: 480px; background-color: #f0f0f0; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+      <div class="inner-square"
+        style="width: 500px; height: 440px; background-color: #ccc; border-radius: 10px; padding: 20px;">
+        <div name="textInputs" style="display: flex; flex-direction: column; align-items: center; margin-top: -15px;">
+          <label for="className"
+            style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;">Class:</label><br>
+          <input type="text" id="class" name="className"
+            style="height: 40px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -15px;"><br>
 
-        <div style="display: flex; width: 90%; margin-bottom: 25px;">
-          <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
-            <label for="professorName"
-              style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;">Professor:</label><br>
-            <input type="text" id="professorName" name="professorName"
-              style="height: 40px; width: calc(100% - 2.5px); border: 0px; border-radius: 10px; margin-bottom: -5px; margin-right: 2.5px;">
+          <div style="display: flex; width: 90%; margin-bottom: 25px;">
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+              <label for="professorName"
+                style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;">Professor:</label><br>
+              <input type="text" id="professorName" name="professorName"
+                style="height: 40px; width: calc(100% - 2.5px); border: 0px; border-radius: 10px; margin-bottom: -5px; margin-right: 2.5px;">
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column;">
+              <label for="professor_email"
+                style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px; text-align: right;">Professor
+                Email:</label><br>
+              <input type="text" id="professor_email" name="professor_email"
+                style="height: 40px; width: calc(100% - 2.5px); border: 0px; border-radius: 10px; margin-bottom: -15px; margin-left: 2.5px;">
+            </div>
           </div>
-          <div style="flex: 1; display: flex; flex-direction: column;">
-            <label for="professor_email"
-              style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px; text-align: right;">Professor
-              Email:</label><br>
-            <input type="text" id="professor_email" name="professor_email"
-              style="height: 40px; width: calc(100% - 2.5px); border: 0px; border-radius: 10px; margin-bottom: -15px; margin-left: 2.5px;">
+
+          <label for="studentName"
+            style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;">Student
+            Name:</label><br>
+          <input type="text" id="student" name="studentName"
+            style="height: 40px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -15px;"><br>
+
+          <label for="report"
+            style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;">Report:</label><br>
+          <input type="text" id="report" name="report"
+            style="height: 80px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -5px;"><br>
+        </div>
+      </div>
+      <div>
+        <div style="display: flex; align-items: center; flex-direction: column;">
+          <div name="selectRating" style="margin-bottom: 20px; width: 150px;">
+            <div id="ratingContainer">
+              <input type="radio" id="positive" name="rating" value="positive" class="radio-button"
+                style="display: none;">
+              <label for="positive" class="button-label"
+                style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); height: 50px; cursor: pointer; text-align: center; display: inline-block; width: 100%; margin-bottom: 5px;">Positive</label><br>
+
+              <input type="radio" id="neutral" name="rating" value="neutral" class="radio-button"
+                style="display: none;">
+              <label for="neutral" class="button-label"
+                style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); height: 50px; cursor: pointer; text-align: center; display: inline-block; width: 100%; margin-bottom: 5px;">Neutral</label><br>
+
+              <input type="radio" id="negative" name="rating" value="negative" class="radio-button"
+                style="display: none;">
+              <label for="negative" class="button-label"
+                style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); height: 50px; cursor: pointer; text-align: center; display: inline-block; width: 100%; margin-bottom: 35px;">Negative</label><br>
+            </div>
+
+            <div id="emailStatusContainer">
+              <input type="radio" id="email" name="emailStatus" value="email" class="radio-button"
+                style="display: none;">
+              <label for="email" class="button-label"
+                style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(100, 100, 255); color: white; height: 50px; cursor: pointer; text-align: center; display: inline-block; width: 100%; margin-bottom: 5px;">Email</label><br>
+
+              <input type="radio" id="dontEmail" name="emailStatus" value="dontEmail" class="radio-button"
+                style="display: none;">
+              <label for="dontEmail" class="button-label"
+                style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); height: 50px; cursor: pointer; text-align: center; display: inline-block; width: 100%; margin-bottom: 35px;">Don't
+                Email</label><br>
+            </div>
+
+            <div id="workTypeContainer">
+              <input type="radio" id="inClass" name="workType" value="assignment" class="radio-button"
+                style="display: none;">
+              <label for="inClass" class="button-label"
+                style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); height: 50px; cursor: pointer; text-align: center; display: inline-block; width: 100%; margin-bottom: 5px;">Assignment</label><br>
+
+              <input type="radio" id="project" name="workType" value="project" class="radio-button"
+                style="display: none;">
+              <label for="project" class="button-label"
+                style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); height: 50px; cursor: pointer; text-align: center; display: inline-block; width: 100%;">Project</label><br>
+            </div>
           </div>
         </div>
-
-        <label for="studentName"
-          style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;">Student
-          Name:</label><br>
-        <input type="text" id="student" name="studentName"
-          style="height: 40px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -15px;"><br>
-
-        <label for="report"
-          style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;">Report:</label><br>
-        <input type="text" id="report" name="report"
-          style="height: 80px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -5px;"><br>
       </div>
+    </div>
+    <div id="privacyContainer"
+      style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 710px; margin: 0 auto; place-items: center;">
+      <input type="radio" id="privateButton" name="privacy" value="private" class="radio-button" style="display: none;">
+      <label for="privateButton" class="button-label"
+        style="width: 95%; font-size: 24px; font-weight: 100; color: white; border-radius: 5px; border: 0px; background-color: rgb(100, 100, 255); height: 50px; cursor: pointer; text-align: center;">Private</label>
+
+      <input type="radio" id="publicButton" name="privacy" value="public" class="radio-button" style="display: none;">
+      <label for="publicButton" class="button-label"
+        style="width: 95%; font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); height: 50px; cursor: pointer; text-align: center;">Public</label>
+    </div>
+    <div
+      style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 710px; margin: 20px auto 0 auto; place-items: center;">
+      <input type="file" id="fileUpload" name="filename"
+        style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; width: 95%; height: 50px;">
+      <input type="hidden" name="userID" value="{{ user.email }}">
+      <input type="submit"
+        style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); height: 50px; width: 95%;">
     </div>
     <div>
-      <div style="display: flex; align-items: center; flex-direction: column;">
-        <div name="selectRating" style="margin-bottom: 20px; width: 150px;">
-          <div id="ratingContainer">
-            <input type="radio" id="positive" name="rating" value="positive" class="radio-button"
-              style="display: none;">
-            <label for="positive" class="button-label"
-              style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); height: 50px; cursor: pointer; text-align: center; display: inline-block; width: 100%; margin-bottom: 5px;">Positive</label><br>
-
-            <input type="radio" id="neutral" name="rating" value="neutral" class="radio-button"
-              style="display: none;">
-            <label for="neutral" class="button-label"
-              style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); height: 50px; cursor: pointer; text-align: center; display: inline-block; width: 100%; margin-bottom: 5px;">Neutral</label><br>
-
-            <input type="radio" id="negative" name="rating" value="negative" class="radio-button"
-              style="display: none;">
-            <label for="negative" class="button-label"
-              style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); height: 50px; cursor: pointer; text-align: center; display: inline-block; width: 100%; margin-bottom: 35px;">Negative</label><br>
-          </div>
-
-          <div id="emailStatusContainer">
-            <input type="radio" id="email" name="emailStatus" value="email" class="radio-button"
-              style="display: none;">
-            <label for="email" class="button-label"
-              style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(100, 100, 255); color: white; height: 50px; cursor: pointer; text-align: center; display: inline-block; width: 100%; margin-bottom: 5px;">Email</label><br>
-
-            <input type="radio" id="dontEmail" name="emailStatus" value="dontEmail" class="radio-button"
-              style="display: none;">
-            <label for="dontEmail" class="button-label"
-              style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); height: 50px; cursor: pointer; text-align: center; display: inline-block; width: 100%; margin-bottom: 35px;">Don't
-              Email</label><br>
-          </div>
-
-          <div id="workTypeContainer">
-            <input type="radio" id="inClass" name="workType" value="assignment" class="radio-button"
-              style="display: none;">
-            <label for="inClass" class="button-label"
-              style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); height: 50px; cursor: pointer; text-align: center; display: inline-block; width: 100%; margin-bottom: 5px;">Assignment</label><br>
-
-            <input type="radio" id="project" name="workType" value="project" class="radio-button"
-              style="display: none;">
-            <label for="project" class="button-label"
-              style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); height: 50px; cursor: pointer; text-align: center; display: inline-block; width: 100%;">Project</label><br>
-          </div>
-        </div>
-      </div>
+      {% if not user.is_authenticated %}
+      <a class="nav-link" href="/">Exit</a>
+      {% endif %}
     </div>
-  </div>
-  <div id="privacyContainer"
-    style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 710px; margin: 0 auto; place-items: center;">
-    <input type="radio" id="privateButton" name="privacy" value="private" class="radio-button" style="display: none;">
-    <label for="privateButton" class="button-label"
-      style="width: 95%; font-size: 24px; font-weight: 100; color: white; border-radius: 5px; border: 0px; background-color: rgb(100, 100, 255); height: 50px; cursor: pointer; text-align: center;">Private</label>
 
-    <input type="radio" id="publicButton" name="privacy" value="public" class="radio-button" style="display: none;">
-    <label for="publicButton" class="button-label"
-      style="width: 95%; font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); height: 50px; cursor: pointer; text-align: center;">Public</label>
-  </div>
-  <div
-    style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 710px; margin: 20px auto 0 auto; place-items: center;">
-    <input type="file" id="fileUpload" name="filename"
-      style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; width: 95%; height: 50px;">
-    <input type="hidden" name="userID" value="{{ user.email }}">
-    <input type="submit"
-      style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); height: 50px; width: 95%;">
-  </div>
-  <div>
-    {% if not user.is_authenticated %}
-    <a class="nav-link" href="/">Exit</a>
-    {% endif %}
-  </div>
-
-  <script>
-    const emailStatusRadioButtons = document.querySelectorAll("#emailStatusContainer [name='emailStatus']");
-
-    emailStatusRadioButtons.forEach(function (emailStatusRadioButton) {
-      emailStatusRadioButton.addEventListener("change", function () {
-        document.querySelectorAll("#emailStatusContainer .button-label").forEach(function (label) {
-          label.style.backgroundColor = "rgb(150, 150, 255)";
-          label.style.color = "rgb(45, 45, 45)";
-        });
-
-        if (this.checked) {
-          this.nextElementSibling.style.backgroundColor = "rgb(100, 100, 255)";
-          this.nextElementSibling.style.color = "white";
+    <script>
+      setTimeout(function() {
+        var errorDiv = document.getElementById('errorDiv');
+        if (errorDiv) {
+          errorDiv.style.opacity = '0';
         }
-      });
-    });
+      }, 2000);
 
-    const ratingRadioButtons = document.querySelectorAll("#ratingContainer [name='rating']");
+      const emailStatusRadioButtons = document.querySelectorAll("#emailStatusContainer [name='emailStatus']");
 
-    ratingRadioButtons.forEach(function (ratingRadioButton) {
-      ratingRadioButton.addEventListener("change", function () {
-        document.querySelectorAll("#ratingContainer .button-label").forEach(function (label) {
-          label.style.backgroundColor = "rgb(150, 150, 255)";
-          label.style.color = "rgb(45, 45, 45)";
+      emailStatusRadioButtons.forEach(function (emailStatusRadioButton) {
+        emailStatusRadioButton.addEventListener("change", function () {
+          document.querySelectorAll("#emailStatusContainer .button-label").forEach(function (label) {
+            label.style.backgroundColor = "rgb(150, 150, 255)";
+            label.style.color = "rgb(45, 45, 45)";
+          });
+
+          if (this.checked) {
+            this.nextElementSibling.style.backgroundColor = "rgb(100, 100, 255)";
+            this.nextElementSibling.style.color = "white";
+          }
         });
-
-        if (this.checked) {
-          this.nextElementSibling.style.backgroundColor = "rgb(100, 100, 255)";
-          this.nextElementSibling.style.color = "white";
-        }
       });
-    });
 
-    const workTypeRadioButtons = document.querySelectorAll("#workTypeContainer [name='workType']");
+      const ratingRadioButtons = document.querySelectorAll("#ratingContainer [name='rating']");
 
-    workTypeRadioButtons.forEach(function (workTypeRadioButton) {
-      workTypeRadioButton.addEventListener("change", function () {
-        document.querySelectorAll("#workTypeContainer .button-label").forEach(function (label) {
-          label.style.backgroundColor = "rgb(150, 150, 255)";
-          label.style.color = "rgb(45, 45, 45)";
+      ratingRadioButtons.forEach(function (ratingRadioButton) {
+        ratingRadioButton.addEventListener("change", function () {
+          document.querySelectorAll("#ratingContainer .button-label").forEach(function (label) {
+            label.style.backgroundColor = "rgb(150, 150, 255)";
+            label.style.color = "rgb(45, 45, 45)";
+          });
+
+          if (this.checked) {
+            this.nextElementSibling.style.backgroundColor = "rgb(100, 100, 255)";
+            this.nextElementSibling.style.color = "white";
+          }
         });
-
-        if (this.checked) {
-          this.nextElementSibling.style.backgroundColor = "rgb(100, 100, 255)";
-          this.nextElementSibling.style.color = "white";
-        }
       });
-    });
 
-    const privacyRadioButtons = document.querySelectorAll("#privacyContainer [name='privacy']");
+      const workTypeRadioButtons = document.querySelectorAll("#workTypeContainer [name='workType']");
 
-    privacyRadioButtons.forEach(function (privacyRadioButton) {
-      privacyRadioButton.addEventListener("change", function () {
-        document.querySelectorAll("#privacyContainer .button-label").forEach(function (label) {
-          label.style.backgroundColor = "rgb(150, 150, 255)";
-          label.style.color = "rgb(45, 45, 45)";
+      workTypeRadioButtons.forEach(function (workTypeRadioButton) {
+        workTypeRadioButton.addEventListener("change", function () {
+          document.querySelectorAll("#workTypeContainer .button-label").forEach(function (label) {
+            label.style.backgroundColor = "rgb(150, 150, 255)";
+            label.style.color = "rgb(45, 45, 45)";
+          });
+
+          if (this.checked) {
+            this.nextElementSibling.style.backgroundColor = "rgb(100, 100, 255)";
+            this.nextElementSibling.style.color = "white";
+          }
         });
-
-        if (this.checked) {
-          this.nextElementSibling.style.backgroundColor = "rgb(100, 100, 255)";
-          this.nextElementSibling.style.color = "white";
-        }
       });
-    });
-  </script>
-  <form>
+
+      const privacyRadioButtons = document.querySelectorAll("#privacyContainer [name='privacy']");
+
+      privacyRadioButtons.forEach(function (privacyRadioButton) {
+        privacyRadioButton.addEventListener("change", function () {
+          document.querySelectorAll("#privacyContainer .button-label").forEach(function (label) {
+            label.style.backgroundColor = "rgb(150, 150, 255)";
+            label.style.color = "rgb(45, 45, 45)";
+          });
+
+          if (this.checked) {
+            this.nextElementSibling.style.backgroundColor = "rgb(100, 100, 255)";
+            this.nextElementSibling.style.color = "white";
+          }
+        });
+      });
+    </script>
+    <form>
 </body>
 
 </html>
