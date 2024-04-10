@@ -7,6 +7,15 @@
   {% include 'login/user_navbar.html' %}
 {% endif %}
 <body>
+  {% if error_message %}
+  <div class="container"
+        style="display: flex; justify-content: center; width: 710px; height: 100px0px; background-color: #ED4337; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+        <label for="className"
+            style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45);">
+          Error: {{ error_message }}
+        </label>
+  </div>
+{% endif %}
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
       <div class="container"
@@ -50,10 +59,12 @@
               <label for="neutral" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 13px;">Neutral</label><br>
               <input type="radio" id="negative" name="rating" value="negative" style="width: 18px; height: 18px;">
               <label for="negative" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 70px;">Negative</label><br>
-              <input type="radio" id="email" name="emailStatus" value="email" style="width: 18px; height: 18px;">
+              
+              <input type="radio" id="email" name="email_prof" value="email_prof" style="width: 18px; height: 18px;">
               <label for="email" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 13px;">Email</label><br>
-              <input type="radio" id="dontEmail" name="emailStatus" value="dontEmail" style="width: 18px; height: 18px;">
+              <input type="radio" id="dontEmail" name="email_prof" value="dont_email_prof" style="width: 18px; height: 18px;">
               <label for="dontEmail" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 70px;">Don't Email</label><br>
+              
               <input type="radio" id="inClass" name="workType" value="assignment" style="width: 18px; height: 18px;">
               <label for="inClass" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 13px;">Assignment</label><br>
               <input type="radio" id="project" name="workType" value="project" style="width: 18px; height: 18px;">
@@ -105,5 +116,6 @@
         }
     });
     </script>
+  </form>
 </body>
 </html>

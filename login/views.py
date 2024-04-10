@@ -89,6 +89,15 @@ def report(request):
         professor_email = request.POST['professor_email']
         email_prof = request.POST.get('email_prof')
         report = request.POST['report']
+        privacy = request.POST.get('privacy')
+        
+        print(privacy)
+        
+        if privacy == "public":
+            privacy_boolean = False
+            print("true!")
+        else:
+            privacy_boolean = True
         
         if(email_prof == "email_prof"):
             email_prof_boolean = True
@@ -110,7 +119,7 @@ def report(request):
                 },
                 )
             
-        Report.objects.create(userID = userID, report = report, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink, status=status, feedback=feedback, email_prof = email_prof_boolean, professor_email = professor_email)
+        Report.objects.create(userID = userID, report = report, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink, status=status, feedback=feedback, email_prof = email_prof_boolean, professor_email = professor_email, private = privacy_boolean)
     return render(
         request,
         "report_page.html"
