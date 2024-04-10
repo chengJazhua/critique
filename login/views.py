@@ -73,7 +73,6 @@ def report(request):
             fileLink = evidence.upload.url
             evidence.save()
         except Exception as e:
-            print("broke 1")
             return render(
                 request,
                 "report_page.html",
@@ -86,7 +85,25 @@ def report(request):
         professorName = request.POST['professorName']
         studentName = request.POST['studentName']
         rating = request.POST.get('rating')
-        workType = request.POST.getlist('workType')
+        workType = request.POST.get('workType')
+        professor_email = request.POST['professor_email']
+        email_prof = request.POST.get('email_prof')
+        report = request.POST['report']
+        privacy = request.POST.get('privacy')
+        
+        print(privacy)
+        
+        if privacy == "public":
+            privacy_boolean = False
+            print("true!")
+        else:
+            privacy_boolean = True
+        
+        if(email_prof == "email_prof"):
+            email_prof_boolean = True
+        else:
+            email_prof_boolean = False
+        
         status = "New"
         feedback = ""
         report=request.POST['report']
@@ -94,8 +111,7 @@ def report(request):
         if userID == "":
             userID = "Anonymous"
         
-        if report == "" or professor_email == "" or fileLink == "" or className == "" or professorName == "" or studentName == "" or rating == "" or workType == "" or status == "":
-            print("broken here")
+        if professor_email == "" or email_prof == None or report == "" or fileLink == "" or className == "" or professorName == "" or studentName == "" or rating == None or workType == None or status == "":
             return render(
                 request,
                 "report_page.html",
@@ -104,7 +120,7 @@ def report(request):
                 },
                 )
             
-        Report.objects.create(userID = userID, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink, status=status, feedback=feedback, report=report, professor_email=professor_email)
+        Report.objects.create(userID = userID, report = report, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink, status=status, feedback=feedback, email_prof = email_prof_boolean, professor_email = professor_email, private = privacy_boolean)
     return render(
         request,
         "report_page.html"
