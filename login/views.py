@@ -152,3 +152,11 @@ def admin_specific_report_view(request, pk):
         'admin_specific_report_view.html', 
         {'report': report},
         )
+
+def report_delete(request, pk):
+    report = get_object_or_404(Report, pk=pk)  
+
+    if request.method == 'POST':         
+        report.delete()                    
+    return redirect('/userlanding/')            
+    
