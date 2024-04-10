@@ -37,7 +37,7 @@ def redirect_after_google_login(sender, request, user, **kwargs):
 
 
 def home(request):
-    return render(request, "login/home.html") #issue here
+    return render(request, "login/home.html") 
 
 def logout_view(request):
     logout(request)
@@ -46,9 +46,8 @@ def logout_view(request):
 def admin_view_reports(request):
     return render(request, "admin_view_reports.html")
 
-def user_reports(request):
-    return render(request, "user_reports.html")
-
+def public_reports(request):
+    return render(request, "public_reports.html")
 
 def user_landing_view(request):
     ## retrieve user's name through database lookup
@@ -93,18 +92,20 @@ def report(request):
         )
 
 @login_required
-def user_view_reports(request):
+def user_reports(request):
     print(f"requested user view reports")
     name = "name"
     reports = Report.objects.filter(userID=request.user.email)
-    return render(request, 'user_landing_page.html', {'reports': reports})
+    return render(request, 'user_reports.html', {'reports': reports})
 
     
-def admin_report_view(request):
+def review_reports(request):
     reports = Report.objects.all()
     return render(
         request,
-        "temp_admin_report_view.html",
+        "review_reports.html",
+
+
         {'reports' : reports},
         )
     
