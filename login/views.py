@@ -95,7 +95,6 @@ def report(request):
         
         if privacy == "public":
             privacy_boolean = False
-            print("true!")
         else:
             privacy_boolean = True
         
