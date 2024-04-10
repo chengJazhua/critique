@@ -29,7 +29,7 @@
                     <iframe id="display" src="{{ report.fileLink}}" overflow="hidden" frameborder="0" width=90% height="600" scrolling="yes"></iframe><br>
                   </div>
                   <strong>Status:</strong> {{ report.status }}<br>
-                  <form method="post">
+                  <form method="post" value="resolving">
                     {% csrf_token %}
                     {% if report.feedback == "" %}
                         <strong>Feedback:</strong> No feedback. <br>
@@ -43,8 +43,12 @@
                         <textarea id="feedback" name="feedback" style="width: 90%; height: 300px;"></textarea>
                     {% endif %}
                     <br>
-                    <input type="submit">
+                    <input type="Submit" value="Resolve">
                   </form>
+                  <form action='/sent/' method=post> 
+                </textarea> 
+                <input type="Submit" value= "Email"> 
+                </form> 
                 </div>
             </div>
         </div>

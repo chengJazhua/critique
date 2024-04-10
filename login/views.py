@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
-
+from django.core.mail import EmailMessage
 from .forms import ReportForm
 
 # Create your views here.
@@ -116,11 +116,26 @@ def admin_specific_report_view(request, pk):
         report.save()
     # add error checking
     if request.method == 'POST':
-        report.feedback = request.POST.get('feedback')
-        report.status = "Resolved"
-        report.save()
+        if 'Resolve' in request.POST:
+            report.feedback = request.POST.get('feedback')
+            report.status = "Resolved"
+            report.save()
+        if 'Email' in request.POST:
+            report.email_status=True
+            report.save()
+            email = EmailMessage('Reporting '+report.studentName+' for '+report.className,
+                                'A student in your class has been reported for the following reasons: '
+                                + report,
+                                to=['your@email.com'])
+            if report.fileLink!="":
+                print("unsure how to add attachment!")
+            email.send()
+            render(request, 'email_sent.html')
     return render(
         request, 
         'admin_specific_report_view.html', 
         {'report': report},
         )
+
+def email(request):
+    return render(request, "email_sent.html")
