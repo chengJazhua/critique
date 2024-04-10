@@ -3,9 +3,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
   integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <html lang="en">
-{% if user.is_authenticated %}
 {% include 'login/user_navbar.html' %}
-{% endif %}
 
 <body>
   <form method="post" enctype="multipart/form-data">
@@ -15,9 +13,9 @@
         <div class="inner-square"
           style="width: 500px; height: 440px; background-color: #ccc; border-radius: 10px; padding: 20px;">
           <div name="textInputs" style="display: flex; flex-direction: column; align-items: center;">
-            <label for="reportName"
+            <label for="report"
               style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;">Report Title:</label><br>
-            <input type="text" id="reportName" name="reportName"
+            <input type="text" id="report" name="report"
               style="height: 40px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -5px;"><br>
             <label for="className"
               style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;">Class:</label><br>
@@ -30,8 +28,8 @@
                 <input type="text" id="professorName" name="professorName" style="height: 40px; width: calc(100% - 2.5px); border: 0px; border-radius: 10px; margin-bottom: -5px; margin-right: 2.5px;">
               </div>
               <div style="flex: 1; display: flex; flex-direction: column;">
-                <label for="professorEmail" style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px; text-align: right;">Professor Email:</label><br>
-                <input type="text" id="professorEmail" name="professorEmail" style="height: 40px; width: calc(100% - 2.5px); border: 0px; border-radius: 10px; margin-bottom: -5px; margin-left: 2.5px;">
+                <label for="professor_email" style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px; text-align: right;">Professor Email:</label><br>
+                <input type="text" id="professor_email" name="professor_email" style="height: 40px; width: calc(100% - 2.5px); border: 0px; border-radius: 10px; margin-bottom: -5px; margin-left: 2.5px;">
               </div>
             </div>
             
@@ -45,22 +43,24 @@
           <div style="display: flex; align-items: center; flex-direction: column;">
             <div name="selectRating" style="margin-bottom: 20px;">
               <input type="radio" id="positive" name="rating" value="positive" style="width: 18px; height: 18px;">
-              <label for="positive" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 30px;">Positive</label><br>
+              <label for="positive" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 15px;">Positive</label><br>
               <input type="radio" id="neutral" name="rating" value="neutral" style="width: 18px; height: 18px;">
-              <label for="neutral" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 30px;">Neutral</label><br>
+              <label for="neutral" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 15px;">Neutral</label><br>
               <input type="radio" id="negative" name="rating" value="negative" style="width: 18px; height: 18px;">
-              <label for="negative" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 150px;">Negative</label><br>
+              <label for="negative" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 70px;">Negative</label><br>
               <input type="radio" id="inClass" name="workType" value="inClass" style="width: 18px; height: 18px;">
-              <label for="inClass" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 30px;"> Assignment</label><br>
+              <label for="inClass" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 70px;">Email</label><br>
+              <input type="radio" id="inClass" name="workType" value="inClass" style="width: 18px; height: 18px;">
+              <label for="inClass" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 15px;">Assignment</label><br>
               <input type="radio" id="project" name="workType" value="project" style="width: 18px; height: 18px;">
-              <label for="project" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 0px;"> Project</label><br>
+              <label for="project" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 0px;">Project</label><br>
             </div>
           </div>
         </div>
       </div>
       <div style="display: fixed; bottom: 100%; transform: translate3d(calc(50vw - 355px), 0px, 0px); width: 710px; height: 50px;">
-        <button type="button" for="private" name="private" id="privateButton" class="activeButton" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(100, 100, 255); width: 350px; height: 50px; margin-right: 2.9px; color: white;">Private</button>
-        <button type="button" for="public" name="public" id="publicButton" class="inactiveButton" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); width: 350px; height: 50px; margin-left: 2.9px;">Public</button>
+        <button type="button" for="private" name="private" id="private" class="private" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(100, 100, 255); width: 350px; height: 50px; margin-right: 2.9px; color: white;">Private</button>
+        <button type="button" for="public" name="public" id="public" class="public" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); width: 350px; height: 50px; margin-left: 2.9px;">Public</button>
       </div>
       <div style="display: fixed; bottom: 100%; transform: translate3d(calc(50vw - 355px), 20px, 0px); width: 710px; height: 50px;">
         <input type="file" id="fileUpload" name="filename" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); border-radius: 5px; width: 350px; height: 50px; margin-right: 2px;">
@@ -69,11 +69,6 @@
       </div>
     </div>
   </form>
-  <div>
-  {% if not user.is_authenticated %}
-  <a class="nav-link" href="/">Exit</a>
-  {% endif %}
-</div>
 </body>
 <script>
     document.getElementById("privateButton").addEventListener("click", function() {
