@@ -12,15 +12,11 @@
         style="display: flex; justify-content: space-between; width: 710px; height: 480px; background-color: #f0f0f0; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
         <div class="inner-square"
           style="width: 500px; height: 440px; background-color: #ccc; border-radius: 10px; padding: 20px;">
-          <div name="textInputs" style="display: flex; flex-direction: column; align-items: center;">
-            <label for="report"
-              style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;">Report Title:</label><br>
-            <input type="text" id="report" name="report"
-              style="height: 40px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -5px;"><br>
+          <div name="textInputs" style="display: flex; flex-direction: column; align-items: center; margin-top: -15px;">
             <label for="className"
               style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;">Class:</label><br>
             <input type="text" id="class" name="className"
-              style="height: 40px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -5px;"><br>
+              style="height: 40px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -15px;"><br>
             
             <div style="display: flex; width: 90%; margin-bottom: 25px;">
               <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
@@ -29,14 +25,19 @@
               </div>
               <div style="flex: 1; display: flex; flex-direction: column;">
                 <label for="professor_email" style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px; text-align: right;">Professor Email:</label><br>
-                <input type="text" id="professor_email" name="professor_email" style="height: 40px; width: calc(100% - 2.5px); border: 0px; border-radius: 10px; margin-bottom: -5px; margin-left: 2.5px;">
+                <input type="text" id="professor_email" name="professor_email" style="height: 40px; width: calc(100% - 2.5px); border: 0px; border-radius: 10px; margin-bottom: -15px; margin-left: 2.5px;">
               </div>
             </div>
             
             <label for="studentName"
               style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;"> Student Name:</label><br>
             <input type="text" id="student" name="studentName"
-              style="height: 40px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -5px;"><br>
+              style="height: 40px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -15px;"><br>
+
+            <label for="report"
+              style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;">Report:</label><br>
+            <input type="text" id="report" name="report"
+              style="height: 80px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -5px;"><br>
           </div>
         </div>
         <div>
@@ -92,3 +93,4 @@
     });
 </script>
 </html>
+
