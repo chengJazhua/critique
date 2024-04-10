@@ -31,3 +31,4 @@ class Report(models.Model):
     email_prof = models.BooleanField(default=True)
     private = models.BooleanField(default=True)
     reported = models.BooleanField(default=False)
+    email_status= models.BooleanField(default=False)

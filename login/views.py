@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
-
+from django.core.mail import EmailMessage
 from .forms import ReportForm
 
 # Create your views here.
@@ -105,7 +105,8 @@ def report(request):
         
         status = "New"
         feedback = ""
-       
+        report=request.POST['report']
+        professor_email=request.POST['professor_email']
         if userID == "":
             userID = "Anonymous"
         
@@ -148,20 +149,34 @@ def admin_specific_report_view(request, pk):
         report.status = "Seen"
         report.save()
     if request.method == 'POST':
-        feedback = request.POST.get('feedback')
-        if report.feedback == "":
-            return render(
-                request, 
-                'admin_specific_report_view.html', 
-                {
-                    'report': report,
-                    # to include in html page
-                    'error_message': "You must submit feedback.",
-                },
-            )
-        report.feedback = feedback
-        report.status = "Resolved"
-        report.save()
+        if request.POST.get('Resolve',False): #if resolve button is clicked
+            feedback = request.POST.get('feedback')
+            print(f"Feedback received: [{feedback}]")
+            if feedback == "":
+                return render(
+                    request, 
+                    'admin_specific_report_view.html', 
+                    {
+                        'report': report,
+                        # to include in html page
+                        'error_message': "You must submit feedback.",
+                    },
+                )
+            report.feedback = feedback
+            report.status = "Resolved"
+            report.save()
+        elif request.POST.get('Email',False): #if email button is clicked
+            print(f"emailing")
+            report.email_status=True
+            report.save()
+            email = EmailMessage('Reporting '+report.studentName+' for '+report.className,
+                                'A student in your class has been reported for the following reasons:\n'
+                                + report.report,
+                                to=[report.professor_email])
+            # if report.fileLink!="":
+            #     email.attach_file(report.fileLink)
+            email.send()
+            return render(request, 'email_sent.html')
     return render(
         request, 
         'admin_specific_report_view.html', 
@@ -175,3 +190,6 @@ def report_delete(request, pk):
         report.delete()                    
     return redirect('/userlanding/')            
     
+
+def email(request):
+    return render(request, "email_sent.html")

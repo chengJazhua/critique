@@ -52,8 +52,12 @@
                         <textarea id="feedback" name="feedback" style="width: 90%; height: 300px;"></textarea>
                     {% endif %}
                     <br>
-                    <input type="submit">
+                    <input type="Submit" value="Resolve" name="Resolve">
                   </form>
+                  <form method=post> 
+                    {% csrf_token %}
+                <input type="Submit" value= "Email" name="Email"> 
+                </form> 
                 </div>
             </div>
         </div>
