@@ -155,12 +155,11 @@ def admin_specific_report_view(request, pk):
             report.email_status=True
             report.save()
             email = EmailMessage('Reporting '+report.studentName+' for '+report.className,
-                                'A student in your class has been reported for the following reasons: '
+                                'A student in your class has been reported for the following reasons:\n'
                                 + report.report,
                                 to=[report.professor_email])
             # if report.fileLink!="":
             #     email.attach_file(report.fileLink)
-            print(f"email sent")
             email.send()
             return render(request, 'email_sent.html')
     return render(
