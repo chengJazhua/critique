@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
-
+from django.core.mail import EmailMessage
 from .forms import ReportForm
 
 # Create your views here.
@@ -68,24 +68,58 @@ def admin_landing_view(request):
 
 def report(request):
     if request.method == 'POST':
-        evidence = Evidence(upload=request.FILES['filename'])
-        fileLink = evidence.upload.url
-        evidence.save()
+        try:
+            evidence = Evidence(upload=request.FILES['filename'])
+            fileLink = evidence.upload.url
+            evidence.save()
+        except Exception as e:
+            return render(
+                request,
+                "report_page.html",
+                {
+                    "error_message": "You are missing one or more fields",
+                },
+                )
         userID = request.POST['userID']
         className = request.POST['className']
         professorName = request.POST['professorName']
         studentName = request.POST['studentName']
         rating = request.POST.get('rating')
-        workType = request.POST.getlist('workType')
+        workType = request.POST.get('workType')
+        professor_email = request.POST['professor_email']
+        email_prof = request.POST.get('email_prof')
+        report = request.POST['report']
+        privacy = request.POST.get('privacy')
+        
+        print(privacy)
+        
+        if privacy == "public":
+            privacy_boolean = False
+        else:
+            privacy_boolean = True
+        
+        if(email_prof == "email_prof"):
+            email_prof_boolean = True
+        else:
+            email_prof_boolean = False
+        
         status = "New"
         feedback = ""
-        print(fileLink)
-       
+        report=request.POST['report']
+        professor_email=request.POST['professor_email']
         if userID == "":
             userID = "Anonymous"
+        
+        if professor_email == "" or email_prof == None or report == "" or fileLink == "" or className == "" or professorName == "" or studentName == "" or rating == None or workType == None or status == "":
+            return render(
+                request,
+                "report_page.html",
+                {
+                    "error_message": "You are missing one or more fields.",
+                },
+                )
             
-        Report.objects.create(userID = userID, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink, status=status, feedback=feedback)
-        # TODO: upload file and error checking (make sure all inputs are valid)
+        Report.objects.create(userID = userID, report = report, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink, status=status, feedback=feedback, email_prof = email_prof_boolean, professor_email = professor_email, private = privacy_boolean)
     return render(
         request,
         "report_page.html"
@@ -107,20 +141,58 @@ def review_reports(request):
 
 
         {'reports' : reports},
-        )
+    )
     
 def admin_specific_report_view(request, pk):
     report = get_object_or_404(Report, pk=pk)
     if(report.status == "New"):
         report.status = "Seen"
         report.save()
-    # add error checking
     if request.method == 'POST':
-        report.feedback = request.POST.get('feedback')
-        report.status = "Resolved"
-        report.save()
+        if request.POST.get('Resolve',False): #if resolve button is clicked
+            feedback = request.POST.get('feedback')
+            print(f"Feedback received: [{feedback}]")
+            if feedback == "":
+                return render(
+                    request, 
+                    'admin_specific_report_view.html', 
+                    {
+                        'report': report,
+                        # to include in html page
+                        'error_message': "You must submit feedback.",
+                    },
+                )
+            report.feedback = feedback
+            report.status = "Resolved"
+            report.save()
+        elif request.POST.get('Email',False): #if email button is clicked
+            print(f"emailing")
+            report.email_status=True
+            report.save()
+            email = EmailMessage('Reporting '+report.studentName+' for '+report.className,
+                                'A student in your class has been reported for the following reasons:\n'
+                                + report.report,
+                                to=[report.professor_email])
+            if report.fileLink!="":
+                email = EmailMessage('Reporting '+report.studentName+' for '+report.className,
+                                'A student in your class has been reported for the following reasons:\n'
+                                + report.report + "\nclick here to view additional evidence:\n" + report.fileLink,
+                                to=[report.professor_email])
+            email.send()
+            return render(request, 'email_sent.html')
     return render(
         request, 
         'admin_specific_report_view.html', 
         {'report': report},
         )
+
+def report_delete(request, pk):
+    report = get_object_or_404(Report, pk=pk)  
+
+    if request.method == 'POST':         
+        report.delete()                    
+    return redirect('/userlanding/')            
+    
+
+def email(request):
+    return render(request, "email_sent.html")
