@@ -14,8 +14,8 @@ urlpatterns = [
     path('adminlanding/',views.admin_landing_view),
     path('report/', views.report),
     path('viewreports/', views.public_reports),
-    path('viewreports/', views.review_reports),
+    path('viewreports/', views.admin_view_reports),
 
-    path('adminreportview/', views.admin_report_view),
+    path('adminreportview/', views.review_reports),
     path('adminreportview/<int:pk>/', views.admin_specific_report_view, name='admin_specific_report_view'),
 ]
