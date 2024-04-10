@@ -8,14 +8,14 @@
 
 <body>
   <div class="container"
-    style="display: flex; align-items: center; justify-content: space-between; width: 710px; height: 100px; background-color: #f0f0f0; border-radius: 10px;">
-    <button
-      style="display: flex; align-items: center; justify-content: center; height: 80px; width: 335px; padding: 10px; border-radius: 10px; background-color: #ccc; border: 0px;">
-      <p style="font-size: 50px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px;">Trending</p>
+    style="display: flex; align-items: center; justify-content: space-between; width: 710px; height: 70px; background-color: #f0f0f0; border-radius: 10px;">
+    <button id="trendingButton"
+      style="display: flex; align-items: center; justify-content: center; height: 50px; width: 335px; padding: 10px; border-radius: 10px; background-color: rgb(100, 100, 255); border: 0px;">
+      <p style="font-size: 40px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px; color: white;">Trending</p>
     </button>
-    <button
-      style="display: flex; align-items: center; justify-content: center; height: 80px; width: 335px; padding: 10px; border-radius: 10px; background-color: #ccc; border: 0px;">
-      <p style="font-size: 50px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px;">Recent</p>
+    <button id="recentButton"
+      style="display: flex; align-items: center; justify-content: center; height: 50px; width: 335px; padding: 10px; border-radius: 10px; background-color: rgb(150, 150, 255); border: 0px;">
+      <p style="font-size: 40px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px;">Recent</p>
     </button>
   </div>
 
@@ -29,8 +29,10 @@
     <div class="buttons" style="display: flex; flex-direction: column; align-items: flex-end;">
       <button id="upvote" onclick="toggleUpvote('upvote')"
         style="background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTVsE0ySQie8eBpg8s2GZVwWf53TjmZmYrxJgt353gbh8Qe2efksIGSNJ4k3x6ci76179TVAq_Sz2bh8r7Pci-taK705MbMlWd1QzyTIpblbxDz1eiCNdCrxayA3rFzxYCfJNkjaPegxHMUauWacBUqE78bGS0bGn3-K0Pa7NwylqZwUCs8d68nBN-hjU/s1302/upvote:downvote.png'); height: 80px; width: 115px; background-size: cover; margin: 10px; border: 0px solid black;"></button>
-      <div id="scoreContainer" style="height: 80px; width: 115px; background-size: cover; margin: 10px; border: 0px solid black;">
-        <p id="score" style="font-size: 50px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px; text-align: center;">0</p>
+      <div id="scoreContainer"
+        style="height: 80px; width: 115px; background-size: cover; margin: 10px; border: 0px solid black;">
+        <p id="score"
+          style="font-size: 50px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px; text-align: center;">0</p>
       </div>
       <button id="downvote" onclick="toggleDownvote('downvote')"
         style="background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTVsE0ySQie8eBpg8s2GZVwWf53TjmZmYrxJgt353gbh8Qe2efksIGSNJ4k3x6ci76179TVAq_Sz2bh8r7Pci-taK705MbMlWd1QzyTIpblbxDz1eiCNdCrxayA3rFzxYCfJNkjaPegxHMUauWacBUqE78bGS0bGn3-K0Pa7NwylqZwUCs8d68nBN-hjU/s1302/upvote:downvote.png'); height: 80px; width: 115px; background-size: cover; margin: 10px; border: 0px solid black; transform: scaleY(-1);"></button>
@@ -40,13 +42,33 @@
   </div>
 
   <script>
+    document.getElementById("trendingButton").addEventListener("click", function () {
+      document.querySelectorAll("#trendingButton, #recentButton").forEach(function (button) {
+        button.style.backgroundColor = "rgb(150, 150, 255)";
+        button.querySelector("p").style.color = "rgb(45, 45, 45)";
+      });
+
+      this.style.backgroundColor = "rgb(100, 100, 255)";
+      this.querySelector("p").style.color = "white";
+    });
+
+    document.getElementById("recentButton").addEventListener("click", function () {
+      document.querySelectorAll("#trendingButton, #recentButton").forEach(function (button) {
+        button.style.backgroundColor = "rgb(150, 150, 255)";
+        button.querySelector("p").style.color = "rgb(45, 45, 45)";
+      });
+
+      this.style.backgroundColor = "rgb(100, 100, 255)";
+      this.querySelector("p").style.color = "white";
+    });
+
     var score = 0;
-  
+
     function toggleUpvote(buttonId) {
       var downvoteButton = document.getElementById("downvote");
       var upvoteButton = document.getElementById("upvote");
       var scoreElement = document.getElementById("score");
-  
+
       var image1 = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTVsE0ySQie8eBpg8s2GZVwWf53TjmZmYrxJgt353gbh8Qe2efksIGSNJ4k3x6ci76179TVAq_Sz2bh8r7Pci-taK705MbMlWd1QzyTIpblbxDz1eiCNdCrxayA3rFzxYCfJNkjaPegxHMUauWacBUqE78bGS0bGn3-K0Pa7NwylqZwUCs8d68nBN-hjU/s1302/upvote:downvote.png";
       var image2 = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1ZYuHhcFa912yHwmhxebRWyGlfgyx-fvZeXhWl23VwEpovtr39lxU_xfglFUUPvGzV93TSlzKR7Opnpxqy2OWAlAi1pp7zJvHWv7Va-GPP0slC_LskT7urb54Pe-QUFgQelR1wh45y8hc1RfPbPkKWllCCwRB_-VmKKvILEQU8jaAoyQqQ0523mYKBs8/s320/upvoted.png";
       var image3 = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAVHKyt-Wrnzy6S3APRWFXdozRmOIFv9-wVJQyI3qefqLqK7Zohy4jXehGXIOJeaRBH26TKlIQg9koil45o57d9oa-l8PMYUdt0hhzuV5nM_YRUUdIQSs0XT_ZwWMRXdXzg0z23A6WvNxvPOEOmQPpCfC-kDtXs2W6NqRmXIXTZCLMCTL0NjZz2H6cJ3s/s320/downvoted.png";
@@ -58,19 +80,19 @@
         upvoteButton.style.backgroundImage = `url("${image2}")`;
         downvoteButton.style.backgroundImage = `url("${image1}")`;
         score++;
-      } 
+      }
       else {
         upvoteButton.style.backgroundImage = `url("${image1}")`;
         score--;
       }
       scoreElement.textContent = score;
     }
-  
+
     function toggleDownvote(buttonId) {
       var downvoteButton = document.getElementById("downvote");
       var upvoteButton = document.getElementById("upvote");
       var scoreElement = document.getElementById("score");
-  
+
       var image1 = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTVsE0ySQie8eBpg8s2GZVwWf53TjmZmYrxJgt353gbh8Qe2efksIGSNJ4k3x6ci76179TVAq_Sz2bh8r7Pci-taK705MbMlWd1QzyTIpblbxDz1eiCNdCrxayA3rFzxYCfJNkjaPegxHMUauWacBUqE78bGS0bGn3-K0Pa7NwylqZwUCs8d68nBN-hjU/s1302/upvote:downvote.png";
       var image2 = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAVHKyt-Wrnzy6S3APRWFXdozRmOIFv9-wVJQyI3qefqLqK7Zohy4jXehGXIOJeaRBH26TKlIQg9koil45o57d9oa-l8PMYUdt0hhzuV5nM_YRUUdIQSs0XT_ZwWMRXdXzg0z23A6WvNxvPOEOmQPpCfC-kDtXs2W6NqRmXIXTZCLMCTL0NjZz2H6cJ3s/s320/downvoted.png";
       var image3 = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1ZYuHhcFa912yHwmhxebRWyGlfgyx-fvZeXhWl23VwEpovtr39lxU_xfglFUUPvGzV93TSlzKR7Opnpxqy2OWAlAi1pp7zJvHWv7Va-GPP0slC_LskT7urb54Pe-QUFgQelR1wh45y8hc1RfPbPkKWllCCwRB_-VmKKvILEQU8jaAoyQqQ0523mYKBs8/s320/upvoted.png";
@@ -83,7 +105,7 @@
         downvoteButton.style.backgroundImage = `url("${image2}")`;
         upvoteButton.style.backgroundImage = `url("${image1}")`;
         score--;
-      } 
+      }
       else {
         downvoteButton.style.backgroundImage = `url("${image1}")`;
         score++;
