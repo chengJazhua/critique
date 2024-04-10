@@ -18,6 +18,7 @@ class Report(models.Model):
         IN_PROGRESS = 'INP', 'In Progress'
         RESOLVED = 'RES', 'Resolved'
     userID = models.CharField(max_length = 200)
+    report = models.TextField(max_length = 500, default="")
     className = models.CharField(max_length = 200)
     professorName = models.CharField(max_length = 200)
     studentName = models.CharField(max_length = 200)
@@ -26,3 +27,7 @@ class Report(models.Model):
     fileLink = models.CharField(max_length = 500)
     status = models.CharField(max_length = 10)
     feedback = models.TextField(max_length = 500)
+    professor_email = models.CharField(max_length = 200)
+    email_prof = models.BooleanField(default=True)
+    private = models.BooleanField(default=True)
+    reported = models.BooleanField(default=False)

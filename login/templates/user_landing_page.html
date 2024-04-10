@@ -22,10 +22,13 @@
                 <strong>Student Name:</strong> {{ report.studentName }}<br>
                 <strong>Rating:</strong> {{ report.rating }}<br>
                 <strong>Work Type:</strong> {{ report.workType }}<br>
+                <strong>Report:</strong> {{ report.report }}<br>
                 <div class="iframe-wrapper" width="500" height="600">
                   <strong>Attached Evidence:</strong>
                   <iframe id="display" src="{{ report.fileLink}}" overflow="hidden" frameborder="0" width="500" height="600" scrolling="yes"></iframe><br>
                 </div>
+                <strong>Private:</strong> {{ report.private }}<br>
+                <strong>Emailed Professor:</strong> {{ report.email_prof }}<br>
                 <strong>Status:</strong> {{ report.status }}<br>
                 <strong>Feedback:</strong> {{ report.feedback }}<br>
                   </div></div></div>
