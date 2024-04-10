@@ -16,18 +16,25 @@
             <div class="col">
               <div class="card" style="background-color: #dbedff;">
                   <div class="card-body">
-                <strong>User ID:</strong> {{ report.userID }}<br>
-                <strong>Class Name:</strong> {{ report.className }}<br>
-                <strong>Professor Name:</strong> {{ report.professorName }}<br>
-                <strong>Student Name:</strong> {{ report.studentName }}<br>
-                <strong>Rating:</strong> {{ report.rating }}<br>
-                <strong>Work Type:</strong> {{ report.workType }}<br>
-                <div class="iframe-wrapper" width="500" height="600">
-                  <strong>Attached Evidence:</strong>
-                  <iframe id="display" src="{{ report.fileLink}}" overflow="hidden" frameborder="0" width="500" height="600" scrolling="yes"></iframe><br>
-                </div>
-                <strong>Status:</strong> {{ report.get_status_display }}<br>
-                <strong>Feedback:</strong> {{ report.feedback }}<br>
+                    <strong>User ID:</strong> {{ report.userID }}<br>
+                    <strong>Class Name:</strong> {{ report.className }}<br>
+                    <strong>Professor Name:</strong> {{ report.professorName }}<br>
+                    <strong>Student Name:</strong> {{ report.studentName }}<br>
+                    <strong>Rating:</strong> {{ report.rating }}<br>
+                    <strong>Work Type:</strong> {{ report.workType }}<br>
+                    <strong>Report:</strong> {{ report.report }}<br>
+                    <div class="iframe-wrapper" width="500" height="600">
+                      <strong>Attached Evidence:</strong>
+                      <iframe id="display" src="{{ report.fileLink}}" overflow="hidden" frameborder="0" width="500" height="600" scrolling="yes"></iframe><br>
+                    </div>
+                    <strong>Private:</strong> {{ report.private }}<br>
+                    <strong>Emailed Professor:</strong> {{ report.email_prof }}<br>
+                    <strong>Status:</strong> {{ report.status }}<br>
+                    <strong>Feedback:</strong> {{ report.feedback }}<br>
+                <form action="{% url 'login:report_delete' report.id %}" method="post">
+                  {% csrf_token %}
+                  <input type="submit" value="Delete report">
+              </form>
                   </div></div></div>
             {% empty %}
             <div class="col">
