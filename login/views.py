@@ -89,11 +89,12 @@ def report(request):
         workType = request.POST.getlist('workType')
         status = "New"
         feedback = ""
-       
+        report=request.POST['report']
+        professor_email=request.POST['professor_email']
         if userID == "":
             userID = "Anonymous"
         
-        if fileLink == "" or className == "" or professorName == "" or studentName == "" or rating == "" or workType == "" or status == "":
+        if report == "" or professor_email == "" or fileLink == "" or className == "" or professorName == "" or studentName == "" or rating == "" or workType == "" or status == "":
             print("broken here")
             return render(
                 request,
@@ -103,7 +104,7 @@ def report(request):
                 },
                 )
             
-        Report.objects.create(userID = userID, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink, status=status, feedback=feedback)
+        Report.objects.create(userID = userID, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink, status=status, feedback=feedback, report=report, professor_email=professor_email)
     return render(
         request,
         "report_page.html"
@@ -133,22 +134,22 @@ def admin_specific_report_view(request, pk):
         report.status = "Seen"
         report.save()
     if request.method == 'POST':
-        if 'Resolve' in request.POST:
+        if 'Resolve' in request.POST: #if resolve button is clicked
             feedback = request.POST.get('feedback')
-        if report.feedback == "":
-            return render(
-                request, 
-                'admin_specific_report_view.html', 
-                {
-                    'report': report,
-                    # to include in html page
-                    'error_message': "You must submit feedback.",
-                },
-            )
-        report.feedback = feedback
+            if report.feedback == "":
+                return render(
+                    request, 
+                    'admin_specific_report_view.html', 
+                    {
+                        'report': report,
+                        # to include in html page
+                        'error_message': "You must submit feedback.",
+                    },
+                )
+            report.feedback = feedback
             report.status = "Resolved"
             report.save()
-        if 'Email' in request.POST:
+        if 'Email' in request.POST: #if email button is clicked
             report.email_status=True
             report.save()
             email = EmailMessage('Reporting '+report.studentName+' for '+report.className,

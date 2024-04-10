@@ -17,6 +17,6 @@ urlpatterns = [
     path('viewreports/', views.admin_view_reports),
     path('adminreportview/', views.review_reports),
     path('adminreportview/<int:pk>/', views.admin_specific_report_view, name='admin_specific_report_view'),
-    re_path(r'^delete/(?P<pk>[0-9]+)/$', views.report_delete, name='report_delete')
-    path('sent/',views.email)
+    re_path(r'^delete/(?P<pk>[0-9]+)/$', views.report_delete, name='report_delete'),
+    path('sent/',views.email),
 ]

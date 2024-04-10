@@ -55,7 +55,7 @@
                     <input type="Submit" value="Resolve">
                   </form>
                   <form action='/sent/' method=post> 
-                </textarea> 
+                    {% csrf_token %}
                 <input type="Submit" value= "Email"> 
                 </form> 
                 </div>
