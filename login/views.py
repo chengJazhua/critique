@@ -99,7 +99,7 @@ def report(request):
                 request,
                 "report_page.html",
                 {
-                    "error_message": "You are missing one or more fields",
+                    "error_message": "You are missing one or more fields.",
                 },
                 )
             
