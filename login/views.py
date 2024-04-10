@@ -134,9 +134,10 @@ def admin_specific_report_view(request, pk):
         report.status = "Seen"
         report.save()
     if request.method == 'POST':
-        if 'Resolve' in request.POST: #if resolve button is clicked
+        if request.POST.get('Resolve',False): #if resolve button is clicked
             feedback = request.POST.get('feedback')
-            if report.feedback == "":
+            print(f"Feedback received: [{feedback}]")
+            if feedback == "":
                 return render(
                     request, 
                     'admin_specific_report_view.html', 
@@ -149,17 +150,19 @@ def admin_specific_report_view(request, pk):
             report.feedback = feedback
             report.status = "Resolved"
             report.save()
-        if 'Email' in request.POST: #if email button is clicked
+        elif request.POST.get('Email',False): #if email button is clicked
+            print(f"emailing")
             report.email_status=True
             report.save()
             email = EmailMessage('Reporting '+report.studentName+' for '+report.className,
                                 'A student in your class has been reported for the following reasons: '
-                                + report,
-                                to=['your@email.com'])
-            if report.fileLink!="":
-                print("unsure how to add attachment!")
+                                + report.report,
+                                to=[report.professor_email])
+            # if report.fileLink!="":
+            #     email.attach_file(report.fileLink)
+            print(f"email sent")
             email.send()
-            render(request, 'email_sent.html')
+            return render(request, 'email_sent.html')
     return render(
         request, 
         'admin_specific_report_view.html', 
