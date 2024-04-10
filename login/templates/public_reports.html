@@ -26,19 +26,17 @@
               </div>
               </span>
             </p>
-            <button onclick="expand('{{report.id}}')" id="reportButton{{report.id}}">Expand</button>
+            <button onclick="expand('{{report.id}}')" id="reportButton{{report.id}}">Collapse</button>
             <script>
             function expand(name) {
               var testimonial = document.getElementById("expand" + name);
               var buttonText = document.getElementById("reportButton" + name);
               var evidence = document.getElementById("evidence" + name);
             if (testimonial.style.display === "none") {
-                //dots.style.display = "inline";
                 buttonText.innerHTML = "Collapse"; 
                 testimonial.style.display = "inline";
                 evidence.style.display = "inline";
               } else {
-                //dots.style.display = "none";
                 buttonText.innerHTML = "Expand"; 
                 testimonial.style.display = "none";
                 evidence.style.display = "none";
