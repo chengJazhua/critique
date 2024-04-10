@@ -68,9 +68,19 @@ def admin_landing_view(request):
 
 def report(request):
     if request.method == 'POST':
-        evidence = Evidence(upload=request.FILES['filename'])
-        fileLink = evidence.upload.url
-        evidence.save()
+        try:
+            evidence = Evidence(upload=request.FILES['filename'])
+            fileLink = evidence.upload.url
+            evidence.save()
+        except Exception as e:
+            print("broke 1")
+            return render(
+                request,
+                "report_page.html",
+                {
+                    "error_message": "You are missing one or more fields",
+                },
+                )
         userID = request.POST['userID']
         className = request.POST['className']
         professorName = request.POST['professorName']
@@ -79,13 +89,21 @@ def report(request):
         workType = request.POST.getlist('workType')
         status = "New"
         feedback = ""
-        print(fileLink)
        
         if userID == "":
             userID = "Anonymous"
+        
+        if fileLink == "" or className == "" or professorName == "" or studentName == "" or rating == "" or workType == "" or status == "":
+            print("broken here")
+            return render(
+                request,
+                "report_page.html",
+                {
+                    "error_message": "You are missing one or more fields",
+                },
+                )
             
         Report.objects.create(userID = userID, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink, status=status, feedback=feedback)
-        # TODO: upload file and error checking (make sure all inputs are valid)
     return render(
         request,
         "report_page.html"
@@ -107,16 +125,26 @@ def review_reports(request):
 
 
         {'reports' : reports},
-        )
+    )
     
 def admin_specific_report_view(request, pk):
     report = get_object_or_404(Report, pk=pk)
     if(report.status == "New"):
         report.status = "Seen"
         report.save()
-    # add error checking
     if request.method == 'POST':
-        report.feedback = request.POST.get('feedback')
+        feedback = request.POST.get('feedback')
+        if report.feedback == "":
+            return render(
+                request, 
+                'admin_specific_report_view.html', 
+                {
+                    'report': report,
+                    # to include in html page
+                    'error_message': "You must submit feedback.",
+                },
+            )
+        report.feedback = feedback
         report.status = "Resolved"
         report.save()
     return render(
