@@ -20,44 +20,61 @@
       <div class="container"
         style="display: flex; justify-content: space-between; width: 710px; height: 480px; background-color: #f0f0f0; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
         <div class="inner-square"
-          style="width: 500px; height: 360px; background-color: #ccc; border-radius: 10px; padding: 20px;">
-          <div name="textInputs" style="display: flex; flex-direction: column; align-items: center;">
+          style="width: 500px; height: 440px; background-color: #ccc; border-radius: 10px; padding: 20px;">
+          <div name="textInputs" style="display: flex; flex-direction: column; align-items: center; margin-top: -15px;">
             <label for="className"
               style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;">Class:</label><br>
             <input type="text" id="class" name="className"
-              style="height: 40px; width: 70%; border: 0px; border-radius: 10px; margin-bottom: 5px;"><br>
-            <label for="professorName"
-              style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;">Professor:</label><br>
-            <input type="text" id="professor" name="professorName"
-              style="height: 40px; width: 70%; border: 0px; border-radius: 10px; margin-bottom: 5px;"><br>
-            <label for="studetnName"
-              style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;"> Student Name:</label><br>
+              style="height: 40px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -15px;"><br>
+            
+            <div style="display: flex; width: 90%; margin-bottom: 25px;">
+              <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+                <label for="professorName" style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;">Professor:</label><br>
+                <input type="text" id="professorName" name="professorName" style="height: 40px; width: calc(100% - 2.5px); border: 0px; border-radius: 10px; margin-bottom: -5px; margin-right: 2.5px;">
+              </div>
+              <div style="flex: 1; display: flex; flex-direction: column;">
+                <label for="professor_email" style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px; text-align: right;">Professor Email:</label><br>
+                <input type="text" id="professor_email" name="professor_email" style="height: 40px; width: calc(100% - 2.5px); border: 0px; border-radius: 10px; margin-bottom: -15px; margin-left: 2.5px;">
+              </div>
+            </div>
+            
+            <label for="studentName"
+              style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;">Student Name:</label><br>
             <input type="text" id="student" name="studentName"
-              style="height: 40px; width: 70%; border: 0px; border-radius: 10px; margin-bottom: 5px;"><br>
+              style="height: 40px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -15px;"><br>
+
+            <label for="report"
+              style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); margin-bottom: -25px;">Report:</label><br>
+            <input type="text" id="report" name="report"
+              style="height: 80px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -5px;"><br>
           </div>
         </div>
         <div>
           <div style="display: flex; align-items: center; flex-direction: column;">
             <div name="selectRating" style="margin-bottom: 20px;">
               <input type="radio" id="positive" name="rating" value="positive" style="width: 18px; height: 18px;">
-              <label for="positive" style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 30px;">Positive</label><br>
+              <label for="positive" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 13px;">Positive</label><br>
               <input type="radio" id="neutral" name="rating" value="neutral" style="width: 18px; height: 18px;">
-              <label for="neutral" style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 30px;">Neutral</label><br>
+              <label for="neutral" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 13px;">Neutral</label><br>
               <input type="radio" id="negative" name="rating" value="negative" style="width: 18px; height: 18px;">
-              <label for="negative" style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45);">Negative</label>
+              <label for="negative" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 70px;">Negative</label><br>
+              <input type="radio" id="inClass" name="workType" value="inClass" style="width: 18px; height: 18px;">
+              <label for="inClass" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 13px;">Email</label><br>
+              <input type="radio" id="inClass" name="workType" value="inClass" style="width: 18px; height: 18px;">
+              <label for="inClass" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 70px;">Don't Email</label><br>
+              <input type="radio" id="inClass" name="workType" value="inClass" style="width: 18px; height: 18px;">
+              <label for="inClass" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 13px;">Assignment</label><br>
+              <input type="radio" id="project" name="workType" value="project" style="width: 18px; height: 18px;">
+              <label for="project" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); padding-bottom: 0px;">Project</label><br>
             </div>
           </div>
         </div>
       </div>
-      <div name="selectWorkType" style="display: fixed; bottom: 100%; transform: translate3d(calc(50vw - 335px), -100px, 0px); width: 670px; height: 50px;">
-        <input type="radio" id="inClass" name="workType" value="inClass"
-          style="width: 30px; height: 30px; transform: translateY(5px);">
-        <label for="inClass" style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); display: inline-block; margin-right: 10px; padding-right: 60px; transform: translateX(-10px);"> Assignment</label>
-        <input type="radio" id="project" name="workType" value="project"
-          style="width: 30px; height: 30px; transform: translateY(5px);">
-        <label for="project" style="font-size: 30px; font-weight: 100; color:rgb(45, 45, 45); display: inline-block; margin-right: 10px; transform: translateX(-10px);"> Project</label>
+      <div style="display: fixed; bottom: 100%; transform: translate3d(calc(50vw - 355px), 0px, 0px); width: 710px; height: 50px;">
+        <button type="button" for="private" name="private" id="private" class="private" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(100, 100, 255); width: 350px; height: 50px; margin-right: 2.9px; color: white;">Private</button>
+        <button type="button" for="public" name="public" id="public" class="public" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); width: 350px; height: 50px; margin-left: 2.9px;">Public</button>
       </div>
-      <div style="display: fixed; bottom: 100%; transform: translate3d(calc(50vw - 355px), -40px, 0px); width: 710px; height: 50px;">
+      <div style="display: fixed; bottom: 100%; transform: translate3d(calc(50vw - 355px), 20px, 0px); width: 710px; height: 50px;">
         <input type="file" id="fileUpload" name="filename" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); border-radius: 5px; width: 350px; height: 50px; margin-right: 2px;">
         <input type="hidden" name="userID" value="{{ user.email }}">
         <input type="submit" style="font-size: 24px; font-weight: 100; color:rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); width: 350px; height: 50px; margin-left: 3px;">
@@ -65,4 +82,25 @@
     </div>
   </form>
 </body>
+<script>
+    document.getElementById("privateButton").addEventListener("click", function() {
+        document.querySelectorAll("button[name='private'], button[name='public']").forEach(function(button) {
+            button.style.backgroundColor = "rgb(150, 150, 255)";
+            button.style.color = "rgb(45, 45, 45)";
+        });
+
+        this.style.backgroundColor = "rgb(100, 100, 255)";
+        this.style.color = "white";
+    });
+
+    document.getElementById("publicButton").addEventListener("click", function() {
+        document.querySelectorAll("button[name='private'], button[name='public']").forEach(function(button) {
+            button.style.backgroundColor = "rgb(150, 150, 255)"; 
+            button.style.color = "rgb(45, 45, 45)";
+        });
+
+        this.style.backgroundColor = "rgb(100, 100, 255)";
+        this.style.color = "white"; 
+    });
+</script>
 </html>
