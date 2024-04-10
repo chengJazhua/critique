@@ -19,8 +19,9 @@
         <meta http-equiv="refresh" content="0; url=/userlanding/" />
     {% endif %}
 {% endif %}
-
+{% if user.is_authenticated %}
 {% include 'login/user_navbar.html' %}
+{% endif %}
     <body>
         <div class="position-absolute top-50 start-50 translate-middle">
             <p class="fs-1 d-flex justify-content-center">Login</p>
