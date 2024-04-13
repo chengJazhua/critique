@@ -9,6 +9,8 @@ from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.core.mail import EmailMessage
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from .forms import ReportForm
 
 # Create your views here.
@@ -73,13 +75,14 @@ def report(request):
             fileLink = evidence.upload.url
             evidence.save()
         except Exception as e:
-            return render(
-                request,
-                "report_page.html",
-                {
-                    "error_message": "You are missing one or more fields",
-                },
-                )
+            fileLink=""
+            # return render(
+            #     request,
+            #     "report_page.html",
+            #     {
+            #         "error_message": "You are missing one or more fields",
+            #     },
+            #     )
         userID = request.POST['userID']
         className = request.POST['className']
         professorName = request.POST['professorName']
@@ -90,6 +93,8 @@ def report(request):
         email_prof = request.POST.get('email_prof')
         report = request.POST['report']
         privacy = request.POST.get('privacy')
+        status = "New"
+        feedback = ""
         
         print(privacy)
         
@@ -103,14 +108,11 @@ def report(request):
         else:
             email_prof_boolean = False
         
-        status = "New"
-        feedback = ""
-        report=request.POST['report']
-        professor_email=request.POST['professor_email']
         if userID == "":
             userID = "Anonymous"
         
-        if professor_email == "" or email_prof == None or report == "" or fileLink == "" or className == "" or professorName == "" or studentName == "" or rating == None or workType == None or status == "":
+        if email_prof == None or report == "" or className == "" or professorName == "" or studentName == "" or rating == None or workType == None or status == "":
+            print("not enough fields")
             return render(
                 request,
                 "report_page.html",
@@ -118,7 +120,20 @@ def report(request):
                     "error_message": "You are missing one or more fields.",
                 },
                 )
-            
+        if email_prof_boolean:
+            try:
+                if professor_email.strip()=="":
+                    raise ValidationError
+                validate_email(professor_email)
+            except ValidationError as e:
+                return render(
+                    request,
+                    "report_page.html",
+                    {
+                        "error_message": "You must enter a valid email address.",
+                    },
+                    )
+        print("creating object")
         Report.objects.create(userID = userID, report = report, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink, status=status, feedback=feedback, email_prof = email_prof_boolean, professor_email = professor_email, private = privacy_boolean)
     return render(
                 request,
@@ -170,21 +185,25 @@ def admin_specific_report_view(request, pk):
             report.status = "Resolved"
             report.save()
         elif request.POST.get('Email',False): #if email button is clicked
-            print(f"emailing")
-            report.email_status=True
-            report.save()
-            msg='A student,' + report.studentName +', in your class,'+report.className+', has been reported for the following reasons:\n'+ report.report
-            if report.fileLink!="":
-                msg+= "\nclick here to view additional evidence:\n" + report.fileLink +"\n"
-            if report.userID=="Anonymous":
-                msg+="\n This was reported anonymously"
+            if report.email_prof:
+                print(f"emailing")
+                report.email_status=True
+                report.save()
+                msg='A student,' + report.studentName +', in your class,'+report.className+', has been reported for the following reasons:\n'+ report.report
+                if report.fileLink!="":
+                    msg+= "\nclick here to view additional evidence:\n" + report.fileLink +"\n"
+                if report.userID=="Anonymous":
+                    msg+="\n This was reported anonymously"
+                else:
+                    msg+="\n Please reach back out to the reporter at "+ report.userID + " if you have any other questions or concerns."
+                email = EmailMessage('Reporting '+report.studentName+' for '+report.className,
+                                    msg,
+                                    to=[report.professor_email])
+                email.send()
+                return render(request, 'email_sent.html', {'message':"Email has been sent to professor!"})
             else:
-                msg+="\n Please reach back out to the reporter at "+ report.userID + " if you have any other questions or concerns."
-            email = EmailMessage('Reporting '+report.studentName+' for '+report.className,
-                                msg,
-                                to=[report.professor_email])
-            email.send()
-            return render(request, 'email_sent.html')
+                return render(request, 'email_sent.html', {'message':"This user has requested to not report to the professor."})
+
     return render(
         request, 
         'admin_specific_report_view.html', 

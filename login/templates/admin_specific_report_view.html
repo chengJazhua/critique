@@ -54,6 +54,12 @@
                     <br>
                     <input type="Submit" value="Resolve" name="Resolve">
                   </form>
+                  {% if report.email_prof %}
+                  <strong>This student would like to submit their report to the professor</strong><br>
+                  <strong>Professor Email:</strong> {{ report.professor_email }}<br>
+                  {% else %}
+                  <strong>This student does not want to submit their report to the professor</strong><br>
+                  {% endif %}
                   <form method=post> 
                     {% csrf_token %}
                 <input type="Submit" value= "Email" name="Email"> 
