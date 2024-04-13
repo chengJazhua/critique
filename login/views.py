@@ -169,14 +169,15 @@ def admin_specific_report_view(request, pk):
             print(f"emailing")
             report.email_status=True
             report.save()
-            email = EmailMessage('Reporting '+report.studentName+' for '+report.className,
-                                'A student in your class has been reported for the following reasons:\n'
-                                + report.report,
-                                to=[report.professor_email])
+            msg='A student,' + report.studentName +', in your class,'+report.className+', has been reported for the following reasons:\n'+ report.report
             if report.fileLink!="":
-                email = EmailMessage('Reporting '+report.studentName+' for '+report.className,
-                                'A student in your class has been reported for the following reasons:\n'
-                                + report.report + "\nclick here to view additional evidence:\n" + report.fileLink,
+                msg+= "\nclick here to view additional evidence:\n" + report.fileLink +"\n"
+            if report.userID=="Anonymous":
+                msg+="\n This was reported anonymously"
+            else:
+                msg+="\n Please reach back out to the reporter at "+ report.userID + " if you have any other questions or concerns."
+            email = EmailMessage('Reporting '+report.studentName+' for '+report.className,
+                                msg,
                                 to=[report.professor_email])
             email.send()
             return render(request, 'email_sent.html')
