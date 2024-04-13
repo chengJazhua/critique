@@ -130,7 +130,7 @@ def report(request):
                     request,
                     "report_page.html",
                     {
-                        "error_message": "You must enter a valid email address.",
+                        "error_message": "You must enter a valid email.",
                     },
                     )
         print("creating object")
