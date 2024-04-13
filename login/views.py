@@ -123,7 +123,7 @@ def report(request):
         if email_prof_boolean:
             try:
                 if professor_email.strip()=="":
-                    raise ValidationError
+                    raise ValidationError("Invalid email")
                 validate_email(professor_email)
             except ValidationError as e:
                 return render(
