@@ -19,14 +19,14 @@
               {{report.className}} taught by {{report.professorName}}<br>
               Rating: {{report.rating}}<br>
               Assignment Type: {{report.workType}}<br>
-              <span id="expand{{report.id}}">
+              <span id="expand{{report.id}}" style="display:none">
                 User Testimonial: {{report.report}}<br>
               <div class="embed-responsive embed-responsive-4by3">
-                <iframe class="embed-responsive-item" id="evidence{{report.id}}" src="{{ report.fileLink}}"></iframe>
+                <iframe class="embed-responsive-item" id="evidence{{report.id}}" src="{{ report.fileLink}}" style="display:none"></iframe>
               </div>
               </span>
             </p>
-            <button onclick="expand('{{report.id}}')" id="reportButton{{report.id}}">Collapse</button>
+            <button onclick="expand('{{report.id}}')" id="reportButton{{report.id}}">Expand</button>
             <script>
             function expand(name) {
               var testimonial = document.getElementById("expand" + name);
