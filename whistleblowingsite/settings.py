@@ -12,9 +12,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 import django_heroku
 import dj_database_url
-
 from pathlib import Path
 import django
+from dotenv import load_dotenv
+load_dotenv()
+
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -32,7 +35,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'a-08-3e91aaebfb2c.herokuapp.com']
 
-SITE_ID = 5 #identifies which site we are using for login 
+SITE_ID = 6 #identifies which site we are using for login 
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,8 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'login.apps.LoginConfig', 
+    # 'login.apps.LoginConfig', 
     'storages',
+    'login',
     "django.contrib.sites",
     "allauth", #allows other forms of authentication
     "allauth.account",
@@ -179,6 +183,7 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_FILE_OVERWRITE = False
 AWS_LOCATION = 'static'
+AWS_DEFAULT_ACL = None
 
 
 # STORAGES = {  
@@ -194,6 +199,7 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend" #and allauth backend
 )
 
+SOCIALACCOUNT_LOGIN_ON_GET = True
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
@@ -207,4 +213,10 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-django_heroku.settings(locals(), staticfiles=False, test_runner=False)
+django_heroku.settings(locals(), test_runner=False)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'teamwhistleblowing@gmail.com'
+EMAIL_HOST_PASSWORD = 'xgmv kktx ulyh xulf'
+EMAIL_PORT = 587

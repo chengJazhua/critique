@@ -55,6 +55,7 @@
 
                 <p style="font-size: 20px; font-weight: 300; color:rgb(45, 45, 45); margin: 0px;">Rating:</p>
                 <p style="font-size: 20px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px;">{{ report.rating|capfirst }}</p>
+                <li><a href="/adminreportview/{{report.pk}}/">View Report #{{ report.pk }}</a></li>
             </div>
         </div>
     {% endfor %}
