@@ -13,7 +13,7 @@ urlpatterns = [
     path('userlanding/', views.user_reports),
     path('adminlanding/',views.admin_landing_view),
     path('report/', views.report),
-    path('viewreports/', views.user_reports),
+    path('publicreports/', views.public_reports),
     path('viewreports/', views.admin_view_reports),
     path('adminreportview/', views.review_reports),
     path('adminreportview/<int:pk>/', views.admin_specific_report_view, name='admin_specific_report_view'),
