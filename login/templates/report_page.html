@@ -8,9 +8,9 @@
 {% endif %}
 
 <body>
-  {% if error_message %}
+  {% if error_message != "" %}
   <div id="errorDiv"
-    style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 852px; height: 120px; background-color: #ED4337; padding: 20px; border-radius: 15px; margin-bottom: 20px; z-index: 9999; text-align: center; opacity: 1; transition: opacity 1s;">
+    style="pointer-events: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 852px; height: 120px; background-color: #ED4337; padding: 20px; border-radius: 15px; margin-bottom: 20px; z-index: 9999; text-align: center; opacity: 1; transition: opacity 1s;">
     <label for="className" style="font-size: 45px; font-weight: 100; color:rgb(45, 45, 45);">
       Error: {{ error_message }}
     </label>
@@ -80,7 +80,7 @@
               <input type="radio" id="email" name="email_prof" value="email_prof" class="radio-button"
                 style="display: none;">
               <label for="email" class="button-label"
-                style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(100, 100, 255); color: white; height: 50px; cursor: pointer; text-align: center; display: inline-block; width: 100%; margin-bottom: 5px;">Email</label><br>
+                style="font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); color: rgb(45, 45, 45);  height: 50px; cursor: pointer; text-align: center; display: inline-block; width: 100%; margin-bottom: 5px;">Email</label><br>
 
               <input type="radio" id="dontEmail" name="email_prof" value="dont_email_prof" class="radio-button"
                 style="display: none;">
@@ -108,7 +108,7 @@
       style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 710px; margin: 0 auto; place-items: center;">
       <input type="radio" id="privateButton" name="privacy" value="private" class="radio-button" style="display: none;">
       <label for="privateButton" class="button-label"
-        style="width: 95%; font-size: 24px; font-weight: 100; color: white; border-radius: 5px; border: 0px; background-color: rgb(100, 100, 255); height: 50px; cursor: pointer; text-align: center;">Private</label>
+        style="width: 95%; font-size: 24px; font-weight: 100; color: rgb(45, 45, 45); border-radius: 5px; border: 0px; background-color: rgb(150, 150, 255); height: 50px; cursor: pointer; text-align: center;">Private</label>
 
       <input type="radio" id="publicButton" name="privacy" value="public" class="radio-button" style="display: none;">
       <label for="publicButton" class="button-label"

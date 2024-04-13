@@ -121,9 +121,13 @@ def report(request):
             
         Report.objects.create(userID = userID, report = report, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink, status=status, feedback=feedback, email_prof = email_prof_boolean, professor_email = professor_email, private = privacy_boolean)
     return render(
-        request,
-        "report_page.html"
-        )
+                request,
+                "report_page.html",
+                {
+                    "error_message": "",
+                },
+                )
+            
 
 @login_required
 def user_reports(request):
