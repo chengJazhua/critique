@@ -33,14 +33,14 @@
         {% endif %}
     {% endif %}
     {% for report in reports %}
-
+    <a href="/adminreportview/{{report.pk}}/">
         <div class="container" 
             style="display: flex; align-items: center; justify-content: space-between; width: 710px; height: 400px; background-color: #f0f0f0; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-            <a href="/adminreportview/{{report.pk}}/">
+            
             <div class="inner-square" style="width: 500px; height: 360px; background-color: #ccc; border-radius: 10px;">
-                <img src="{{ report.fileLink }}" style="width: 500px; height: 360px; border-radius: 10px; border: 5px solid blue;">
+                <iframe id="display" src="{{ report.fileLink}}" overflow="hidden" frameborder="0" width="500" height="360" scrolling="yes" style="border-radius: 10px; border: 5px solid blue;"></iframe>
             </div>
-        </a>
+        
             <div class="buttons" style="display: flex; flex-direction: column; align-items: flex-start;">
                 <p style="font-size: 20px; font-weight: 300; color:rgb(45, 45, 45); margin: 0px;">Username:</p>
                 <p style="font-size: 20px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px; margin-bottom: 15px;">{{ report.userID }}</p>
@@ -62,7 +62,7 @@
             </div>
        
         </div>
-    
+    </a>
     {% endfor %}
 </body>
 
