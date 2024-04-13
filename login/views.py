@@ -49,7 +49,8 @@ def admin_view_reports(request):
     return render(request, "admin_view_reports.html")
 
 def public_reports(request):
-    return render(request, "public_reports.html")
+    public_reports = Report.objects.filter(private=False)
+    return render(request, "public_reports.html", {"reports": public_reports})
 
 def user_landing_view(request):
     ## retrieve user's name through database lookup
