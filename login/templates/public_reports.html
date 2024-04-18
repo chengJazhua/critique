@@ -6,56 +6,66 @@
 <html lang="en">
 {% include 'login/user_navbar.html' %}
 <!--- report button will have different style --->
-<style> 
-.expand-button {
-  background-color:lightblue;
-  color:darkcyan;
-  border: none;
-}
+<style>
+  .expand-button {
+    background-color: rgb(150, 150, 255);
+    color: rgb(45, 45, 45);
+    border: 0px;
+    border-radius: 5px;
+  }
 </style>
+
 <body>
   <div class="container mt-5">
     <h1 class="mb-4">Public Reports</h1>
-      <div class="row row-cols-1 row-cols-md-2 g-4">
-        {% for report in reports %}
-        <div class="col">
-        <div class="card" style="background-color:lightblue">
-            <h5 class="card-title" style="padding:7px; padding-left:15px">{{report.studentName}}</h5>
-            <div class="card-body" style="background-color:whitesmoke">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      {% for report in reports %}
+      <div class="col">
+        <div class="card" style="background-color: #ccc">
+          <h5 class="card-title" style="padding:7px; padding-left:15px">{{report.studentName.capitalize}}</h5>
+          <div class="card-body" style="background-color:whitesmoke">
             <p class="card-text">
-              {{ report.userID }} <br>
-              {{report.className}} taught by {{report.professorName}}<br>
-              Rating: {{report.rating}}<br>
-              Assignment Type: {{report.workType}}<br>
+              Report submitted by {{ report.userID }} <br>
+              {{report.className}} taught by {{report.professorName.capitalize}}<br>
+              Rating: {{report.rating.capitalize}}<br>
+              Assignment Type: {{report.workType.capitalize}}<br>
               <span id="expand{{report.id}}" style="display:none">
                 User Testimonial: {{report.report}}<br>
-              <div class="embed-responsive embed-responsive-4by3">
-                <iframe class="embed-responsive-item" id="evidence{{report.id}}" src="{{ report.fileLink}}" style="display:none"></iframe>
-              </div>
+                <div class="embed-responsive embed-responsive-4by3">
+                  <iframe class="embed-responsive-item" id="evidence{{report.id}}" src="{{ report.fileLink}}"
+                    style="display:none"></iframe>
+                </div>
               </span>
             </p>
-            <button onclick="expand('{{report.id}}')" id="reportButton{{report.id}}" class="expand-button">Expand</button>
-            <script>
-            function expand(name) {
-              var testimonial = document.getElementById("expand" + name);
-              var buttonText = document.getElementById("reportButton" + name);
-              var evidence = document.getElementById("evidence" + name);
-            if (testimonial.style.display === "none") {
-                buttonText.innerHTML = "Collapse"; 
-                testimonial.style.display = "inline";
-                evidence.style.display = "inline";
-              } else {
-                buttonText.innerHTML = "Expand"; 
-                testimonial.style.display = "none";
-                evidence.style.display = "none";
-              }
-            }
-            </script>
-            </div></div></div>
-            {% empty %}
-              <p>No public reports submitted.</p>
-            {% endfor %}
+            <button onclick="expand('{{report.id}}')" id="reportButton{{report.id}}"
+              class="expand-button">Expand</button>
           </div>
+        </div>
+      </div>
+      {% empty %}
+      <p>No public reports available</p>
+      {% endfor %}
+    </div>
   </div>
+  <script>
+    function expand(name) {
+      var testimonial = document.getElementById("expand" + name);
+      var buttonText = document.getElementById("reportButton" + name);
+      var evidence = document.getElementById("evidence" + name);
+
+      if (testimonial.style.display === "none") {
+        buttonText.innerHTML = "Collapse";
+        testimonial.style.display = "inline";
+        evidence.style.display = "inline";
+      }
+
+      else {
+        buttonText.innerHTML = "Expand";
+        testimonial.style.display = "none";
+        evidence.style.display = "none";
+      }
+    }
+  </script>
 </body>
+
 </html>
