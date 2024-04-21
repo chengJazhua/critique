@@ -8,18 +8,23 @@
 <body>
     <div class="container"
         style="display: flex; align-items: center; justify-content: space-between; width: 710px; height: 100px; background-color: #f0f0f0; border-radius: 10px; margin-bottom: 20px;">
+        <a href="review_reports.html" target="_blank">
         <button
             style="display: flex; align-items: center; justify-content: center; height: 80px; width: 216.66px; padding: 10px; border-radius: 10px; background-color: #ccc; border: 0px;">
-            <p style="font-size: 50px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px;">New</p>
+            <p style="font-size: 50px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px;">All</p>
+        </a><a href="inprogress_reports.html" target="_blank">
         </button>
         <button
             style="display: flex; align-items: center; justify-content: center; height: 80px; width: 216.66px; padding: 10px; border-radius: 10px; background-color: #ccc; border: 0px;">
             <p style="font-size: 50px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px;">Seen</p>
         </button>
+    </a>
+    <a href="resolved_reports.html" target="_blank">
         <button
             style="display: flex; align-items: center; justify-content: center; height: 80px; width: 216.66px; padding: 10px; border-radius: 10px; background-color: #ccc; border: 0px;">
             <p style="font-size: 50px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px;">Resolved</p>
         </button>
+    </a>
     </div>
 
     {% if user.is_authenticated %}
@@ -39,6 +44,7 @@
             
             <div class="inner-square" style="width: 500px; height: 360px; background-color: #ccc; border-radius: 10px;">
                 <iframe id="display" src="{{ report.fileLink}}" overflow="hidden" frameborder="0" width="500" height="360" scrolling="yes" style="border-radius: 10px; border: 5px solid blue;"></iframe>
+                
             </div>
         
             <div class="buttons" style="display: flex; flex-direction: column; align-items: flex-start;">
