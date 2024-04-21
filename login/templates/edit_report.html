@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+{% load socialaccount %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<html lang="en">
+{% if user.is_authenticated %}
+{% include 'login/user_navbar.html' %}
+{% endif %}
+
+<body style="background-color: lightgrey;">
+  {% if error_message != "" %}
+  <div id="errorDiv"
+    style="pointer-events: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 852px; height: 120px; background-color: #ED4337; padding: 20px; border-radius: 15px; margin-bottom: 20px; z-index: 9999; text-align: center; opacity: 1; transition: opacity 1s;">
+    <label for="className" style="font-size: 45px; font-weight: 100; color:rgb(45, 45, 45);">
+      Error: {{ error_message }}
+    </label>
+  </div>
+  {% endif %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="container"
+      style="display: flex; justify-content: space-between; width: 710px; height: 480px; background-color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+      <div class="inner-square"
+        style="width: 500px; height: 440px; background-color: rgb(60, 60, 60); border-radius: 10px; padding: 20px;">
+        <div name="textInputs" style="display: flex; flex-direction: column; align-items: center; margin-top: -15px;">
+          <label for="className"
+            style="font-size: 30px; font-weight: 100; color: rgb(210, 210, 210); margin-bottom: -25px;">Class:</label><br>
+          <input type="text" id="class" name="className"
+            style="text-align: center; height: 40px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -15px;" value="{{ report.className }}"><br>
+
+          <div style="display: flex; width: 90%; margin-bottom: 25px;">
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+              <label for="professorName"
+                style="font-size: 30px; font-weight: 100; color: rgb(210, 210, 210); margin-bottom: -25px;">Professor:</label><br>
+              <input type="text" id="professorName" name="professorName"
+                style="text-align: center; height: 40px; width: calc(100% - 2.5px); border: 0px; border-radius: 10px; margin-bottom: -5px; margin-right: 2.5px;" value="{{ report.professorName }}">
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column;">
+              <label for="professor_email"
+                style="font-size: 30px; font-weight: 100; color: rgb(210, 210, 210); margin-bottom: -25px; text-align: right;">Professor Email:</label><br>
+              <input type="text" id="professor_email" name="professor_email"
+                style="text-align: center; height: 40px; width: calc(100% - 2.5px); border: 0px; border-radius: 10px; margin-bottom: -15px; margin-left: 2.5px;" value="{{ report.professor_email }}">
+            </div>
+          </div>
+
+          <label for="studentName"
+            style="font-size: 30px; font-weight: 100; color: rgb(210, 210, 210); margin-bottom: -25px;">Student
+            Name:</label><br>
+          <input type="text" id="student" name="studentName"
+            style="text-align: center; height: 40px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -15px;" value="{{ report.studentName }}"><br>
+
+          <label for="report"
+            style="font-size: 30px; font-weight: 100; color: rgb(210, 210, 210); margin-bottom: -25px;">Report:</label><br>
+          <textarea type="text" id="report" name="report" style="text-indent: 0; padding: 5px; width: 90%; height: 80px; border: 0px; border-radius: 10px; margin-bottom: -5px; resize: none; overflow-wrap: break-word;">{{ report.report }}</textarea>
+          </div>
+      </div>
+      <div>
+        <div style="display: flex; align-items: center; flex-direction: column;">
+          <div name="selectRating" style="width: 150px;">
+            <div id="ratingContainer" style="text-align: center; padding-bottom: 50px;">
+              <input type="radio" id="positive" name="rating" value="positive" class="radio-button"
+                style="display: none;">
+              <label for="positive" class="button-label"
+                style="rotate: 90deg; border-radius: 5px; border: 0px; height: 45px; cursor: pointer; text-align: center; display: inline-block; width: 45px; background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi0_vX3WJi-T4pBm72OtTk4GyKD5ATATsvrVxyzIglnRLalo02U1KLQKQbxGE3B3NSB7iiTyqo5KPNSqQeRz37O03Zj5o0xfGtIqtSpzg2-dpqMYEAEK6bW41uCcB0nu9UgQ2gTfjlyE5rzlJ1njNhBvys0kd6Wdhkbwh5E58cTertrneLrnRhh6jHxwtY/s334/Screenshot%202024-04-20%20at%204.22.10%E2%80%AFPM.png'); background-size: cover; background-position: center;"></label>
+
+              <input type="radio" id="neutral" name="rating" value="neutral" class="radio-button"
+                style="display: none;">
+              <label for="neutral" class="button-label"
+                style="border-radius: 5px; border: 0px; height: 45px; cursor: pointer; text-align: center; display: inline-block; width: 45px; background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi0_vX3WJi-T4pBm72OtTk4GyKD5ATATsvrVxyzIglnRLalo02U1KLQKQbxGE3B3NSB7iiTyqo5KPNSqQeRz37O03Zj5o0xfGtIqtSpzg2-dpqMYEAEK6bW41uCcB0nu9UgQ2gTfjlyE5rzlJ1njNhBvys0kd6Wdhkbwh5E58cTertrneLrnRhh6jHxwtY/s334/Screenshot%202024-04-20%20at%204.22.10%E2%80%AFPM.png'); background-size: cover; background-position: center;"></label>
+
+              <input type="radio" id="negative" name="rating" value="negative" class="radio-button"
+                style="display: none;">
+              <label for="negative" class="button-label"
+                style="rotate: -90deg; border-radius: 5px; border: 0px; height: 45px; cursor: pointer; text-align: center; display: inline-block; width: 45px; background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi0_vX3WJi-T4pBm72OtTk4GyKD5ATATsvrVxyzIglnRLalo02U1KLQKQbxGE3B3NSB7iiTyqo5KPNSqQeRz37O03Zj5o0xfGtIqtSpzg2-dpqMYEAEK6bW41uCcB0nu9UgQ2gTfjlyE5rzlJ1njNhBvys0kd6Wdhkbwh5E58cTertrneLrnRhh6jHxwtY/s334/Screenshot%202024-04-20%20at%204.22.10%E2%80%AFPM.png'); background-size: cover; background-position: center;"></label>
+            </div>
+
+            <div id="emailStatusContainer" style="padding-bottom: 10px;">
+              <input type="radio" id="email" name="email_prof" value="email_prof" class="radio-button"
+                style="display: none;">
+              <label for="email" class="button-label"
+                style="border-radius: 5px; border: 0px; height: 70px; cursor: pointer; text-align: center; display: inline-block; width: 70px; margin-bottom: 35px; background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhWe51QT6yKXwbCB8GF5Wx7mfWz4nZYJaV-E3gaSJ1MmiwJ3MJGjEGUmzsN4pHw6l0nJ2JeBlvF1KtOXjAbLDxX1ftCtgE-Xxj2E8N_H_djtau3B6VTqEyQMY5oEmGKvMN1Mzo40PCyBEDmXK0qJwZxUiie7g99ziHPTucPwcHPsxLopKFka3RuZwMt5c0/s430/Screenshot%202024-04-20%20at%204.25.21%E2%80%AFPM.png'); background-size: cover; background-position: center;"></label>
+
+              <input type="radio" id="dontEmail" name="email_prof" value="dont_email_prof" class="radio-button"
+                style="display: none;">
+              <label for="dontEmail" class="button-label"
+                style="border-radius: 5px; border: 0px; height: 70px; cursor: pointer; text-align: center; display: inline-block; width: 70px; margin-bottom: 35px; background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhslwWYR_g4bIcMhukO3g0Dcg9zSoBHfyGQ3DV-s-8OtifA63HxPtj8MxXeJ1Oxq9Mpyi1dZdUxXOHZfhcFcHx9PmUwkfs-ysl8zeuILAtozP5vN5a4PUy-v0-EQNSAR0Yzd4eTZ_r-utmWkvCr6x67nTOInoiEFGT_o4UqVLe7o0aH3LFmimeglTC4hKw/s976/Screenshot%202024-04-20%20at%204.27.50%E2%80%AFPM.png'); background-size: cover; background-position: center;"></label>
+            </div>
+
+            <div id="privacyContainer">
+              <input type="radio" id="publicButton" name="privacy" value="public" class="radio-button"
+                style="display: none;">
+              <label for="publicButton" class="button-label"
+                style="border-radius: 5px; border: 0px; height: 70px; cursor: pointer; text-align: center; display: inline-block; width: 70px; margin-bottom: 35px; background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiyy5ny9wneTGIXpcoVGywm27mqrL0BWkaQVqjudpLHaS0LCT7G9QjE2qQ91dsrni_NZNYLUQfir9_hTrI1zdpQOEElRJzX8ugmMBOn_YYe5n7Caw-i9h38OB4HIPEOSrP4C7YzRR9Cqgmiaw8KEJWpnwsks3fIpjMB23K3Dqmiq-8CiZ3L8aRZV-moLus/s662/Screenshot%202024-04-20%20at%204.53.59%E2%80%AFPM.png'); background-size: cover; background-position: center;"></label>
+
+              <input type="radio" id="privateButton" name="privacy" value="private" class="radio-button"
+                style="display: none;">
+              <label for="privateButton" class="button-label"
+                style="border-radius: 5px; border: 0px; height: 70px; cursor: pointer; text-align: center; display: inline-block; width: 70px; margin-bottom: 35px; background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjy9V4XuNi7I1XeUb-QxUylK6DgpLNM_Yvf_5YTYoWkctk2dmsfNJpOCU0DpYQ9PmZUbXht40cSlNIPhoiPHVr43ZxQ6rNd5rIpVfe28JAaX5HU2e3uhWTF-vVG9nNIsdxjDUc1u8uzb2hTYu5a8GmugsSWrAJQ0qU6K_5edZaeJMcODBBssK-vt95a-wU/s662/Screenshot%202024-04-20%20at%204.54.16%E2%80%AFPM.png'); background-size: cover; background-position: center;"></label>
+            </div>
+
+            <div id="workTypeContainer">
+              <input type="radio" id="inClass" name="workType" value="assignment" class="radio-button"
+                style="display: none;">
+              <label for="inClass" class="button-label"
+                style="font-size: 24px; font-weight: 100; color: rgb(210, 210, 210); border-radius: 5px; border: 0px; background-color: rgb(60, 60, 60); height: 50px; cursor: pointer; text-align: center; display: inline-block; width: 100%; margin-bottom: 5px;">Assignment</label><br>
+
+              <input type="radio" id="project" name="workType" value="project" class="radio-button"
+                style="display: none;">
+              <label for="project" class="button-label"
+                style="font-size: 24px; font-weight: 100; color: rgb(210, 210, 210); border-radius: 5px; border: 0px; background-color: rgb(60, 60, 60); height: 50px; cursor: pointer; text-align: center; display: inline-block; width: 100%;">Project</label><br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 710px; margin: 20px auto 0 auto; place-items: center;">
+      <input type="file" id="fileUpload" name="filename"
+        style="font-size: 24px; font-weight: 100; color: rgb(60, 60, 60); border-radius: 5px; width: 95%; height: 50px;">
+      <input type="hidden" name="userID" value="{{ user.email }}">
+      <input value="Edit Report" type="submit"
+        style="font-size: 24px; font-weight: 100; color: rgb(210, 210, 210); border-radius: 5px; border: 0px; background-color: rgb(60, 60, 60); height: 50px; width: 95%;">
+    </div>
+    <div>
+      {% if not user.is_authenticated %}
+      <a class="nav-link" style="text-align: center;" href="/">Exit</a>
+      {% endif %}
+    </div>
+
+    <script>
+      setTimeout(function () {
+        var errorDiv = document.getElementById('errorDiv');
+        if (errorDiv) {
+          errorDiv.style.opacity = '0';
+        }
+      }, 2000);
+
+      const emailStatusRadioButtons = document.querySelectorAll("#emailStatusContainer [name='email_prof']");
+
+      emailStatusRadioButtons.forEach(function (emailStatusRadioButton) {
+        emailStatusRadioButton.addEventListener("change", function () {
+          document.querySelectorAll("#emailStatusContainer .button-label").forEach(function (label) {
+            label.style.transition = "transform 0.3s ease"; 
+            label.style.transform = "scale(0.8)"; 
+          });
+
+          if (this.checked) {
+            this.nextElementSibling.style.transform = "scale(1.2)"; 
+          }
+        });
+      });
+
+      const ratingRadioButtons = document.querySelectorAll("#ratingContainer [name='rating']");
+
+      ratingRadioButtons.forEach(function (ratingRadioButton) {
+        ratingRadioButton.addEventListener("change", function () {
+          document.querySelectorAll("#ratingContainer .button-label").forEach(function (label) {
+            label.style.transition = "transform 0.3s ease"; 
+            label.style.transform = "scale(0.8)"; 
+          });
+
+          if (this.checked) {
+            this.nextElementSibling.style.transform = "scale(1.2)"; 
+          }
+        });
+      });
+
+      const workTypeRadioButtons = document.querySelectorAll("#workTypeContainer [name='workType']");
+
+      workTypeRadioButtons.forEach(function (workTypeRadioButton) {
+        workTypeRadioButton.addEventListener("change", function () {
+          document.querySelectorAll("#workTypeContainer .button-label").forEach(function (label) {
+            label.style.transition = "transform 0.3s ease";
+            label.style.transform = "scale(0.8)"; 
+          });
+
+          if (this.checked) {
+            this.nextElementSibling.style.transform = "scale(1.2)"; 
+          }
+        });
+      });
+
+      const privacyRadioButtons = document.querySelectorAll("#privacyContainer [name='privacy']");
+
+      privacyRadioButtons.forEach(function (privacyRadioButton) {
+        privacyRadioButton.addEventListener("change", function () {
+          document.querySelectorAll("#privacyContainer .button-label").forEach(function (label) {
+            label.style.transition = "transform 0.3s ease"; 
+            label.style.transform = "scale(0.8)"; 
+          });
+
+          if (this.checked) {
+            this.nextElementSibling.style.transform = "scale(1.2)";
+          }
+        });
+      });
+
+
+    </script>
+    <form>
+</body>
+
+</html>

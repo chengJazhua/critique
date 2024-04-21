@@ -240,3 +240,90 @@ def report_delete(request, pk):
 
 def email(request):
     return render(request, "email_sent.html")
+
+def edit_report(request, pk):
+    report = get_object_or_404(Report, pk=pk)
+    userID = report.userID
+    if request.method == 'POST':
+        try:
+            evidence = Evidence(upload=request.FILES['filename'])
+            fileLink = evidence.upload.url
+            evidence.save()
+        except Exception as e:
+            fileLink=report.fileLink
+        userID = request.POST['userID']
+        className = request.POST['className']
+        professorName = request.POST['professorName']
+        studentName = request.POST['studentName']
+        rating = request.POST.get('rating')
+        workType = request.POST.get('workType')
+        professor_email = request.POST['professor_email']
+        email_prof = request.POST.get('email_prof')
+        report_text = request.POST['report']
+        privacy = request.POST.get('privacy')
+        status = "New"
+        feedback = ""
+        
+        print(privacy)
+        
+        if privacy == "public":
+            privacy_boolean = False
+        else:
+            privacy_boolean = True
+        
+        if(email_prof == "email_prof"):
+            email_prof_boolean = True
+        else:
+            email_prof_boolean = False
+        
+        if userID == "":
+            userID = "Anonymous"
+        
+        if email_prof == None or report_text == "" or className == "" or professorName == "" or studentName == "" or rating == None or workType == None or status == "":
+            print("not enough fields")
+            return render(
+                request,
+                "edit_report.html",
+                {
+                    'report': report,
+                    "error_message": "You are missing one or more fields.",
+                },
+                )
+        if email_prof_boolean:
+            try:
+                if professor_email.strip()=="":
+                    raise ValidationError("Invalid email")
+                validate_email(professor_email)
+            except ValidationError as e:
+                return render(
+                    request,
+                    "edit_report.html",
+                    {
+                        "error_message": "You must enter a valid email.",
+                        'report': report,
+                    },
+                    )
+        print("creating object")
+        report.userID = userID
+        report.report = report_text
+        report.className = className
+        report.professorName = professorName
+        report.studentName = studentName
+        report.rating = rating
+        report.workType = workType
+        report.fileLink = fileLink
+        report.status = status
+        report.feedback = feedback
+        report.email_prof = email_prof_boolean
+        report.professor_email = professor_email
+        report.private = privacy_boolean
+        report.save()
+        
+    return render(
+        request,
+        "edit_report.html",
+        {
+            "error_message": "",
+            'report': report,
+        },
+        )

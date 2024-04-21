@@ -47,12 +47,7 @@
                     </div>
                     <div class="iframe-wrapper" width="500" height="600">
                       <strong>Attached Evidence:</strong>
-                      {% if report.fileLink|isjpg %}
-                      <img id="display" src="{{ report.fileLink}}" />
-                      {% else %}
-                      <embed id="display" src="{{ report.fileLink}}" />
-
-                      {% endif %}
+                      <iframe id="display" src="{{ report.fileLink}}" overflow="hidden" frameborder="0" width="500" height="600" scrolling="yes"></iframe><br>
                     </div>
                     <strong>Status:</strong> {{ report.status }}<br>
                     <strong>Feedback:</strong> {{ report.feedback }}<br>
@@ -60,6 +55,10 @@
                   {% csrf_token %}
                   <input type="submit" style="background-color: rgb(150, 150, 255); color: rgb(45, 45, 45); border: 0px; border-radius: 5px;" value="Delete report">
               </form>
+              <a href="/editreport/{{report.pk}}/" style="display: inline-block; text-align: center; vertical-align: middle; line-height: normal; padding: 4px 8px; background-color: rgb(150, 150, 255); color: rgb(45, 45, 45); border: 0px; border-radius: 5px; margin-top: 5px; text-decoration: none;">
+                Edit Report
+              </a>
+            
                   </div></div></div>
             {% empty %}
               <p>No reports submitted.</p>
