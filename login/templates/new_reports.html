@@ -43,7 +43,12 @@
             style="display: flex; align-items: center; justify-content: space-between; width: 710px; height: 400px; background-color: #f0f0f0; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
             
             <div class="inner-square" style="width: 500px; height: 360px; background-color: #ccc; border-radius: 10px;">
-                <iframe id="display" src="{{ report.fileLink}}" overflow="hidden" frameborder="0" width="500" height="360" scrolling="yes" style="border-radius: 10px; border: 5px solid blue;"></iframe>
+                {% if report.fileLink|isjpg %}
+                <img id="display" src="{{ report.fileLink}}" />
+                {% else %}
+                <embed id="display" src="{{ report.fileLink}}" />
+
+                {% endif %} 
                 
             </div>
         

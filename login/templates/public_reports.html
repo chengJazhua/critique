@@ -32,8 +32,13 @@
               <span id="expand{{report.id}}" style="display:none">
                 User Testimonial: {{report.report}}<br>
                 <div class="embed-responsive embed-responsive-4by3">
-                  <iframe class="embed-responsive-item" id="evidence{{report.id}}" src="{{ report.fileLink}}"
-                    style="display:none"></iframe>
+                 
+                    {% if report.fileLink|isjpg %}
+                <img class="embed-responsive-item" id="evidence{{report.id}}" src="{{ report.fileLink}}" />
+                {% else %}
+                <embed class="embed-responsive-item" id="evidence{{report.id}}" src="{{ report.fileLink}}" />
+
+                {% endif %}
                 </div>
               </span>
             </p>

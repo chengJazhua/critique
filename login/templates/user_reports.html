@@ -47,7 +47,12 @@
                     </div>
                     <div class="iframe-wrapper" width="500" height="600">
                       <strong>Attached Evidence:</strong>
-                      <iframe id="display" src="{{ report.fileLink}}" overflow="hidden" frameborder="0" width="500" height="600" scrolling="yes"></iframe><br>
+                      {% if report.fileLink|isjpg %}
+                      <img id="display" src="{{ report.fileLink}}" />
+                      {% else %}
+                      <embed id="display" src="{{ report.fileLink}}" />
+
+                      {% endif %}
                     </div>
                     <strong>Status:</strong> {{ report.status }}<br>
                     <strong>Feedback:</strong> {{ report.feedback }}<br>
