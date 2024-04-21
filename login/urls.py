@@ -19,4 +19,8 @@ urlpatterns = [
     path('adminreportview/<int:pk>/', views.admin_specific_report_view, name='admin_specific_report_view'),
     re_path(r'^delete/(?P<pk>[0-9]+)/$', views.report_delete, name='report_delete'),
     path('sent/',views.email),
+    path('new_reports/',views.new_reports),
+    path('in_progress_reports/',views.in_progress_reports),
+    path('resolved_reports/',views.resolved_reports),
+
 ]

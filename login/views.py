@@ -162,6 +162,17 @@ def review_reports(request):
 
         {'reports' : reports},
     )
+def new_reports(request):
+    new_reports = Report.objects.filter(status='New')
+    return render(request, "new_reports.html", {"reports": new_reports})
+
+def in_progress_reports(request):
+    inprogress_reports = Report.objects.filter(status='In Progress')
+    return render(request, "inprogress_reports.html", {"reports": inprogress_reports})
+
+def resolved_reports(request):
+    resolved_reports = Report.objects.filter(status='Resolved')
+    return render(request, "resolved_reports.html", {"reports": resolved_reports})   
     
 def admin_specific_report_view(request, pk):
     report = get_object_or_404(Report, pk=pk)
