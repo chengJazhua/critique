@@ -22,5 +22,5 @@ urlpatterns = [
     path('new_reports/',views.new_reports),
     path('in_progress_reports/',views.in_progress_reports),
     path('resolved_reports/',views.resolved_reports),
-
+    path('editreport/<int:pk>/',views.edit_report),
 ]
