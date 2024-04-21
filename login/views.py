@@ -13,6 +13,14 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from .forms import ReportForm
 
+from django.template.defaulttags import register
+
+@register.filter(name='isjpg')
+def split(value): 
+ 
+    ext = value.split(".")[-1]
+    return ext == '.jpg'
+
 # Create your views here.
 class DocumentCreateView(CreateView):
     model = Evidence
