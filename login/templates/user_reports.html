@@ -5,38 +5,55 @@
   integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <html lang="en">
   {% include 'login/user_navbar.html' %}
-    <body>
+    <body style="background-color: rgb(224, 122, 95);">
         <div class="container mt-5">
-          <h1 class="mb-4">Your Reports</h1>
           <div class="row row-cols-1 row-cols-md-2 g-4">
             {% for report in reports %}
             <div class="col">
-              <div class="card" style="background-color: #ccc">
+              <div class="card" style="background-color: rgb(242, 204, 143)">
                   <div class="card-body">
-                    <strong>User:</strong> {{ report.userID }}<br>
-                    <div style="width: 100%; height: 40px; border: 0px; border-radius: 5px; background-color: #f0f0f0; text-align: center; align-items: center; padding-top: 8px; margin-bottom: 20px;">
-                      Reported <strong>{{ report.studentName.capitalize }}</strong> for their work in <strong>{{ report.className }}</strong> taught by <strong>{{ report.professorName.capitalize }}</strong><br>
+                    <!-- <strong>User:</strong> {{ report.userID }}<br> -->
+                    <div style="width: 100%; height: auto; padding-top: 5px; padding-bottom: 5px; border-radius: 5px; background-color: #f0f0f0; text-align: center; align-items: center; padding-top: 8px; margin-bottom: 20px;">
+                      You reported <strong>{{ report.studentName.capitalize }}</strong> for their work in <strong>{{ report.className }}</strong> taught by <strong>{{ report.professorName.capitalize }}</strong><br>
                     </div>
 
-                    {% if report.rating.capitalize == "Positive" %}
-                      <img style="rotate: 90deg; width: 120px; height: 120px;" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhD2a2uzprPRdusoiSCTdrF5I6j5T_nY4FD-PU4e62iy0B77leCdAAiBhAcwa5R_p40HiDPkoX0Q_cBKONCbj3O7tq-lxhO2paTdCivtc2lG9hL_w5aVHxhH6cz5zUnGqAEcpU0kt2cGPVf5V6DmIU9AOHWaQXNCyh7g4cR2GgmxqdJQA1mQHb0pas6ZW8/s334/Screenshot_2024-04-20_at_4.22.10_PM-removebg-preview.png">
-                    {% elif report.rating.capitalize == "Negative" %}
-                      <img style="width: 120px; height: 120px;" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhD2a2uzprPRdusoiSCTdrF5I6j5T_nY4FD-PU4e62iy0B77leCdAAiBhAcwa5R_p40HiDPkoX0Q_cBKONCbj3O7tq-lxhO2paTdCivtc2lG9hL_w5aVHxhH6cz5zUnGqAEcpU0kt2cGPVf5V6DmIU9AOHWaQXNCyh7g4cR2GgmxqdJQA1mQHb0pas6ZW8/s334/Screenshot_2024-04-20_at_4.22.10_PM-removebg-preview.png">
-                    {% else %}
-                      <img style="rotate: -90deg; width: 120px; height: 120px;" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhD2a2uzprPRdusoiSCTdrF5I6j5T_nY4FD-PU4e62iy0B77leCdAAiBhAcwa5R_p40HiDPkoX0Q_cBKONCbj3O7tq-lxhO2paTdCivtc2lG9hL_w5aVHxhH6cz5zUnGqAEcpU0kt2cGPVf5V6DmIU9AOHWaQXNCyh7g4cR2GgmxqdJQA1mQHb0pas6ZW8/s334/Screenshot_2024-04-20_at_4.22.10_PM-removebg-preview.png">
-                    {% endif %}
-                    
-                    {% if report.private %}
-                      <img style="width: 120px; height: 120px;" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhAzIyj1_OYAFmTj3BUckj9dXwIibMGwLCQsYzr6YKgV1M3FNgXAmOteI0BtQ4Q8opFuJtse9Z6pWpm_WHO3oKlJRVn7lGy-dUj_bZyVAjZtYeDw1AgUh0iuebQHGgOiXMgA77o4x-yoA5pv0I-TJjkgRtlqP4PLxP4xgviSeVRzbQSsIIGrV74AWe-bEg/s499/Screenshot_2024-04-20_at_4.54.16_PM-removebg-preview.png">
-                    {% else %}
-                      <img style="width: 120px; height: 120px;" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhQ52KOYGpyxrFzwPHlPSzPTy4q2_ia3ZY_2lS4V_LeK17q-GsnV2Oz9N4rjo3DFGTUM_tCukP1NdjkxR0WPIboS_Ic7T8ZVEvlTkgB7MTZtWbRNIIe_me9kYRG6v_F_QcUpT-UNkqQs4V_Wt99_eMAHz09cNZwHMcRTsiKtnsHIN8kipt2qKml5YCzfhQ/s499/Screenshot_2024-04-20_at_4.53.59_PM-removebg-preview.png"></img>
-                    {% endif %}
+                    <div style="width: 100%; height: 100px;">
+                      <div style="width: 49%; display: inline-block;">
+                        {% if report.rating.capitalize == "Positive" %}
+                          <img style="rotate: 90deg; width: 80px; height: 80px;" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhD2a2uzprPRdusoiSCTdrF5I6j5T_nY4FD-PU4e62iy0B77leCdAAiBhAcwa5R_p40HiDPkoX0Q_cBKONCbj3O7tq-lxhO2paTdCivtc2lG9hL_w5aVHxhH6cz5zUnGqAEcpU0kt2cGPVf5V6DmIU9AOHWaQXNCyh7g4cR2GgmxqdJQA1mQHb0pas6ZW8/s334/Screenshot_2024-04-20_at_4.22.10_PM-removebg-preview.png">
+                        {% elif report.rating.capitalize == "Negative" %}
+                          <img style="width: 80px; height: 80px;" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhD2a2uzprPRdusoiSCTdrF5I6j5T_nY4FD-PU4e62iy0B77leCdAAiBhAcwa5R_p40HiDPkoX0Q_cBKONCbj3O7tq-lxhO2paTdCivtc2lG9hL_w5aVHxhH6cz5zUnGqAEcpU0kt2cGPVf5V6DmIU9AOHWaQXNCyh7g4cR2GgmxqdJQA1mQHb0pas6ZW8/s334/Screenshot_2024-04-20_at_4.22.10_PM-removebg-preview.png">
+                        {% else %}
+                          <img style="rotate: -90deg; width: 80px; height: 80px;" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhD2a2uzprPRdusoiSCTdrF5I6j5T_nY4FD-PU4e62iy0B77leCdAAiBhAcwa5R_p40HiDPkoX0Q_cBKONCbj3O7tq-lxhO2paTdCivtc2lG9hL_w5aVHxhH6cz5zUnGqAEcpU0kt2cGPVf5V6DmIU9AOHWaQXNCyh7g4cR2GgmxqdJQA1mQHb0pas6ZW8/s334/Screenshot_2024-04-20_at_4.22.10_PM-removebg-preview.png">
+                        {% endif %}
+                        
+                        {% if report.private %}
+                          <img style="width: 110px; height: 110px;" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhAzIyj1_OYAFmTj3BUckj9dXwIibMGwLCQsYzr6YKgV1M3FNgXAmOteI0BtQ4Q8opFuJtse9Z6pWpm_WHO3oKlJRVn7lGy-dUj_bZyVAjZtYeDw1AgUh0iuebQHGgOiXMgA77o4x-yoA5pv0I-TJjkgRtlqP4PLxP4xgviSeVRzbQSsIIGrV74AWe-bEg/s499/Screenshot_2024-04-20_at_4.54.16_PM-removebg-preview.png">
+                        {% else %}
+                          <img style="width: 110px; height: 110px;" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhQ52KOYGpyxrFzwPHlPSzPTy4q2_ia3ZY_2lS4V_LeK17q-GsnV2Oz9N4rjo3DFGTUM_tCukP1NdjkxR0WPIboS_Ic7T8ZVEvlTkgB7MTZtWbRNIIe_me9kYRG6v_F_QcUpT-UNkqQs4V_Wt99_eMAHz09cNZwHMcRTsiKtnsHIN8kipt2qKml5YCzfhQ/s499/Screenshot_2024-04-20_at_4.53.59_PM-removebg-preview.png"></img>
+                        {% endif %}
 
-                    {% if report.email_prof %}
-                        <img style="width: 120px; height: 120px;" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiNX84xbjujhq0k_nn7jxNdXbH3oKWv7mIcWS1qeMnd2jXEvVnbjFNaf_IDtTNu_HiWZ5psck04nLQtpUvF9EpieL-SKEAzwE4BVURr-EgSlxM8BtqbFLHacFGj1GQgtHU1FrOAqUmVKRFJ6wuRnGBhtM-6LFfYSHFwfE-3r3e83bhvL_UijC1is6NXWL8/s430/Screenshot_2024-04-20_at_4.25.21_PM-removebg-preview.png">
-                    {% else %}
-                        <img style="width: 120px; height: 120px;" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLi8glhGxlrEbBO5YRVmS0ijCmryyCYfM-EBCDXSIpmoewulXh7q9T5DLDVZowRRFaktpqRwAUpUhJtWjE2-s3nZ5zu9yDDBWnojEVeBE_Sohi64yG5GYwyrXYReNbF6wE6ZE8FmD9_xcOfGdcL_TmRDSzBSPS67Q4pdwWJG-jD7Lhyphenhyphenus1GnKuVMhmLw0/s500/Screenshot_2024-04-20_at_4.27.50_PM-removebg-preview.png">
-                    {% endif %}
+                        {% if report.email_prof %}
+                            <img style="width: 80px; height: 80px;" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiNX84xbjujhq0k_nn7jxNdXbH3oKWv7mIcWS1qeMnd2jXEvVnbjFNaf_IDtTNu_HiWZ5psck04nLQtpUvF9EpieL-SKEAzwE4BVURr-EgSlxM8BtqbFLHacFGj1GQgtHU1FrOAqUmVKRFJ6wuRnGBhtM-6LFfYSHFwfE-3r3e83bhvL_UijC1is6NXWL8/s430/Screenshot_2024-04-20_at_4.25.21_PM-removebg-preview.png">
+                        {% else %}
+                            <img style="width: 80px; height: 80px;" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLi8glhGxlrEbBO5YRVmS0ijCmryyCYfM-EBCDXSIpmoewulXh7q9T5DLDVZowRRFaktpqRwAUpUhJtWjE2-s3nZ5zu9yDDBWnojEVeBE_Sohi64yG5GYwyrXYReNbF6wE6ZE8FmD9_xcOfGdcL_TmRDSzBSPS67Q4pdwWJG-jD7Lhyphenhyphenus1GnKuVMhmLw0/s500/Screenshot_2024-04-20_at_4.27.50_PM-removebg-preview.png">
+                        {% endif %}
+                      </div>
+                      <div style="width: 49%; height: 120px; display: inline-block; margin: 3.9px; transform: translateY(-40px); background-color: #f0f0f0; border-radius: 5px;">
+                        <div style="top: 0; width: 100%; height: 30px; margin-bottom: 10px;">
+                          <p style="font-weight: bold; padding-left: 5px;">Status: </p>
+                          {% if report.status == "New" %}
+
+                          {% elif report.status == "In Progress" %}
+
+                          {% else %}
+
+                          {% endif %}
+                        </div>
+                        <div style="width: 100%; height: 80px;">
+                        </div>
+                      </div>
+                    </div>
 
                     <br>
                     <strong>Work Type:</strong> {{ report.workType.capitalize }}<br>
@@ -49,7 +66,6 @@
                       <strong>Attached Evidence:</strong>
                       <iframe id="display" src="{{ report.fileLink}}" overflow="hidden" frameborder="0" width="500" height="600" scrolling="yes"></iframe><br>
                     </div>
-                    <strong>Status:</strong> {{ report.status }}<br>
                     <strong>Feedback:</strong> {{ report.feedback }}<br>
                 <form action="{% url 'login:report_delete' report.id %}" method="post">
                   {% csrf_token %}
