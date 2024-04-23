@@ -132,12 +132,17 @@
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         var SubmitAReport = document.getElementById('SubmitAReport');
+        var Submit = document.getElementById('Submit');
         if (SubmitAReport) {
           SubmitAReport.style.backgroundColor = 'rgb(242, 204, 143)';
-          SubmitAReport.style.height = 'calc(100% + 25px)';
-          SubmitAReport.style.transform = 'translateY(-7px)';
+          Submit.style.height = '90px';
+          SubmitAReport.style.width = '140px';
+          SubmitAReport.style.transform = 'translateY(0px)';
           SubmitAReport.style.borderBottomLeftRadius = '8px';
           SubmitAReport.style.borderBottomRightRadius = '8px';
+          Submit.style.boxShadow = '0px 6px 10px rgba(0, 0, 0, 0.65)';
+          Submit.style.borderBottomLeftRadius = '8px';
+          Submit.style.borderBottomRightRadius = '8px';
         }
       });
 
