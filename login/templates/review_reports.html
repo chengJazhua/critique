@@ -66,5 +66,17 @@
     </a>
     {% endfor %}
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var ViewReports = document.getElementById('ViewReports');
+      if (ViewReports) {
+        ViewReports.style.backgroundColor = 'rgb(242, 204, 143)';
+        ViewReports.style.height = 'calc(100% + 25px)';
+        ViewReports.style.transform = 'translateY(-7px)';
+        ViewReports.style.borderBottomLeftRadius = '8px';
+        ViewReports.style.borderBottomRightRadius = '8px';
+      }
+    });
+</script>
 
 </html>
