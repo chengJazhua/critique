@@ -19,7 +19,7 @@
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="container"
-      style="display: flex; justify-content: space-between; width: 710px; height: 480px; background-color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+      style="margin-top: 60px; display: flex; justify-content: space-between; width: 710px; height: 480px; background-color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
       <div class="inner-square"
         style="width: 500px; height: 440px; background-color: rgb(60, 60, 60); border-radius: 10px; padding: 20px;">
         <div name="textInputs" style="display: flex; flex-direction: column; align-items: center; margin-top: -15px;">
@@ -52,8 +52,9 @@
 
           <label for="report"
             style="font-size: 30px; font-weight: 100; color: rgb(210, 210, 210); margin-bottom: -25px;">Report:</label><br>
-          <textarea type="text" id="report" name="report" style="text-indent: 0; padding: 5px; width: 90%; height: 80px; border: 0px; border-radius: 10px; margin-bottom: -5px; resize: none; overflow-wrap: break-word;"></textarea>
-          </div>
+          <textarea type="text" id="report" name="report"
+            style="text-indent: 0; padding: 5px; width: 90%; height: 80px; border: 0px; border-radius: 10px; margin-bottom: -5px; resize: none; overflow-wrap: break-word;"></textarea>
+        </div>
       </div>
       <div>
         <div style="display: flex; align-items: center; flex-direction: column;">
@@ -129,6 +130,17 @@
     </div>
 
     <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var SubmitAReport = document.getElementById('SubmitAReport');
+        if (SubmitAReport) {
+          SubmitAReport.style.backgroundColor = 'rgb(224, 122, 95)';
+          SubmitAReport.style.height = 'calc(100% + 25px)';
+          SubmitAReport.style.transform = 'translateY(-7px)';
+          SubmitAReport.style.borderBottomLeftRadius = '8px';
+          SubmitAReport.style.borderBottomRightRadius = '8px';
+        }
+      });
+
       setTimeout(function () {
         var errorDiv = document.getElementById('errorDiv');
         if (errorDiv) {
@@ -141,12 +153,12 @@
       emailStatusRadioButtons.forEach(function (emailStatusRadioButton) {
         emailStatusRadioButton.addEventListener("change", function () {
           document.querySelectorAll("#emailStatusContainer .button-label").forEach(function (label) {
-            label.style.transition = "transform 0.3s ease"; 
-            label.style.transform = "scale(0.8)"; 
+            label.style.transition = "transform 0.3s ease";
+            label.style.transform = "scale(0.8)";
           });
 
           if (this.checked) {
-            this.nextElementSibling.style.transform = "scale(1.2)"; 
+            this.nextElementSibling.style.transform = "scale(1.2)";
           }
         });
       });
@@ -156,12 +168,12 @@
       ratingRadioButtons.forEach(function (ratingRadioButton) {
         ratingRadioButton.addEventListener("change", function () {
           document.querySelectorAll("#ratingContainer .button-label").forEach(function (label) {
-            label.style.transition = "transform 0.3s ease"; 
-            label.style.transform = "scale(0.8)"; 
+            label.style.transition = "transform 0.3s ease";
+            label.style.transform = "scale(0.8)";
           });
 
           if (this.checked) {
-            this.nextElementSibling.style.transform = "scale(1.2)"; 
+            this.nextElementSibling.style.transform = "scale(1.2)";
           }
         });
       });
@@ -172,11 +184,11 @@
         workTypeRadioButton.addEventListener("change", function () {
           document.querySelectorAll("#workTypeContainer .button-label").forEach(function (label) {
             label.style.transition = "transform 0.3s ease";
-            label.style.transform = "scale(0.8)"; 
+            label.style.transform = "scale(0.8)";
           });
 
           if (this.checked) {
-            this.nextElementSibling.style.transform = "scale(1.2)"; 
+            this.nextElementSibling.style.transform = "scale(1.2)";
           }
         });
       });
@@ -186,8 +198,8 @@
       privacyRadioButtons.forEach(function (privacyRadioButton) {
         privacyRadioButton.addEventListener("change", function () {
           document.querySelectorAll("#privacyContainer .button-label").forEach(function (label) {
-            label.style.transition = "transform 0.3s ease"; 
-            label.style.transform = "scale(0.8)"; 
+            label.style.transition = "transform 0.3s ease";
+            label.style.transform = "scale(0.8)";
           });
 
           if (this.checked) {

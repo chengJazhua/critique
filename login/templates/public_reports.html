@@ -48,6 +48,17 @@
     </div>
   </div>
   <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var PublicReports = document.getElementById('PublicReports');
+      if (PublicReports) {
+        PublicReports.style.backgroundColor = 'rgb(224, 122, 95)';
+        PublicReports.style.height = 'calc(100% + 25px)';
+        PublicReports.style.transform = 'translateY(-7px)';
+        PublicReports.style.borderBottomLeftRadius = '8px';
+        PublicReports.style.borderBottomRightRadius = '8px';
+      }
+    });
+
     function expand(name) {
       var testimonial = document.getElementById("expand" + name);
       var buttonText = document.getElementById("reportButton" + name);
