@@ -1,32 +1,60 @@
- <!--navbar from bootstrap-->
- {% load socialaccount %}
+<!--navbar from bootstrap-->
+{% load socialaccount %}
+{% if user.is_authenticated %}
+{% if user.groups.exists %}
+{% for group in user.groups.all %}
+{% if group.name == 'site admin' %}
+<meta http-equiv="refresh" content="0; url=/adminlanding/" />
+{% endif %}
+{% endfor %}
+{% else %}
 
- <nav class="navbar navbar-expand-lg bg-body-tertiary" style="margin-bottom: 20px;">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="#">User: {{ user.username|capfirst|default:"Anonymous" }}</a>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <!--add link in href-->
-            <a class="nav-link active" aria-current="page" href="/userlanding">Your Reports</a>
-          </li>
-          <li class="nav-item">
-            <!--add link in href-->
-            <a class="nav-link" href="/report">Submit A Report</a>
-          </li>
-          <li class="nav-item">
-            <!---<a class="nav-link" href="/viewreports">Public Reports</a>-->
-            <a class="nav-link" href="/publicreports">Public Reports</a>
-          </li>
-        </ul> <!-- to change based on login status -->
-        {% if user.is_authenticated %}
-          <a class="nav-link" href="/logout">Logout</a>
-        {% else %}
-          <a class="nav-link" href="{% provider_login_url 'google' %}" method="oauth2">Login</a>
-        {% endif %}
-      </div>
-    </div>
-  </nav>
+{% endif %}
+{% endif %}
+
+<!-- remove "position: fixed; top: 0; left: 0; right: 0; z-index: 1000;" if you don't want it fixed, idk yall's preferences -->
+<div style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgb(244, 241, 222); height: 200px; transform: translateY(-190px);"></div>
+<div style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgb(244, 241, 222); margin-bottom: 50px; height: 70px; box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.65);">
+  <div style="position: absolute; top: 0px; left: 0px; width: 120px; height: 70px; padding-top: 10px;">
+    <a style="display: flex; align-items: center; justify-content: center; font-weight: 400;">{{user.username|capfirst|default:"Anonymous"}}</a>
+    <a style="display: flex; align-items: center; justify-content: center; font-weight: 700;">User</a>
+  </div>
+  <div style="position: absolute; display: flex; justify-content: space-evenly; align-items: center; height: 70px; left: 120px;">
+    <li class="nav-item" id="Your" style="display: flex; flex-direction: column; align-items: center; list-style-type: none; height: 70px; width: 120px;">
+      <a class="nav-link" aria-current="page" href="/userlanding" id="YourReports"
+        style="height: calc(100% + 17px); position: relative; display: inline-block; transform: translateY(-7px)">
+        <img
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRs6cHIeudh7SlVmROJixN9Wu5P-TN8sjj603pRrOcM7amTTO6deY6neTea9HimG5VCfxHZRWNgtFsuOw3FI9KcDDZgSrtzFW80WQr3Th05-VUwsAtGPZ9EKGP5PGzQbZ6B_ldydoarfJM1ThKGV7nQtA3bvNXkB1ZsJ2frtzZJNJde7vNuvDwXBuC1oo/s512/headshot.png"
+          style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 20px; height: auto; margin-bottom: 5px;">
+        <span style="display: block; transform: translateY(45px); text-align: center;">Your Reports</span>
+      </a>
+    </li>
+    <li class="nav-item" id="Submit" style="display: flex; flex-direction: column; align-items: center; list-style-type: none; height: 70px; width: 140px;">
+      <a class="nav-link" aria-current="page" href="/report" id="SubmitAReport"
+        style="height: calc(100% + 17px); position: relative; display: inline-block; transform: translateY(-7px)">
+        <img
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0lyIWkJ454OwaoBCSgyrNPPicB6JOqyTxTIoJ4rty25mJURY-0p7Eeo_ykvKge1RLT0MUNlgCQBC87Xr0B9TXNWRtZukx2TtRTdggeBs9UW3yxJLmVFVqRMFR-jyCevuNqwr4oBRRrVGP3TaMgQAiZj1qVdliHX4eLTwFILCBcaQz5lWC1fbslbCqR-E/s614/pencil.png"
+          style="scale: 3; position: absolute; top: 20px; left: 45%; width: 20px; height: auto; margin-bottom: 5px;">
+        <span style="display: block; transform: translateY(45px); text-align: center;">Submit A Report</span>
+      </a>
+    </li>
+    <li class="nav-item" id="Public" style="display: flex; flex-direction: column; align-items: center; list-style-type: none; height: 70px; width: 120px;">
+      <a class="nav-link" aria-current="page" href="/publicreports" id="PublicReports"
+        style="height: calc(100% + 17px); position: relative; display: inline-block; transform: translateY(-7px);">
+        <img
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjIISRMXWEfp_Ctaz3IUPolrJmAlXjjOtqZhFPed8X1PFde-96vck93aHFtqW202MxBut1Q3u-lDZgjrV7ecpZC7kRbgyqfd-o6IuQW-wIjSNo4sotzU1PjirLPdRo3AHlrUL1blpv7KMeKtN8ZNi5fGDyTr-DTL2uDocfElReS6E_XWKjVuRiRrgsC5pQ/s512/magnifying_glass.png"
+          style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 20px; height: auto; margin-bottom: 5px;">
+        <span style="display: block; transform: translateY(45px); text-align: center;">Public Reports</span>
+      </a>
+    </li>
+  </div>
+  {% if user.is_authenticated %}
+  <a class="nav-link" href="/logout">
+    <img
+      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzRxwymwRyfZJabfRMkxBYk47TdD8oWEXylA_o2panOwtdydVT-4eH3sn7i-GLstYBUnHp69BqiO8xS-agMdM7zYellNPOKZ82zZnvO7Uq0vbhcdWGPxUnOexd18ZBltHe6IzM4SgRZM6nIiZMecg1XkvKxspH_u41FhCrfnFgq5ZoeXJT6UhEs26N_JI/s512/logout.png"
+      style="position: absolute; top: 15px; right: 15px; width: 40px; height: 40px; margin-bottom: 5px;">
+  </a>
+  {% else %}
+  <a class="nav-link" href="{% provider_login_url 'google' %}" method="oauth2">Login</a>
+  {% endif %}
+</div>
