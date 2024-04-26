@@ -5,6 +5,8 @@
   integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 {% if user.is_authenticated %}
 {% include 'login/user_navbar.html' %}
+{% if not user.is_authenticated %}
+{% include 'login/anon_navbar.html' %}
 {% endif %}
 
 <head>
@@ -148,11 +150,6 @@
       <input type="hidden" name="userID" value="{{ user.email }}">
       <input type="submit"
         style="font-size: 24px; font-weight: 100; color: black; border-radius: 5px; border: 0px; background-color: rgb(129, 178, 154); height: 50px; width: 95%;">
-    </div>
-    <div>
-      {% if not user.is_authenticated %}
-      <a class="nav-link" style="text-align: center;" href="/">Exit</a>
-      {% endif %}
     </div>
 
     <script>
