@@ -318,6 +318,7 @@ def edit_report(request, pk):
         report.professor_email = professor_email
         report.private = privacy_boolean
         report.save()
+        return redirect('/userlanding/')
         
     return render(
         request,
