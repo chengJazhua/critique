@@ -11,16 +11,14 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
       @media (max-width: 660px) {
-        .col {
+        .card {
           transform: scale(0.8);
-          margin-top: -80px;
         }
       }
 
       @media (min-width: 661px) and (max-width: 690px) {
-        .col {
+        .card {
           transform: scale(0.9);
-          margin-top: -40px;
         }
       }
 
@@ -47,7 +45,7 @@
   <div class="container mt-5">
     <div class="row row-cols-1 row-cols-md-2 g-4">
       {% for report in reports %}
-      <div class="col" style="width: 660px; height: 400px;">
+      <div class="col">
         <div class="card" style="background-color: rgb(242, 204, 143); border: 0px; margin-bottom: 20px;">
           <div class="card-body">
             <div
