@@ -60,14 +60,14 @@ def admin_view_reports(request):
 def public_reports(request):
     if request.method == "POST":
         search = request.POST.get('search')
-        public_reports = Report.objects.filter(private=False)
+        public_reports = Report.objects.filter(private=False).order_by("-pub_date")
         if search == "":
             return render(request, "public_reports.html", {"reports": public_reports})
         public_reports = public_reports.filter(Q(userID__icontains=search) | Q(className__icontains=search) | Q(professorName__icontains=search) | Q(studentName__icontains=search) | Q(professor_email__icontains=search))
         public_reports.filter(private=False)
         return render(request, "public_reports.html", {"reports": public_reports})
     
-    public_reports = Report.objects.filter(private=False)
+    public_reports = Report.objects.filter(private=False).order_by("-pub_date")
     return render(request, "public_reports.html", {"reports": public_reports})
 
 def user_landing_view(request):
@@ -90,7 +90,17 @@ def admin_landing_view(request):
 def report(request):
     if request.method == 'POST':
         try:
-            evidence = Evidence(upload=request.FILES['filename'])
+            upload=request.FILES['filename']
+            print(upload)
+            if " " in upload.name:
+                return render(
+                request,
+                "report_page.html",
+                {
+                    "error_message": "File name cannot contain a space.",
+                },
+                )
+            evidence = Evidence(upload)
             fileLink = evidence.upload.url
             evidence.save()
         except Exception as e:
