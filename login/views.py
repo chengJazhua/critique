@@ -63,7 +63,7 @@ def public_reports(request):
         public_reports = Report.objects.filter(private=False).order_by("-pub_date")
         if search == "":
             return render(request, "public_reports.html", {"reports": public_reports})
-        public_reports = public_reports.filter(Q(userID__icontains=search) | Q(className__icontains=search) | Q(professorName__icontains=search) | Q(studentName__icontains=search) | Q(professor_email__icontains=search))
+        public_reports = public_reports.filter( Q(className__icontains=search) | Q(professorName__icontains=search) | Q(studentName__icontains=search))
         public_reports.filter(private=False)
         return render(request, "public_reports.html", {"reports": public_reports})
     
