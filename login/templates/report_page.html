@@ -16,9 +16,7 @@
 {% elif not user.is_authenticated %}
 {% include 'login/anon_navbar.html' %}
 {% endif %}
-{% load bootstrap5 %}
-  <!-- {% bootstrap_css %} -->
-  {% bootstrap_javascript %}
+
 <style>
   .report-text-portion {
     input, label {
