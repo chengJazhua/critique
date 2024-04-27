@@ -38,7 +38,7 @@
   {% if user.groups.exists %}
   {% for group in user.groups.all %}
   {% if group.name == 'site admin' %}
-  <meta http-equiv="refresh" content="0; url=/adminlanding/" />
+  <meta http-equiv="refresh" content="0; url=/adminreportview/" />
   {% endif %}
   {% endfor %}
   {% else %}

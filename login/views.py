@@ -199,7 +199,11 @@ def in_progress_reports(request):
 
 def resolved_reports(request):
     resolved_reports = Report.objects.filter(status='Resolved')
-    return render(request, "resolved_reports.html", {"reports": resolved_reports})   
+    return render(request, "resolved_reports.html", {"reports": resolved_reports}) 
+  
+def admin_public_reports(request):
+    public_reports = Report.objects.filter(private=0)
+    return render(request, "admin_public_reports.html", {"reports": public_reports})  
     
 def admin_specific_report_view(request, pk):
     report = get_object_or_404(Report, pk=pk)

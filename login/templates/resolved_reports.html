@@ -3,80 +3,186 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
-        body {
+        @media (max-width: 1085px) {
+          .body {
+            margin-right: -100px;
             font-family: 'Lato', sans-serif;
-        }
-        </style>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
+          }
     
+          .row.row-cols-1.g-4 {
+            width: 100%;
+            justify-content: center;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+          }
+    
+          .col {
+            width: 100% !important;
+            margin: 1vw 0;
+          }
+    
+          .card,
+          .card-body,
+          .row {
+            width: calc(2 * 44.5vw - 40px) !important;
+          }
+    
+          .summary,
+          .details {
+            width: calc(88vw - 65px) !important;
+          }
+    
+          .expandcollapse {
+            width: calc(88vw - 65px) !important;
+          }
+    
+          .information {
+            width: calc(88vw - 65px) !important;
+          }
+    
+          .submit_status_and_update,
+          .submit_status_and_update_box,
+          .quickinfo {
+            width: 40vw !important;
+            height: 30vh;
+          }
+    
+          .edit,
+          .delete {
+            width: 19vw !important;
+          }
+    
+          .rating_email {
+            width: max(10vw, 20vh);
+            height: max(10vw, 20vh);
+          }
+    
+          .private {
+            width: min(15vw, 30vh);
+            height: min(15vw, 30vh);
+          }
+    
+          #ReportDetails,
+          #display,
+          #ExpandCollapse,
+          #arrowImage {
+            width: calc(2 * 40.5vw) !important;
+          }
+        }
+      </style>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
     <html lang="en">
 {% include 'login/admin_navbar.html' %}
 
-<body>
-    <div class="container"
-        style="display: flex; align-items: center; justify-content: space-between; width: 710px; height: 100px; background-color: #f0f0f0; border-radius: 10px; margin-bottom: 20px;">
-        <a href="new_reports.html" target="_blank">
-        <button
-            style="display: flex; align-items: center; justify-content: center; height: 80px; width: 216.66px; padding: 10px; border-radius: 10px; background-color: #ccc; border: 0px;">
-            <p style="font-size: 50px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px;">New</p>
-        </a><a href="inprogress_reports.html" target="_blank">
-        </button>
-        <button
-            style="display: flex; align-items: center; justify-content: center; height: 80px; width: 216.66px; padding: 10px; border-radius: 10px; background-color: #ccc; border: 0px;">
-            <p style="font-size: 50px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px;">Seen</p>
-        </button>
-    </a>
-    <a href="review_reports.html" target="_blank">
-        <button
-            style="display: flex; align-items: center; justify-content: center; height: 80px; width: 216.66px; padding: 10px; border-radius: 10px; background-color: #ccc; border: 0px;">
-            <p style="font-size: 50px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px;">All</p>
-        </button>
-    </a>
-    </div>
-
+<body style= "margin-top: 120px;">
+    
     {% if user.is_authenticated %}
         {% if user.groups.exists %}
         {% for group in user.groups.all %}
-            {% if group.name == 'site admin' %}
+            {% if group.name != 'site admin' %}
                 {% endif %}
             {% endfor %}
         {% else %}
             <meta http-equiv="refresh" content="0; url=/userlanding/" />
         {% endif %}
     {% endif %}
-    {% for report in reports %}
-    <a href="/adminreportview/{{report.pk}}/">
-        <div class="container" 
-            style="display: flex; align-items: center; justify-content: space-between; width: 710px; height: 400px; background-color: #f0f0f0; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-            
-            <div class="inner-square" style="width: 500px; height: 360px; background-color: #ccc; border-radius: 10px;">
-                <iframe id="display" src="{{ report.fileLink}}" overflow="hidden" frameborder="0" width="500" height="360" scrolling="yes" style="border-radius: 10px; border: 5px solid blue;"></iframe>
-                
+    <div class="container mt-5">
+        <div class="row row-cols-1 g-4" style="justify-content: center; position: absolute; left: 12px;">
+            {% for report in reports %}
+            <div class="col" style="width: calc(44.5vw - 18px); margin: 1vw;">
+              <div class="card" id="report_card{{report.id}}"
+                style="margin-left: -12px; width: calc(44.5vw - 20px); height: auto; background-color: rgb(242, 204, 143); border: 0px;">
+                <div class="card-body">
+                  <div class="summary"
+                    style="width: 40.5vw; height: auto; padding-top: 5px; padding-bottom: 5px; border-radius: 5px; background-color: #f0f0f0; text-align: center; align-items: center; padding-top: 8px; margin-bottom: 1vh;">
+                    {{report.userID}} reported <strong>{{ report.studentName.capitalize }}</strong> for their work in
+                    <strong>{{report.className }}</strong> taught by <strong>{{ report.professorName.capitalize}}</strong><br>
+                  </div>
+      
+                  <div style="display: flex; width: 40vw; height: 40vh; margin-bottom: 1vh;" class="information">
+                    <div class="quickinfo"
+                      style="width: 49%; height: 95%; display: inline-block; margin-right: 10px; margin-top: 3.9px; background-color: #f0f0f0; border-radius: 5px;">
+                      <div style="padding: 5px 10px; box-sizing: border-box; width: 100%; height: 30px; margin-bottom: 3px;">
+                        <div style="display: flex; align-items: center;">
+                          <p style="font-weight: bold; padding-left: 5px; width: auto;">Work Type: </p>
+                          <p style="padding-left: 10px; width: auto;">{{ report.workType.capitalize }}</p>
+                        </div>
+                      </div>
+                      <div
+                        style="width: 90%; height: 5px; border-radius: 3px; background-color: rgb(242, 204, 143); margin: auto;">
+                      </div>
+                      <div style="padding: 3px 10px; top: 0; width: 100%; height: 30px; margin-bottom: 3px;">
+                        <div style="display: flex; align-items: center;">
+                          <p style="font-weight: bold; padding-left: 5px; width: auto;">Status: </p>
+                          <p style="padding-left: 10px; width: auto;">{{ report.status.capitalize }}</p>
+                        </div>
+                      </div>
+                      <div
+                        style="width: 90%; height: 5px; border-radius: 3px; background-color: rgb(242, 204, 143); margin: auto;">
+                      </div>
+                      <div style="padding: 3px 10px; width: 100%; height: 80px; margin-top: 3px;">
+                        <p style="font-weight: bold; padding-left: 5px;">Feedback: </p>
+                        <p>{{report.feedback}}</p>
+                      </div>
+                    </div>
+      
+                    <div style="width: 20vw; display: inline-block; height: 15vh; margin-right: -5px;"
+                      class="submit_status_and_update">
+                      <div style="display: flex; justify-content: space-around; align-items: center; height: 15vh;"
+                        class="submit_status_and_update_box">
+                        {% if report.rating.capitalize == "Positive" %}
+                        <img class="rating_email" style="rotate: 90deg; width: auto; height: 8vh;"
+                          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhD2a2uzprPRdusoiSCTdrF5I6j5T_nY4FD-PU4e62iy0B77leCdAAiBhAcwa5R_p40HiDPkoX0Q_cBKONCbj3O7tq-lxhO2paTdCivtc2lG9hL_w5aVHxhH6cz5zUnGqAEcpU0kt2cGPVf5V6DmIU9AOHWaQXNCyh7g4cR2GgmxqdJQA1mQHb0pas6ZW8/s334/Screenshot_2024-04-20_at_4.22.10_PM-removebg-preview.png">
+                        {% elif report.rating.capitalize == "Negative" %}
+                        <img class="rating_email" style="width: auto; height: 8vh;"
+                          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhD2a2uzprPRdusoiSCTdrF5I6j5T_nY4FD-PU4e62iy0B77leCdAAiBhAcwa5R_p40HiDPkoX0Q_cBKONCbj3O7tq-lxhO2paTdCivtc2lG9hL_w5aVHxhH6cz5zUnGqAEcpU0kt2cGPVf5V6DmIU9AOHWaQXNCyh7g4cR2GgmxqdJQA1mQHb0pas6ZW8/s334/Screenshot_2024-04-20_at_4.22.10_PM-removebg-preview.png">
+                        {% else %}
+                        <img class="rating_email" style="rotate: -90deg; width: auto; height: 8vh;"
+                          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhD2a2uzprPRdusoiSCTdrF5I6j5T_nY4FD-PU4e62iy0B77leCdAAiBhAcwa5R_p40HiDPkoX0Q_cBKONCbj3O7tq-lxhO2paTdCivtc2lG9hL_w5aVHxhH6cz5zUnGqAEcpU0kt2cGPVf5V6DmIU9AOHWaQXNCyh7g4cR2GgmxqdJQA1mQHb0pas6ZW8/s334/Screenshot_2024-04-20_at_4.22.10_PM-removebg-preview.png">
+                        {% endif %}
+      
+                        {% if report.private %}
+                        <img class="private" style="width: auto; height: 12vh;"
+                          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhAzIyj1_OYAFmTj3BUckj9dXwIibMGwLCQsYzr6YKgV1M3FNgXAmOteI0BtQ4Q8opFuJtse9Z6pWpm_WHO3oKlJRVn7lGy-dUj_bZyVAjZtYeDw1AgUh0iuebQHGgOiXMgA77o4x-yoA5pv0I-TJjkgRtlqP4PLxP4xgviSeVRzbQSsIIGrV74AWe-bEg/s499/Screenshot_2024-04-20_at_4.54.16_PM-removebg-preview.png">
+                        {% else %}
+                        <img class="private" style="width: auto; height: 12vh;"
+                          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhQ52KOYGpyxrFzwPHlPSzPTy4q2_ia3ZY_2lS4V_LeK17q-GsnV2Oz9N4rjo3DFGTUM_tCukP1NdjkxR0WPIboS_Ic7T8ZVEvlTkgB7MTZtWbRNIIe_me9kYRG6v_F_QcUpT-UNkqQs4V_Wt99_eMAHz09cNZwHMcRTsiKtnsHIN8kipt2qKml5YCzfhQ/s499/Screenshot_2024-04-20_at_4.53.59_PM-removebg-preview.png">
+                        {% endif %}
+      
+                        {% if report.email_prof %}
+                        <img class="rating_email" style="width: auto; height: 8vh;"
+                          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiNX84xbjujhq0k_nn7jxNdXbH3oKWv7mIcWS1qeMnd2jXEvVnbjFNaf_IDtTNu_HiWZ5psck04nLQtpUvF9EpieL-SKEAzwE4BVURr-EgSlxM8BtqbFLHacFGj1GQgtHU1FrOAqUmVKRFJ6wuRnGBhtM-6LFfYSHFwfE-3r3e83bhvL_UijC1is6NXWL8/s430/Screenshot_2024-04-20_at_4.25.21_PM-removebg-preview.png">
+                        {% else %}
+                        <img class="rating_email" style="width: auto; height: 8vh;"
+                          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLi8glhGxlrEbBO5YRVmS0ijCmryyCYfM-EBCDXSIpmoewulXh7q9T5DLDVZowRRFaktpqRwAUpUhJtWjE2-s3nZ5zu9yDDBWnojEVeBE_Sohi64yG5GYwyrXYReNbF6wE6ZE8FmD9_xcOfGdcL_TmRDSzBSPS67Q4pdwWJG-jD7Lhyphenhyphenus1GnKuVMhmLw0/s500/Screenshot_2024-04-20_at_4.27.50_PM-removebg-preview.png">
+                        {% endif %}
+                      </div>
+                      <div style="margin-top: 17px; height: 5vh;">
+                        <div style="display: flex;">
+                          <a href="/adminreportview/{{report.pk}}/"
+                            style="font-size: 20px; font-weight: 300; width: 10vw; margin-right: 5px; height: 21vh; border-radius: 5px; display: flex; justify-content: center; align-items: center; background-color: #81B29A; text-decoration: none; color: white; word-break: break-all; text-align: center;">
+                            View<br>Report
+                          </a>
+                          <form action="{% url 'login:report_delete' report.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="delete"
+                              style="font-size: 20px; font-weight: 300; width: 10vw; height: 21vh; background-color: rgb(224, 122, 95); color: white; border: 0px; border-radius: 5px; text-align: center; word-break: break-all;">
+                              Delete<br>report
+                            </button>
+                          </form>
+                        </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        
-            <div class="buttons" style="display: flex; flex-direction: column; align-items: flex-start;">
-                <p style="font-size: 20px; font-weight: 300; color:rgb(45, 45, 45); margin: 0px;">Username:</p>
-                <p style="font-size: 20px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px; margin-bottom: 15px;">{{ report.userID }}</p>
-
-                <p style="font-size: 20px; font-weight: 300; color:rgb(45, 45, 45); margin: 0px;">Class Name:</p>
-                <p style="font-size: 20px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px; margin-bottom: 15px;">{{ report.className }}</p>
-
-                <p style="font-size: 20px; font-weight: 300; color:rgb(45, 45, 45); margin: 0px;">Professor Name:</p>
-                <p style="font-size: 20px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px; margin-bottom: 15px;">{{ report.professorName|capfirst }}
-                </p>
-
-                <p style="font-size: 20px; font-weight: 300; color:rgb(45, 45, 45); margin: 0px;">Student Name:</p>
-                <p style="font-size: 20px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px; margin-bottom: 15px;">{{ report.studentName|capfirst }}
-                </p>
-
-                <p style="font-size: 20px; font-weight: 300; color:rgb(45, 45, 45); margin: 0px;">Rating:</p>
-                <p style="font-size: 20px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px;">{{ report.rating|capfirst }}</p>
-                <!-- <li><a href="/adminreportview/{{report.pk}}/">View Report #{{ report.pk }}</a></li> -->
-            </div>
-       
+            {% empty %}
+            <p>No reports submitted.</p>
+            {% endfor %}
+          </div>
         </div>
-    </a>
-    {% endfor %}
+        
 </body>
-
 </html>
