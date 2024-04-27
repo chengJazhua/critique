@@ -11,11 +11,14 @@
     </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
 
-  {% if user.is_authenticated %}
+{% if user.is_authenticated %}
 {% include 'login/user_navbar.html' %}
 {% elif not user.is_authenticated %}
 {% include 'login/anon_navbar.html' %}
 {% endif %}
+{% load bootstrap5 %}
+  <!-- {% bootstrap_css %} -->
+  {% bootstrap_javascript %}
 <style>
   .report-text-portion {
     input, label {
@@ -27,21 +30,31 @@
   }
   .report-text-portion {
     margin-left:10%;
-    margin-bottom:2%;
+    margin-bottom:5%;
     margin-top:2%
   }
 </style>
-<body style="padding-top:100px" >
+<body style="padding-top:5%" >
   {% if error_message != "" %}
   <div id="errorDiv"
-    style="pointer-events: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 852px; height: 120px; background-color:white; padding: 20px; border-radius: 15px; margin-bottom: 20px; z-index: 9999; text-align: center; opacity: 1; transition: opacity 1s;">
-    <label for="className" style="font-size: 45px; font-weight: 100; color:rgb(45, 45, 45);">
+    style="pointer-events: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+    width: 75%; height: 20%; background-color:#E07A5F; padding: 2%; margin-bottom: 2%; 
+    z-index: 9999; text-align: center; opacity: 1; transition: opacity 1s;">
+    <label for="className" style="font-size: 250%; font-weight: 100; color:#F4F1DE;">
       Error: {{ error_message }}
     </label>
   </div>
+  <script>
+    setTimeout(function () {
+      var errorDiv = document.getElementById('errorDiv');
+      if (errorDiv) {
+        errorDiv.style.opacity = '0';
+      }
+    }, 2000);
+  </script>
   {% endif %}
   <div id="report-guidelines" style="margin:5%; color:#F4F1DE">
-    <strong style="font-size:300%">Submitting a Report</strong>
+    <strong style="font-size:300%; color:#81B29A">Submitting a Report</strong>
     <p>guidelines on what to report about. dont be a cyberbully. can we please change the font. lorem de dipshit im so tired</p>
     <p>todo: center card + realign items, inputs should have ids not labels (which should have fors), font change, navbar color switch to dark blue w/white text + put "user" above the username, yippee also link color would have to change too </p>
     <p>also dont forgor the error modal, probs make it salmon lol</p>
@@ -84,18 +97,18 @@
           </div>
           <hr class="solid">
           <p style="margin-left:5%; color:#81B29A; font-size:150%">3. After Submission</p>
-          <div style="margin-left:10%; margin-bottom:10%">
+          <div style="margin-left:10%; margin-bottom:5%">
             <input type="checkbox" name="public" id="public">
-            <label for="public">Post publicly</label><br>
+            <label for="privacy">Post publicly</label><br>
             <input type="checkbox" name="email" id="email">
-            <label for="email">Email copy of report to professor</label>
+            <label for="email_prof">Email copy of report to professor</label>
           </div>
         </div>
       </div>
       <input type="hidden" name="userID" value="{{ user.email }}">
-      <div>
+      <div style="position:relative; text-align:center; margin-top:2%; margin-bottom:2%; align-items: center">
         <input type="submit"
-            style="font-size:20px; font-weight: 100; color: white; border-radius: 5px; border: 0px; background-color: rgb(129, 178, 154); height: 5%; width: 50%;">
+            style="font-size:25px; font-weight: 100; color: white; border-radius: 5px; border: 0px; background-color: rgb(129, 178, 154); height: 5%; width: 50%;">
       </div>
     </form>
   </body>
