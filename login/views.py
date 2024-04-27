@@ -12,7 +12,7 @@ from django.core.mail import EmailMessage
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from .forms import ReportForm
-
+from django.utils import timezone
 from django.template.defaulttags import register
 
 @register.filter(name='isjpg')
@@ -160,6 +160,7 @@ def user_reports(request):
     reports = Report.objects.filter(userID=request.user.email)
     return render(request, 'user_reports.html', {'reports': reports})
 
+
     
 def review_reports(request):
     reports = Report.objects.all()
@@ -170,6 +171,16 @@ def review_reports(request):
 
         {'reports' : reports},
     )
+
+def public_reports_newest(request):
+    public_reports = Report.objects.filter(private=False).order_by("-pub_date")
+    return render(request, "public_reports.html", {"reports": public_reports})
+
+def public_reports_votes(request):
+    public_reports = Report.objects.filter(private=False).order_by("-votes")
+    return render(request, "public_reports.html", {"reports": public_reports})
+
+
 def new_reports(request):
     new_reports = Report.objects.filter(status='New')
     return render(request, "new_reports.html", {"reports": new_reports})
@@ -237,6 +248,12 @@ def report_delete(request, pk):
         report.delete()                    
     return redirect('/userlanding/')            
     
+def report_delete_admin(request, pk):
+    report = get_object_or_404(Report, pk=pk)  
+
+    if request.method == 'POST':         
+        report.delete()                    
+    return redirect('/adminreportview/')  
 
 def email(request):
     return render(request, "email_sent.html")

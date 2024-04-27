@@ -32,3 +32,5 @@ class Report(models.Model):
     private = models.BooleanField(default=True)
     reported = models.BooleanField(default=False)
     email_status= models.BooleanField(default=False)
+    pub_date = models.DateTimeField(auto_now_add=True)
+    votes = models.IntegerField(default=0)
