@@ -8,7 +8,6 @@
             margin-right: -100px;
             font-family: 'Lato', sans-serif;
           }
-          
     
           .row.row-cols-1.g-4 {
             width: 100%;
@@ -23,30 +22,13 @@
             margin: 1vw 0;
           }
     
-          .card {
-            display: flex !important;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .card-body {
-            flex: 1;
-            width: 100%;
-        }
+          .card,
+          .card-body,
           .row {
             width: calc(2 * 44.5vw - 40px) !important;
           }
-          .card-body textarea {
-            width: calc(88vw - 105px) !important;
-            margin-bottom: 10px;
-            padding: 10px;
-            resize: vertical;
-            min-height: 100px;
-        }
-          .summary{
-            width: 90% !important;
-            margin: 0 auto 1vh auto; 
-          }
+    
+          .summary,
           .details {
             width: calc(88vw - 65px) !important;
           }
@@ -56,30 +38,14 @@
           }
     
           .information {
-            width: 100% !important;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            width: calc(88vw - 65px) !important;
           }
     
-          .submit_status_and_update{
-            width: 80% !important;
-        height: auto !important;
-        display: flex;
-        justify-content: center;
-          }
-          .submit_status_and_update_box {
-            flex-wrap: wrap;
-            width: auto !important;
-            height: auto !important;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
+          .submit_status_and_update,
+          .submit_status_and_update_box,
           .quickinfo {
-            width: 80% !important;
-            height: auto !important;
-            margin-bottom: 10px;
+            width: 40vw !important;
+            height: 30vh;
           }
     
           .edit,
@@ -93,8 +59,8 @@
           }
     
           .private {
-            width: auto;
-            height: 8vh;
+            width: min(15vw, 30vh);
+            height: min(15vw, 30vh);
           }
     
           #ReportDetails,
@@ -103,19 +69,13 @@
           #arrowImage {
             width: calc(2 * 40.5vw) !important;
           }
-          .textarea-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin-top: 20px; 
-        }
         }
       </style>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
     <html lang="en">
 {% include 'login/admin_navbar.html' %}
 
-<body style="background-color: rgb(224, 122, 95); margin-top: 120px;" class="body">
+<body style= "margin-top: 120px;">
     
     {% if user.is_authenticated %}
         {% if user.groups.exists %}
@@ -135,12 +95,12 @@
                 style="margin-left: -12px; width: calc(44.5vw - 20px); height: auto; background-color: rgb(242, 204, 143); border: 0px;">
                 <div class="card-body">
                   <div class="summary"
-                    style="width: auto; height: auto; padding-top: 5px; padding-bottom: 5px; border-radius: 5px; background-color: #f0f0f0; text-align: center; align-items: center; padding-top: 8px; margin-bottom: 1vh;">
+                    style="width: 40.5vw; height: auto; padding-top: 5px; padding-bottom: 5px; border-radius: 5px; background-color: #f0f0f0; text-align: center; align-items: center; padding-top: 8px; margin-bottom: 1vh;">
                     {{report.userID}} reported <strong>{{ report.studentName.capitalize }}</strong> for their work in
                     <strong>{{report.className }}</strong> taught by <strong>{{ report.professorName.capitalize}}</strong><br>
                   </div>
-                  
-                  <div style="display: flex; width: 40vw; height: 15vh; margin-bottom: 1vh;" class="information">
+      
+                  <div style="display: flex; width: 40vw; height: 40vh; margin-bottom: 1vh;" class="information">
                     <div class="quickinfo"
                       style="width: 49%; height: 95%; display: inline-block; margin-right: 10px; margin-top: 3.9px; background-color: #f0f0f0; border-radius: 5px;">
                       <div style="padding: 5px 10px; box-sizing: border-box; width: 100%; height: 30px; margin-bottom: 3px;">
@@ -158,7 +118,13 @@
                           <p style="padding-left: 10px; width: auto;">{{ report.status.capitalize }}</p>
                         </div>
                       </div>
-                      
+                      <div
+                        style="width: 90%; height: 5px; border-radius: 3px; background-color: rgb(242, 204, 143); margin: auto;">
+                      </div>
+                      <div style="padding: 3px 10px; width: 100%; height: 80px; margin-top: 3px;">
+                        <p style="font-weight: bold; padding-left: 5px;">Feedback: </p>
+                        <p>{{report.feedback}}</p>
+                      </div>
                     </div>
       
                     <div style="width: 20vw; display: inline-block; height: 15vh; margin-right: -5px;"
@@ -192,34 +158,25 @@
                           src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLi8glhGxlrEbBO5YRVmS0ijCmryyCYfM-EBCDXSIpmoewulXh7q9T5DLDVZowRRFaktpqRwAUpUhJtWjE2-s3nZ5zu9yDDBWnojEVeBE_Sohi64yG5GYwyrXYReNbF6wE6ZE8FmD9_xcOfGdcL_TmRDSzBSPS67Q4pdwWJG-jD7Lhyphenhyphenus1GnKuVMhmLw0/s500/Screenshot_2024-04-20_at_4.27.50_PM-removebg-preview.png">
                         {% endif %}
                       </div>
-                      
+                      <div style="margin-top: 17px; height: 5vh;">
+                        <div style="display: flex;">
+                          <a href="/adminreportview/{{report.pk}}/"
+                            style="font-size: 20px; font-weight: 300; width: 10vw; margin-right: 5px; height: 21vh; border-radius: 5px; display: flex; justify-content: center; align-items: center; background-color: #81B29A; text-decoration: none; color: white; word-break: break-all; text-align: center;">
+                            View<br>Report
+                          </a>
+                          <form action="{% url 'login:report_delete' report.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="delete"
+                              style="font-size: 20px; font-weight: 300; width: 10vw; height: 21vh; background-color: rgb(224, 122, 95); color: white; border: 0px; border-radius: 5px; text-align: center; word-break: break-all;">
+                              Delete<br>report
+                            </button>
+                          </form>
+                        </div>
                     </div>
-                    
+                    </div>
                   </div>
-                  
                 </div>
-                <strong style="margin-left: 5vw; margin-top: 10px; display: block;">Feedback:</strong>
-                <div class="textarea-container" style="width: 100%; display: flex; justify-content: center;">
-                    
-                    <textarea readonly style="background-color:rgb(237, 237, 237);width: calc(40.5vw - 40px); border-radius: 5px; margin-bottom: 10px; padding: 10px; resize: vertical; min-height: 100px;" rows="4">{{report.feedback}}</textarea>
-                  </div>
-                  <div style="margin-top: 10px; margin-bottom: 10px; margin-left: 5px; height: 5vh;">
-                    <div style="display: flex;">
-                      <a href="/adminreportview/{{report.pk}}/"
-                        style="font-size: 20px; font-weight: 300; width: 10vw; border-radius: 5px; margin-right: 5px; height: 5vh; display: flex; justify-content: center; align-items: center; background-color: #81B29A; text-decoration: none; color: white; word-break: break-all; text-align: center;">
-                        View
-                      </a>
-                      <form action="{% url 'login:report_delete' report.id %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="delete"
-                          style="font-size: 20px; font-weight: 300; width: 10vw; height: 5vh; background-color: rgb(224, 122, 95); color: white; border: 0px; border-radius: 5px; text-align: center; word-break: break-all;">
-                          Delete
-                        </button>
-                      </form>
-                    </div>
-                    </div>
-            </div>
-              
+              </div>
             </div>
             {% empty %}
             <p>No reports submitted.</p>
