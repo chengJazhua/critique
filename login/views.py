@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404
 from django.core.mail import EmailMessage
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
+from django.db.models import Q
 from .forms import ReportForm
 from django.utils import timezone
 from django.template.defaulttags import register
@@ -57,6 +58,15 @@ def admin_view_reports(request):
     return render(request, "admin_view_reports.html")
 
 def public_reports(request):
+    if request.method == "POST":
+        search = request.POST.get('search')
+        public_reports = Report.objects.filter(private=False)
+        if search == "":
+            return render(request, "public_reports.html", {"reports": public_reports})
+        public_reports = public_reports.filter(Q(userID__icontains=search) | Q(className__icontains=search) | Q(professorName__icontains=search) | Q(studentName__icontains=search) | Q(professor_email__icontains=search))
+        public_reports.filter(private=False)
+        return render(request, "public_reports.html", {"reports": public_reports})
+    
     public_reports = Report.objects.filter(private=False)
     return render(request, "public_reports.html", {"reports": public_reports})
 
@@ -167,8 +177,6 @@ def review_reports(request):
     return render(
         request,
         "review_reports.html",
-
-
         {'reports' : reports},
     )
 
@@ -359,6 +367,7 @@ def edit_report(request, pk):
         report.professor_email = professor_email
         report.private = privacy_boolean
         report.save()
+        return redirect('/userlanding/')
         
     return render(
         request,

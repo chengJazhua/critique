@@ -5,7 +5,6 @@
   integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <html lang="en">
 {% include 'login/user_navbar.html' %}
-<!--- report button will have different style --->
 <style>
   .expand-button {
     background-color: rgb(150, 150, 255);
@@ -17,6 +16,14 @@
 
 <body style="margin-top: 120px;">
   <div class="container mt-5">
+    <div class="d-flex justify-content-center">
+      <form method="post">
+        {% csrf_token %}
+        <input type="text" id="search" name="search">
+        <input type="submit" id="search_button" name="search_button" value="search">
+      </form>
+    </div>
+    <br/>
     <div class="row row-cols-1 row-cols-md-2 g-4">
       {% for report in reports %}
       <div class="col">
