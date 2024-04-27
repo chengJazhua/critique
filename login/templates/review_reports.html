@@ -61,8 +61,14 @@
                 <p style="font-size: 20px; font-weight: 100; color:rgb(45, 45, 45); margin: 0px;">{{ report.rating|capfirst }}</p>
                 <!-- <li><a href="/adminreportview/{{report.pk}}/">View Report #{{ report.pk }}</a></li> -->
             </div>
-       
+            
         </div>
+        <form action="{% url 'login:report_delete_admin' report.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit"
+              style="font-size: 20px; font-weight: 300; width: 10vw; height: 21vh; background-color: rgb(224, 122, 95); color: white; border: 0px; border-radius: 5px;"
+              value="Delete report">
+          </form>
     </a>
     {% endfor %}
 </body>
