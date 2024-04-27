@@ -6,18 +6,113 @@
   <style>
     body {
         font-family: 'Lato', sans-serif;
+        background-color: #3D405B;
     }
     </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
 
-  {% if user.is_authenticated %}
+{% if user.is_authenticated %}
 {% include 'login/user_navbar.html' %}
 {% elif not user.is_authenticated %}
 {% include 'login/anon_navbar.html' %}
 {% endif %}
-
-<head>
-  <meta charset="UTF-8">
+{% load bootstrap5 %}
+  <!-- {% bootstrap_css %} -->
+  {% bootstrap_javascript %}
+<style>
+  .report-text-portion {
+    input, label {
+      display:block;
+    }
+    textarea,select,input {
+      margin-bottom:2%;
+    }
+  }
+  .report-text-portion {
+    margin-left:10%;
+    margin-bottom:5%;
+    margin-top:2%
+  }
+</style>
+<body style="padding-top:5%" >
+  {% if error_message != "" %}
+  <div id="errorDiv"
+    style="pointer-events: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+    width: 75%; height: 20%; background-color:#E07A5F; padding: 2%; margin-bottom: 2%; 
+    z-index: 9999; text-align: center; opacity: 1; transition: opacity 1s;">
+    <label for="className" style="font-size: 250%; font-weight: 100; color:#F4F1DE;">
+      Error: {{ error_message }}
+    </label>
+  </div>
+  <script>
+    setTimeout(function () {
+      var errorDiv = document.getElementById('errorDiv');
+      if (errorDiv) {
+        errorDiv.style.opacity = '0';
+      }
+    }, 2000);
+  </script>
+  {% endif %}
+  <div id="report-guidelines" style="margin:5%; color:#F4F1DE">
+    <strong style="font-size:300%; color:#81B29A">Submitting a Report</strong>
+    <p>guidelines on what to report about. dont be a cyberbully. can we please change the font. lorem de dipshit im so tired</p>
+    <p>todo: center card + realign items, inputs should have ids not labels (which should have fors), font change, navbar color switch to dark blue w/white text + put "user" above the username, yippee also link color would have to change too </p>
+    <p>also dont forgor the error modal, probs make it salmon lol</p>
+    <p>add error tolerance, if someone submits a file with a space in the name, then either catch w/error or fix name after submission</p>
+  </div>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %} 
+    <div class="card" style="margin-left:20%; margin-right:20%; max-width:100%px; max-height:100%; background-color:white; line-height: 25px; border-style:solid; border-color:#3D405B">
+        <div class ="form-group">
+          <p style="margin-left:5%; margin-top:5%; color:#81B29A; font-size:150%">1. Report Information</p>
+          <div class="report-text-portion">
+            <label for="studentName">Who are you reporting?</label>
+            <input name="studentName" id="studentName" type="text" placeholder="ex. John Doe">
+            <label for="rating-select">What is your rating of the student?</label>
+            <select name="rating" id="rating-select">
+              <option value="Postive" id="positive">Positive</option>
+              <option value="Neutral" id="neutral">Neutral</option>
+              <option value="Negative" id="negative">Negative</option>
+            </select><br>
+            <label for="className">What course?</label>
+            <input name="className" id="className" type="text" placeholder="ex. CS 3240">
+            <label for="work-select">What type of work did you do with this student?</label>
+            <select name="workType" id="work-select">
+              <option value="Postive" id="positive">Group Assignment</option>
+              <option value="Neutral" id="neutral">Project</option>
+            </select><br>
+            <label for="professorName">Professor of the course</label>
+            <input name="professorName" id="professorName" type="text" placeholder="ex. Mark Sherriff">
+            <label for="professor_email">Professor Email</label>
+            <input name="professor_email" id="professor_email" type="text" placeholder="ex. xxxxxx@virginia.edu">
+          </div>
+          <hr class="solid" stle="color:#81B29A">
+          <p style="margin-left:5%; color:#81B29A; font-size:150%">2. User Testimonial</p>
+          <div class="report-text-portion">
+            <label for="report">Your experience:</label>
+            <textarea name="report" id="report" placeholder="Describe your experience with this student" style="width:75%"></textarea>
+            <label for="fileUpload">Submit evidence of your testimonial:</label>
+            <input type="file" id="fileUpload" name="filename"
+              style="font-size: 15px; font-weight: 100; color: black; border-radius: 5px; width: 95%; height: 50px;">
+          </div>
+          <hr class="solid">
+          <p style="margin-left:5%; color:#81B29A; font-size:150%">3. After Submission</p>
+          <div style="margin-left:10%; margin-bottom:5%">
+            <input type="checkbox" name="public" id="public">
+            <label for="privacy">Post publicly</label><br>
+            <input type="checkbox" name="email" id="email">
+            <label for="email_prof">Email copy of report to professor</label>
+          </div>
+        </div>
+      </div>
+      <input type="hidden" name="userID" value="{{ user.email }}">
+      <div style="position:relative; text-align:center; margin-top:2%; margin-bottom:2%; align-items: center">
+        <input type="submit"
+            style="font-size:25px; font-weight: 100; color: white; border-radius: 5px; border: 0px; background-color: rgb(129, 178, 154); height: 5%; width: 50%;">
+      </div>
+    </form>
+  </body>
+  <!----<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Submit A Report</title>
   <style>
@@ -59,20 +154,20 @@
         style="width: 500px; height: 440px; background-color: rgb(244, 241, 222); border-radius: 10px; padding: 20px;">
         <div name="textInputs" style="display: flex; flex-direction: column; align-items: center; margin-top: -15px;">
           <label for="className"
-            style="font-size: 30px; font-weight: 100; color: black; margin-bottom: -25px;">Class:</label><br>
+            style="font-size: 24px; font-weight: 100; color: black; margin-bottom: -25px;">Class:</label><br>
           <input type="text" id="class" name="className"
             style="text-align: center; height: 40px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -15px;"><br>
 
           <div style="display: flex; width: 90%; margin-bottom: 25px;">
             <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
               <label for="professorName"
-                style="font-size: 30px; font-weight: 100; color: black; margin-bottom: -25px;">Professor:</label><br>
+                style="font-size: 24px; font-weight: 100; color: black; margin-bottom: -25px;">Professor:</label><br>
               <input type="text" id="professorName" name="professorName"
                 style="text-align: center; height: 40px; width: calc(100% - 2.5px); border: 0px; border-radius: 10px; margin-bottom: -5px; margin-right: 2.5px;">
             </div>
             <div style="flex: 1; display: flex; flex-direction: column;">
               <label for="professor_email"
-                style="font-size: 30px; font-weight: 100; color: black; margin-bottom: -25px; text-align: right;">Professor
+                style="font-size: 24px; font-weight: 100; color: black; margin-bottom: -25px; text-align: right;">Professor
                 Email:</label><br>
               <input type="text" id="professor_email" name="professor_email"
                 style="text-align: center; height: 40px; width: calc(100% - 2.5px); border: 0px; border-radius: 10px; margin-bottom: -15px; margin-left: 2.5px;">
@@ -80,13 +175,13 @@
           </div>
 
           <label for="studentName"
-            style="font-size: 30px; font-weight: 100; color: black; margin-bottom: -25px;">Student
+            style="font-size: 24px; font-weight: 100; color: black; margin-bottom: -25px;">Student
             Name:</label><br>
           <input type="text" id="student" name="studentName"
             style="text-align: center; height: 40px; width: 90%; border: 0px; border-radius: 10px; margin-bottom: -15px;"><br>
 
           <label for="report"
-            style="font-size: 30px; font-weight: 100; color: black; margin-bottom: -25px;">Report:</label><br>
+            style="font-size: 24px; font-weight: 100; color: black; margin-bottom: -25px;">Report:</label><br>
           <textarea type="text" id="report" name="report"
             style="text-indent: 0; padding: 5px; width: 90%; height: 80px; border: 0px; border-radius: 10px; margin-bottom: -5px; resize: none; overflow-wrap: break-word;"></textarea>
         </div>
@@ -245,7 +340,6 @@
 
 
     </script>
-    <form>
-</body>
+    <form>-->
 
 </html>
