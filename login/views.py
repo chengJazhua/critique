@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.contrib.auth.signals import user_logged_in
 from django.dispatch import receiver
-from login.models import Report, Evidence
+from login.models import Report, Evidence, Comments
 #from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
@@ -238,6 +238,30 @@ def admin_specific_report_view(request, pk):
     return render(
         request, 
         'admin_specific_report_view.html', 
+        {'report': report},
+        )
+
+def public_specific_report_view(request, pk):
+    report = get_object_or_404(Report, pk=pk)
+    if request.method == 'POST':
+        if request.POST.get('Resolve',False): #if resolve button is clicked
+            feedback = request.POST.get('feedback')
+            print(f"Feedback received: [{feedback}]")
+            if feedback == "":
+                return render(
+                    request, 
+                    'specific_public_report.html', 
+                    {
+                        'report': report,
+                        # to include in html page
+                        'error_message': "The comment must not be empty.",
+                    },
+                )
+            Comments.objects.create(report=report, comment=feedback)
+        
+    return render(
+        request, 
+        'specific_public_report.html', 
         {'report': report},
         )
 

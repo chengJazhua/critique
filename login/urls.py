@@ -19,6 +19,7 @@ urlpatterns = [
     path('viewreports/', views.admin_view_reports),
     path('adminreportview/', views.review_reports),
     path('adminreportview/<int:pk>/', views.admin_specific_report_view, name='admin_specific_report_view'),
+    path('publicreports/<int:pk>/', views.public_specific_report_view, name='public_specific_report_view'),
     re_path(r'^delete/admin/(?P<pk>[0-9]+)/$', views.report_delete_admin, name='report_delete_admin'),
     re_path(r'^delete/user/(?P<pk>[0-9]+)/$', views.report_delete, name='report_delete'),
     
