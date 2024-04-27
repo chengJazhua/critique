@@ -1,14 +1,78 @@
 <!DOCTYPE html>
 {% load socialaccount %}
 <html lang="en">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 {% if user.is_authenticated %}
 {% include 'login/user_navbar.html' %}
 {% endif %}
-
-<head>
-  <meta charset="UTF-8">
+<style>
+  .label {
+    font-family:Arial, Helvetica, sans-serif
+  }
+  .report-text-portion {
+    input, label {
+      display:block;
+    }
+  }
+</style>
+<body style="padding-top:100px" >
+  {% if error_message != "" %}
+  <div id="errorDiv"
+    style="pointer-events: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 852px; height: 120px; background-color:white; padding: 20px; border-radius: 15px; margin-bottom: 20px; z-index: 9999; text-align: center; opacity: 1; transition: opacity 1s;">
+    <label for="className" style="font-size: 45px; font-weight: 100; color:rgb(45, 45, 45);">
+      Error: {{ error_message }}
+    </label>
+  </div>
+  {% endif %}
+  <div id="report-guidelines" style="font-family:Arial, Helvetica, sans-serif">
+    <strong style="font-family:Arial, Helvetica, sans-serif; font-size:50px">Submitting a Report</strong>
+    <p>guidelines on what to report about. dont be a cyberbully. can we please change the font. lorem de dipshit im so tired</p>
+    <p>todo: center card + realign items, inputs should have ids not labels (which should have fors), font change, navbar color switch to dark blue w/white text + put "user" above the username, yippee also link color would have to change too </p>
+    <p>also dont forgor the error modal, probs make it salmon lol</p>
+    <p>add error tolerance, if someone submits a file with a space in the name, then either catch w/error or fix name after submission</p>
+  </div>
+    <form>
+    <div class="card" style="margin-left:20%; margin-right:20%; max-width:100%px; max-height:100%; background-color:white; line-height: 25px; border-style:solid; border-color:#3D405B">
+        <div class ="form-group">
+          <p style="margin-left:5%">1. Report Information</p>
+          <div class="report-text-portion"style="margin-left:10%; margin-left:10%">
+            <label for="studentName">Who are you reporting?</label>
+            <input id="studentName" type="text" placeholder="ex. John Doe">
+            <label for="rating-select">What is your rating of the student?</label>
+            <select name="rating" id="rating-select">
+              <option value="Postive" id="positive">Positive</option>
+              <option value="Neutral" id="neutral">Neutral</option>
+              <option value="Negative" id="negative">Negative</option>
+            </select><br>
+            <label for="className">What course?</label>
+            <input id="className" type="text" placeholder="ex. CS 3240">
+            <label for="professorName">Professor of the course</label>
+            <input id="professorName" type="text" placeholder="ex. Mark Sherriff">
+            <label for="professor_email">Professor Email</label>
+            <input id="professor_email" type="text" placeholder="ex. xxxxxx@virginia.edu">
+          </div>
+          <hr class="solid" stle="color:#81B29A">
+          <p style="margin-left:5%">2. User Testimonial</p>
+          <div class="report-text-portion" style="margin: 10%">
+            <label for="report">Your experience:</label>
+            <textarea id="report" placeholder="Describe your experience with this student"></textarea>
+            <label for="fileUpload">Submit evidence of your testimonial:</label>
+            <input type="file" id="fileUpload" name="filename"
+              style="font-size: 20px; font-weight: 100; color: black; border-radius: 5px; width: 95%; height: 50px;">
+          </div>
+          <hr class="solid">
+          <p style="margin-left:5%">3. After Submission</p>
+          <input type="checkbox" id="public">
+          <label for="public">Post publicly</label>
+          <input type="checkbox" id="email">
+          <label for="email">Email copy of report to professor</label>
+        </div>
+      </div>
+      <input type="hidden" name="userID" value="{{ user.email }}">
+      <input type="submit"
+            style="font-size:24px; font-weight: 100; color: white; border-radius: 5px; border: 0px; background-color: rgb(129, 178, 154); height: 5%; width: 50%;">
+    </form>
+  </body>
+  <!----<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Submit A Report</title>
   <style>
@@ -241,7 +305,6 @@
 
 
     </script>
-    <form>
-</body>
+    <form>-->
 
 </html>
