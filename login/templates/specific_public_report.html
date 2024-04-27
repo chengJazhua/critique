@@ -4,7 +4,7 @@
 <html lang="en">
     {% include 'login/user_navbar.html' %}
    
-    <body>
+    <body style="margin-top: 120px;">
         {% if error_message %}
         <div class="container"
               style="display: flex; justify-content: center; width: 710px; height: 100px0px; background-color: #ED4337; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
@@ -19,6 +19,8 @@
                 <div class="card" style="background-color: #dbedff;">
                     <div class="card-body">
                   <strong>User ID:</strong> {{ report.userID }}<br>
+                  <strong>Comment:</strong>
+                  <textarea></textarea> <!-- take information from here--> <br>
                   <strong>Class Name:</strong> {{ report.className }}<br>
                   <strong>Professor Name:</strong> {{ report.professorName }}<br>
                   <strong>Student Name:</strong> {{ report.studentName }}<br>
