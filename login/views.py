@@ -125,17 +125,22 @@ def report(request):
         status = "New"
         feedback = ""
         
+
         print(privacy)
         
-        if privacy == "public":
-            privacy_boolean = False
-        else:
+        if privacy is None:
             privacy_boolean = True
+            privacy = True
+        else:
+            privacy_boolean = False
+            privacy = False
         
-        if(email_prof == "email_prof"):
+        if(email_prof == "email_prof" or email_prof == "on"):
             email_prof_boolean = True
+            email_prof = True
         else:
             email_prof_boolean = False
+            email_prof = False
         
         if userID == "":
             userID = "Anonymous"
