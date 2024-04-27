@@ -32,3 +32,10 @@ class Report(models.Model):
     private = models.BooleanField(default=True)
     reported = models.BooleanField(default=False)
     email_status= models.BooleanField(default=False)
+    pub_date = models.DateTimeField(auto_now_add=True)
+    votes = models.IntegerField(default=0)
+
+class Comments(models.Model):
+    report = models.ForeignKey(Report, on_delete=models.CASCADE)
+    comment = models.TextField(max_length = 500)
+    pub_date = models.DateTimeField(auto_now_add=True)
