@@ -1,5 +1,262 @@
 <!DOCTYPE html>
-<!-- https://csimagereferemce.blogspot.com/2024/03/blog-post.html -->
+<html lang="en">
+{% load socialaccount %}
+{% include 'login/user_navbar.html' %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <style>
+    @media (max-width: 1085px) {
+      .body {
+        margin-right: -100px;
+      }
+
+      .row.row-cols-1.g-4 {
+        width: 100%;
+        justify-content: center;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+      }
+
+      .col {
+        width: 100% !important;
+        margin: 1vw 0;
+      }
+
+      .card,
+      .card-body,
+      .row {
+        width: calc(2 * 44.5vw - 40px) !important;
+      }
+
+      .summary,
+      .details {
+        width: calc(88vw - 65px) !important;
+      }
+
+      .expandcollapse {
+        width: calc(88vw - 65px) !important;
+      }
+
+      .information {
+        width: calc(88vw - 65px) !important;
+      }
+
+      .submit_status_and_update,
+      .submit_status_and_update_box,
+      .quickinfo {
+        width: 40vw !important;
+        height: 30vh;
+      }
+
+      .edit,
+      .delete {
+        width: 19vw !important;
+      }
+
+      .rating_email {
+        width: max(10vw, 20vh);
+        height: max(10vw, 20vh);
+      }
+
+      .private {
+        width: min(15vw, 30vh);
+        height: min(15vw, 30vh);
+      }
+
+      #ReportDetails,
+      #display,
+      #ExpandCollapse,
+      #arrowImage {
+        width: calc(2 * 40.5vw) !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="background-color: rgb(224, 122, 95); margin-top: 120px; height: auto;">
+  <div style="background-color: rgb(242, 204, 143); padding: 5px; border-radius: 5px; width: calc(91vw - 36px); margin: 0 auto; height: 40px; margin-bottom: -35px;">
+    <form method="post" style="display: flex; align-items: center; width: 100%;">
+      {% csrf_token %}
+      <div style="margin-right: 5px; width: 15%;">
+        <input type="submit" id="search_button" name="search_button" value="reset" style="width: 100%; border: none; border-radius: 3px; background-color: rgb(224, 122, 95); color: white; cursor: pointer;">
+      </div>
+      <div style="flex: 1;">
+        <input type="text" id="search" name="search" style="width: 100%; height: 30px; border: 0px; border-radius: 3px;">
+      </div>
+      <div style="margin-left: 5px; width: 15%;">
+        <input type="submit" id="search_button" name="search_button" value="search" style="width: 100%; border: none; border-radius: 3px; background-color: rgb(129, 178, 154); color: white; cursor: pointer;">
+      </div>
+    </form>
+  </div>
+
+  <div class="container mt-5">
+    <div class="row row-cols-1 g-4" style="width: 100vw; position: absolute; justify-content: center; left: 0; right: 0; margin: 0 auto;">
+      {% for report in reports %}
+      <div class="col" style="width: calc(44.5vw - 18px); margin: 1vw;">
+        <div class="card" id="report_card{{report.id}}"
+          style="margin-left: -12px; width: calc(44.5vw - 20px); height: auto; background-color: rgb(242, 204, 143); border: 0px;">
+          <div class="card-body">
+            <div class="summary"
+              style="width: 40.5vw; height: auto; padding-top: 5px; padding-bottom: 5px; border-radius: 5px; background-color: #f0f0f0; text-align: center; align-items: center; padding-top: 8px; margin-bottom: 1vh;">
+              You reported <strong>{{ report.studentName.capitalize }}</strong> for their work in
+              <strong>{{report.className }}</strong> taught by <strong>{{ report.professorName.capitalize}}</strong><br>
+            </div>
+
+            <div style="display: flex; width: 40vw; height: 40vh; margin-bottom: 1vh;" class="information">
+              <div class="quickinfo"
+                style="width: 49%; height: 95%; display: inline-block; margin-right: 10px; margin-top: 3.9px; background-color: #f0f0f0; border-radius: 5px;">
+                <div style="padding: 5px 10px; box-sizing: border-box; width: 100%; height: 30px; margin-bottom: 3px;">
+                  <div style="display: flex; align-items: center;">
+                    <p style="font-weight: bold; padding-left: 5px; width: auto;">Work Type: </p>
+                    <p style="padding-left: 10px; width: auto;">{{ report.workType.capitalize }}</p>
+                  </div>
+                </div>
+                <div
+                  style="width: 90%; height: 5px; border-radius: 3px; background-color: rgb(242, 204, 143); margin: auto;">
+                </div>
+                <div style="padding: 3px 10px; top: 0; width: 100%; height: 30px; margin-bottom: 3px;">
+                  <div style="display: flex; align-items: center;">
+                    <p style="font-weight: bold; padding-left: 5px; width: auto;">Status: </p>
+                    <p style="padding-left: 10px; width: auto;">{{ report.status.capitalize }}</p>
+                  </div>
+                </div>
+                <div
+                  style="width: 90%; height: 5px; border-radius: 3px; background-color: rgb(242, 204, 143); margin: auto;">
+                </div>
+                <div style="padding: 3px 10px; width: 100%; height: 80px; margin-top: 3px;">
+                  <p style="font-weight: bold; padding-left: 5px;">Feedback: </p>
+                  <p>{{report.feedback}}</p>
+                </div>
+              </div>
+
+              <div style="width: 20vw; display: inline-block; height: 15vh; margin-right: -5px;"
+                class="submit_status_and_update">
+                <div style="display: flex; justify-content: space-around; align-items: center; height: 15vh;"
+                  class="submit_status_and_update_box">
+                  {% if report.rating.capitalize == "Positive" %}
+                  <img class="rating_email" style="rotate: 90deg; width: auto; height: 8vh;"
+                    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhD2a2uzprPRdusoiSCTdrF5I6j5T_nY4FD-PU4e62iy0B77leCdAAiBhAcwa5R_p40HiDPkoX0Q_cBKONCbj3O7tq-lxhO2paTdCivtc2lG9hL_w5aVHxhH6cz5zUnGqAEcpU0kt2cGPVf5V6DmIU9AOHWaQXNCyh7g4cR2GgmxqdJQA1mQHb0pas6ZW8/s334/Screenshot_2024-04-20_at_4.22.10_PM-removebg-preview.png">
+                  {% elif report.rating.capitalize == "Negative" %}
+                  <img class="rating_email" style="width: auto; height: 8vh;"
+                    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhD2a2uzprPRdusoiSCTdrF5I6j5T_nY4FD-PU4e62iy0B77leCdAAiBhAcwa5R_p40HiDPkoX0Q_cBKONCbj3O7tq-lxhO2paTdCivtc2lG9hL_w5aVHxhH6cz5zUnGqAEcpU0kt2cGPVf5V6DmIU9AOHWaQXNCyh7g4cR2GgmxqdJQA1mQHb0pas6ZW8/s334/Screenshot_2024-04-20_at_4.22.10_PM-removebg-preview.png">
+                  {% else %}
+                  <img class="rating_email" style="rotate: -90deg; width: auto; height: 8vh;"
+                    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhD2a2uzprPRdusoiSCTdrF5I6j5T_nY4FD-PU4e62iy0B77leCdAAiBhAcwa5R_p40HiDPkoX0Q_cBKONCbj3O7tq-lxhO2paTdCivtc2lG9hL_w5aVHxhH6cz5zUnGqAEcpU0kt2cGPVf5V6DmIU9AOHWaQXNCyh7g4cR2GgmxqdJQA1mQHb0pas6ZW8/s334/Screenshot_2024-04-20_at_4.22.10_PM-removebg-preview.png">
+                  {% endif %}
+
+                  {% if report.private %}
+                  <img class="private" style="width: auto; height: 12vh;"
+                    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhAzIyj1_OYAFmTj3BUckj9dXwIibMGwLCQsYzr6YKgV1M3FNgXAmOteI0BtQ4Q8opFuJtse9Z6pWpm_WHO3oKlJRVn7lGy-dUj_bZyVAjZtYeDw1AgUh0iuebQHGgOiXMgA77o4x-yoA5pv0I-TJjkgRtlqP4PLxP4xgviSeVRzbQSsIIGrV74AWe-bEg/s499/Screenshot_2024-04-20_at_4.54.16_PM-removebg-preview.png">
+                  {% else %}
+                  <img class="private" style="width: auto; height: 12vh;"
+                    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhQ52KOYGpyxrFzwPHlPSzPTy4q2_ia3ZY_2lS4V_LeK17q-GsnV2Oz9N4rjo3DFGTUM_tCukP1NdjkxR0WPIboS_Ic7T8ZVEvlTkgB7MTZtWbRNIIe_me9kYRG6v_F_QcUpT-UNkqQs4V_Wt99_eMAHz09cNZwHMcRTsiKtnsHIN8kipt2qKml5YCzfhQ/s499/Screenshot_2024-04-20_at_4.53.59_PM-removebg-preview.png">
+                  {% endif %}
+
+                  {% if report.email_prof %}
+                  <img class="rating_email" style="width: auto; height: 8vh;"
+                    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiNX84xbjujhq0k_nn7jxNdXbH3oKWv7mIcWS1qeMnd2jXEvVnbjFNaf_IDtTNu_HiWZ5psck04nLQtpUvF9EpieL-SKEAzwE4BVURr-EgSlxM8BtqbFLHacFGj1GQgtHU1FrOAqUmVKRFJ6wuRnGBhtM-6LFfYSHFwfE-3r3e83bhvL_UijC1is6NXWL8/s430/Screenshot_2024-04-20_at_4.25.21_PM-removebg-preview.png">
+                  {% else %}
+                  <img class="rating_email" style="width: auto; height: 8vh;"
+                    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLi8glhGxlrEbBO5YRVmS0ijCmryyCYfM-EBCDXSIpmoewulXh7q9T5DLDVZowRRFaktpqRwAUpUhJtWjE2-s3nZ5zu9yDDBWnojEVeBE_Sohi64yG5GYwyrXYReNbF6wE6ZE8FmD9_xcOfGdcL_TmRDSzBSPS67Q4pdwWJG-jD7Lhyphenhyphenus1GnKuVMhmLw0/s500/Screenshot_2024-04-20_at_4.27.50_PM-removebg-preview.png">
+                  {% endif %}
+                </div>
+                <div style="margin-top: 17px; height: 5vh;">
+                  <div style="display: flex;">
+                    {% if report.status != "Resolved" %}
+                    <a href="/editreport/{{report.pk}}/" class="edit"
+                      style="font-size: 20px; font-weight: 300; width: 10vw; margin-right: 5px; height: 21vh; border-radius: 5px; display: flex; justify-content: center; align-items: center; background-color: rgb(61, 64, 91); text-decoration: none; color: white; word-break: break-all; text-align: center;">
+                      Edit<br>Report
+                    </a>
+
+                    {% endif %}
+                    <form action="{% url 'login:report_delete' report.id %}" method="post">
+                      {% csrf_token %}
+                      <button type="submit" class="delete"
+                        style="font-size: 20px; font-weight: 300; width: 10vw; height: 21vh; background-color: rgb(224, 122, 95); color: white; border: 0px; border-radius: 5px; text-align: center; word-break: break-all;">
+                        Delete<br>report
+                      </button>
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="ReportDetails{{report.id}}" class="details"
+              style="display: none; width: 40.5vw; height: 400px; border: 0px; border-radius: 5px; background-color: #f0f0f0; margin-bottom: 1vh;">
+              <p style="padding-left: 5px; font-weight: bold;">Report: </p>
+              <p style="padding-left: 5px;">{{ report.report.capitalize }}</p>
+              <iframe id="display{{report.id}}" src="{{report.fileLink}}" overflow="hidden" frameborder="0" width="500"
+                height="600" scrolling="yes"></iframe>
+            </div>
+
+            <button class="expandcollapse"
+              style="width: 40.5vw; background-color: #f0f0f0; border: 0; border-radius: 5px;"
+              onclick="expand('{{report.id}}')">
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <p id="ExpandCollapse{{report.id}}"
+                  style="color: black; font-size: 16px; font-weight: 500; margin-bottom: 0px;">Expand</p>
+                <img id="arrowImage{{report.id}}" style="width: 10px; height: 10px;"
+                  src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKGLwTli8VHpuuB3u5LaCu-QTpe72EJve82FaYifyyDP3GXWKXd8GPaE5y-9zWbd8IQ-I1_445V1R6_oiX1GyKQpQ9_GgTvcj4n4AlBYHp5wu8KLcJWAxrXBAEVzaZHllHBxxJg_s5JlSE_gb9PkWqdgH_LC-o540HfhvARpnZdiUeO24sZP5PEOPZerk/s512/arrow.png">
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p>No reports submitted.</p>
+      {% endfor %}
+    </div>
+  </div>
+  <script>
+    function expand(reportId) {
+      var details = document.getElementById("ReportDetails" + reportId);
+      var button = document.getElementById("ExpandCollapse" + reportId);
+      var image = document.getElementById("arrowImage" + reportId);
+      var report_card = document.getElementById("report_card" + reportId)
+
+      if (details.style.display === "none" || details.style.display === "") {
+        details.style.display = "block";
+        button.textContent = "Collapse";
+        image.style.transform = "rotate(180deg)";
+        report_card.style.height = "calc(57vh + 410px)";
+      }
+
+      else {
+        details.style.display = "none";
+        button.textContent = "Expand";
+        image.style.transform = "rotate(0deg)";
+        report_card.style.height = "57vh";
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var PublicReports = document.getElementById('PublicReports');
+        var Public = document.getElementById('Public');
+        if (PublicReports) {
+          PublicReports.style.backgroundColor = 'rgb(242, 204, 143)';
+          Public.style.height = '90px';
+          PublicReports.style.width = '120px';
+          PublicReports.style.transform = 'translateY(0px)';
+          PublicReports.style.borderBottomLeftRadius = '8px';
+          PublicReports.style.borderBottomRightRadius = '8px';
+          Public.style.boxShadow = '0px 6px 10px rgba(0, 0, 0, 0.65)';
+          Public.style.borderBottomLeftRadius = '8px';
+          Public.style.borderBottomRightRadius = '8px';
+        }
+      });
+  </script>
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
 {% load socialaccount %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
   integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -90,4 +347,4 @@
   </script>
 </body>
 
-</html>
+</html> -->
