@@ -127,6 +127,51 @@ def report(request):
         
         print(privacy)
         
+        if len(className) > 200:
+            return render(
+                    request,
+                    "report_page.html",
+                    {
+                        "error_message": "Class name must be under 200 characters.",
+                    },
+                    )
+            
+        if len(report) > 500:
+            return render(
+                    request,
+                    "report_page.html",
+                    {
+                        "error_message": "Report must be under 200 characters.",
+                    },
+                    )
+            
+        if len(professorName) > 200:
+            return render(
+                    request,
+                    "report_page.html",
+                    {
+                        "error_message": "Professor name must be under 200 characters.",
+                    },
+                    )
+            
+        if len(studentName) > 200:
+            return render(
+                    request,
+                    "report_page.html",
+                    {
+                        "error_message": "Student name must be under 200 characters.",
+                    },
+                    ) 
+            
+        if len(professor_email) > 200:
+            return render(
+                    request,
+                    "report_page.html",
+                    {
+                        "error_message": "Professor email must be under 200 characters.",
+                    },
+                    ) 
+        
         if privacy == "public":
             privacy_boolean = False
         else:
@@ -230,6 +275,16 @@ def admin_specific_report_view(request, pk):
                         'error_message': "You must submit feedback.",
                     },
                 )
+            if len(feedback) > 200:
+                return render(
+                    request, 
+                    'admin_specific_report_view.html', 
+                    {
+                        'report': report,
+                        # to include in html page
+                        'error_message': "Feedback must be under 200 characters.",
+                    },
+                )
             report.feedback = feedback
             report.status = "Resolved"
             report.save()
@@ -322,6 +377,51 @@ def edit_report(request, pk):
         privacy = request.POST.get('privacy')
         status = "New"
         feedback = ""
+        
+        if len(className) > 200:
+            return render(
+                    request,
+                    "report_page.html",
+                    {
+                        "error_message": "Class name must be under 200 characters.",
+                    },
+                    )
+            
+        if len(report) > 500:
+            return render(
+                    request,
+                    "report_page.html",
+                    {
+                        "error_message": "Report must be under 200 characters.",
+                    },
+                    )
+            
+        if len(professorName) > 200:
+            return render(
+                    request,
+                    "report_page.html",
+                    {
+                        "error_message": "Professor name must be under 200 characters.",
+                    },
+                    )
+            
+        if len(studentName) > 200:
+            return render(
+                    request,
+                    "report_page.html",
+                    {
+                        "error_message": "Student name must be under 200 characters.",
+                    },
+                    ) 
+            
+        if len(professor_email) > 200:
+            return render(
+                    request,
+                    "report_page.html",
+                    {
+                        "error_message": "Professor email must be under 200 characters.",
+                    },
+                    ) 
         
         print(privacy)
         
