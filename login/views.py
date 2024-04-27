@@ -217,7 +217,7 @@ def admin_specific_report_view(request, pk):
                     {
                         'report': report,
                         # to include in html page
-                        'error_message': "You must submit feedback.",
+                        'error_message': "You must submit feedback",
                     },
                 )
             report.feedback = feedback
