@@ -21,7 +21,7 @@
             <meta http-equiv="refresh" content="0; url=/userlanding/" />
         {% endif %}
     {% endif %}
-    <body>
+    <body style=" margin-top: 120px;" class="body">
         {% if error_message %}
         <div class="container"
               style="display: flex; justify-content: center; width: 710px; height: 100px0px; background-color: #ED4337; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
@@ -33,7 +33,7 @@
       {% endif %}
         <div class="container mt-5">
             <h1 class="mb-4">Report #{{ report.pk }}</h1>
-                <div class="card" style="background-color: #dbedff;">
+                <div class="card" style="background-color: rgb(224, 122, 95);">
                     <div class="card-body">
                   <strong>User ID:</strong> {{ report.userID }}<br>
                   <strong>Class Name:</strong> {{ report.className }}<br>
@@ -60,7 +60,7 @@
                         <textarea id="feedback" name="feedback" style="width: 90%; height: 300px;"></textarea>
                     {% endif %}
                     <br>
-                    <input type="Submit" value="Resolve" name="Resolve">
+                    <input  style="background-color: #3D405B; border-radius:5px; color:#F4F1DE" type="Submit" value="Resolve" name="Resolve">
                   </form>
                   {% if report.email_prof %}
                   <strong>This student would like to submit their report to the professor</strong><br>
@@ -70,7 +70,7 @@
                   {% endif %}
                   <form method=post> 
                     {% csrf_token %}
-                <input type="Submit" value= "Email" name="Email"> 
+                <input style="background-color: #3D405B; border-radius:5px; color:#F4F1DE" type="Submit" value= "Email" name="Email"> 
                 </form> 
                 </div>
             </div>

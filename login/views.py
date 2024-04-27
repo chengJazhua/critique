@@ -63,7 +63,7 @@ def public_reports(request):
         public_reports = Report.objects.filter(private=False).order_by("-pub_date")
         if search == "":
             return render(request, "public_reports.html", {"reports": public_reports})
-        public_reports = public_reports.filter(Q(userID__icontains=search) | Q(className__icontains=search) | Q(professorName__icontains=search) | Q(studentName__icontains=search) | Q(professor_email__icontains=search))
+        public_reports = public_reports.filter( Q(className__icontains=search) | Q(professorName__icontains=search) | Q(studentName__icontains=search))
         public_reports.filter(private=False)
         return render(request, "public_reports.html", {"reports": public_reports})
     
@@ -89,6 +89,7 @@ def admin_landing_view(request):
 
 def report(request):
     if request.method == 'POST':
+        fileLink = ""
         try:
             upload=request.FILES['filename']
             print(upload)
@@ -100,18 +101,24 @@ def report(request):
                     "error_message": "File name cannot contain a space.",
                 },
                 )
-            evidence = Evidence(upload)
+            
+            evidence = Evidence(upload=upload)
+            print(evidence)
             fileLink = evidence.upload.url
+            print("filelink:" + fileLink)
             evidence.save()
         except Exception as e:
             fileLink=""
-            # return render(
-            #     request,
-            #     "report_page.html",
-            #     {
-            #         "error_message": "You are missing one or more fields",
-            #     },
-            #     )
+            print(str(e))
+            if (str(e) != "'filename'"):
+            
+                return render(
+                    request,
+                    "report_page.html",
+                    {
+                        "error_message": str(e),
+                    },
+                    )
         userID = request.POST['userID']
         className = request.POST['className']
         professorName = request.POST['professorName']
@@ -125,7 +132,8 @@ def report(request):
         status = "New"
         feedback = ""
         
-        print(privacy)
+        # print(fileLink)
+        # print(privacy)
         
         if len(className) > 200:
             return render(
@@ -172,15 +180,19 @@ def report(request):
                     },
                     ) 
         
-        if privacy == "public":
-            privacy_boolean = False
-        else:
+        if privacy is None:
             privacy_boolean = True
+            privacy = True
+        else:
+            privacy_boolean = False
+            privacy = False
         
-        if(email_prof == "email_prof"):
+        if(email_prof == "email_prof" or email_prof == "on"):
             email_prof_boolean = True
+            email_prof = True
         else:
             email_prof_boolean = False
+            email_prof = False
         
         if userID == "":
             userID = "Anonymous"
@@ -249,12 +261,16 @@ def new_reports(request):
     return render(request, "new_reports.html", {"reports": new_reports})
 
 def in_progress_reports(request):
-    inprogress_reports = Report.objects.filter(status='In Progress')
+    inprogress_reports = Report.objects.filter(status='Seen')
     return render(request, "inprogress_reports.html", {"reports": inprogress_reports})
 
 def resolved_reports(request):
     resolved_reports = Report.objects.filter(status='Resolved')
-    return render(request, "resolved_reports.html", {"reports": resolved_reports})   
+    return render(request, "resolved_reports.html", {"reports": resolved_reports}) 
+  
+def admin_public_reports(request):
+    public_reports = Report.objects.filter(private=0)
+    return render(request, "admin_public_reports.html", {"reports": public_reports})  
     
 def admin_specific_report_view(request, pk):
     report = get_object_or_404(Report, pk=pk)
@@ -272,7 +288,17 @@ def admin_specific_report_view(request, pk):
                     {
                         'report': report,
                         # to include in html page
-                        'error_message': "You must submit feedback.",
+                        'error_message': "You must submit feedback",
+                    },
+                )
+            if len(feedback) > 200:
+                return render(
+                    request, 
+                    'admin_specific_report_view.html', 
+                    {
+                        'report': report,
+                        # to include in html page
+                        'error_message': "Feedback must be under 200 characters.",
                     },
                 )
             if len(feedback) > 200:
@@ -332,10 +358,11 @@ def public_specific_report_view(request, pk):
                 )
             Comments.objects.create(report=report, comment=feedback)
         
+    comments = report.comments_set.all().order_by("-pub_date")
     return render(
         request, 
         'specific_public_report.html', 
-        {'report': report},
+        {'report': report, 'comments': comments},
         )
 
 def report_delete(request, pk):

@@ -38,7 +38,7 @@
   {% if user.groups.exists %}
   {% for group in user.groups.all %}
   {% if group.name == 'site admin' %}
-  <meta http-equiv="refresh" content="0; url=/adminlanding/" />
+  <meta http-equiv="refresh" content="0; url=/adminreportview/" />
   {% endif %}
   {% endfor %}
   {% else %}
@@ -50,11 +50,12 @@
       style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgb(244, 241, 222); height: 200px; transform: translateY(-199.9px);">
     </div>
     <div
-      style="display: inline; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgb(244, 241, 222); margin-bottom: 50px; height: 70px; box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.65);">
+      style="display: inline; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgb(244, 241, 222); margin-bottom: 50px; height: 70px;">
       <div style="position: absolute; top: 0px; left: 0px; width: 120px; height: 70px; padding-top: 10px;">
+        <a style="display: flex; align-items: center; justify-content: center; font-weight: 700;">User</a>
         <a
           style="display: flex; align-items: center; justify-content: center; font-weight: 400;">{{user.username|capfirst|default:"Anonymous"}}</a>
-        <a style="display: flex; align-items: center; justify-content: center; font-weight: 700;">User</a>
+        
       </div>
       <div
         style="position: absolute; display: flex; justify-content: space-evenly; align-items: center; height: 70px; left: 120px;">
@@ -103,7 +104,7 @@
 
   <div class="small_show">
     <div id="expandableContainer"
-      style="position: fixed; top: 10px; left: 10px; z-index: 1000; border-radius: 10px; border: 0px; background-color: rgb(244, 241, 222); margin-bottom: 50px; height: 50px; box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8); width: 100px; transition: height 0.5s ease;">
+      style="position: fixed; top: 10px; left: 10px; z-index: 1000; border-radius: 10px; border: 0px; background-color: rgb(244, 241, 222); margin-bottom: 50px; height: 50px; width: 100px; transition: height 0.5s ease;">
       <button id="expandableButton" onclick="expandContainer()"
         style="position: absolute; top: 0px; left: 10px; border-radius: 10px; border: 0px; width: 100px; height: 50px; background-color: rgb(244, 241, 222); padding-top: 10px; transition: height 0.5s ease;">
         <img id="burgerExit"
@@ -147,7 +148,7 @@
 
     {% if user.is_authenticated %}
     <div
-      style="position: fixed; top: 10px; right: 10px; z-index: 1000; border-radius: 10px; background-color: rgb(244, 241, 222); margin-bottom: 50px; height: 50px; box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8); width: 56px;">
+      style="position: fixed; top: 10px; right: 10px; z-index: 1000; border-radius: 10px; background-color: rgb(244, 241, 222); margin-bottom: 50px; height: 50px; width: 56px;">
       <a class="nav-link" href="/logout">
         <img
           src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzRxwymwRyfZJabfRMkxBYk47TdD8oWEXylA_o2panOwtdydVT-4eH3sn7i-GLstYBUnHp69BqiO8xS-agMdM7zYellNPOKZ82zZnvO7Uq0vbhcdWGPxUnOexd18ZBltHe6IzM4SgRZM6nIiZMecg1XkvKxspH_u41FhCrfnFgq5ZoeXJT6UhEs26N_JI/s512/logout.png"
