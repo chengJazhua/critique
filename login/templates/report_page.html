@@ -48,6 +48,7 @@
     <p>add error tolerance, if someone submits a file with a space in the name, then either catch w/error or fix name after submission</p>
   </div>
     <form method="post" enctype="multipart/form-data">
+      {% csrf_token %} 
     <div class="card" style="margin-left:20%; margin-right:20%; max-width:100%px; max-height:100%; background-color:white; line-height: 25px; border-style:solid; border-color:#3D405B">
         <div class ="form-group">
           <p style="margin-left:5%; margin-top:5%; color:#81B29A; font-size:150%">1. Report Information</p>
