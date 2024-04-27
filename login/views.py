@@ -209,12 +209,16 @@ def new_reports(request):
     return render(request, "new_reports.html", {"reports": new_reports})
 
 def in_progress_reports(request):
-    inprogress_reports = Report.objects.filter(status='In Progress')
+    inprogress_reports = Report.objects.filter(status='Seen')
     return render(request, "inprogress_reports.html", {"reports": inprogress_reports})
 
 def resolved_reports(request):
     resolved_reports = Report.objects.filter(status='Resolved')
-    return render(request, "resolved_reports.html", {"reports": resolved_reports})   
+    return render(request, "resolved_reports.html", {"reports": resolved_reports}) 
+  
+def admin_public_reports(request):
+    public_reports = Report.objects.filter(private=0)
+    return render(request, "admin_public_reports.html", {"reports": public_reports})  
     
 def admin_specific_report_view(request, pk):
     report = get_object_or_404(Report, pk=pk)
@@ -232,7 +236,7 @@ def admin_specific_report_view(request, pk):
                     {
                         'report': report,
                         # to include in html page
-                        'error_message': "You must submit feedback.",
+                        'error_message': "You must submit feedback",
                     },
                 )
             report.feedback = feedback
@@ -282,10 +286,11 @@ def public_specific_report_view(request, pk):
                 )
             Comments.objects.create(report=report, comment=feedback)
         
+    comments = report.comments_set.all().order_by("-pub_date")
     return render(
         request, 
         'specific_public_report.html', 
-        {'report': report},
+        {'report': report, 'comments': comments},
         )
 
 def report_delete(request, pk):
