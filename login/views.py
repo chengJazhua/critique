@@ -90,7 +90,17 @@ def admin_landing_view(request):
 def report(request):
     if request.method == 'POST':
         try:
-            evidence = Evidence(upload=request.FILES['filename'])
+            upload=request.FILES['filename']
+            print(upload)
+            if " " in upload.name:
+                return render(
+                request,
+                "report_page.html",
+                {
+                    "error_message": "File name cannot contain a space.",
+                },
+                )
+            evidence = Evidence(upload)
             fileLink = evidence.upload.url
             evidence.save()
         except Exception as e:
