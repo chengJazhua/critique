@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.contrib.auth.signals import user_logged_in
 from django.dispatch import receiver
-from login.models import Report, Evidence
+from login.models import Report, Evidence, Comments
 #from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
@@ -13,7 +13,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.db.models import Q
 from .forms import ReportForm
-
+from django.utils import timezone
 from django.template.defaulttags import register
 
 @register.filter(name='isjpg')
@@ -170,6 +170,7 @@ def user_reports(request):
     reports = Report.objects.filter(userID=request.user.email)
     return render(request, 'user_reports.html', {'reports': reports})
 
+
     
 def review_reports(request):
     reports = Report.objects.all()
@@ -178,7 +179,16 @@ def review_reports(request):
         "review_reports.html",
         {'reports' : reports},
     )
-    
+
+def public_reports_newest(request):
+    public_reports = Report.objects.filter(private=False).order_by("-pub_date")
+    return render(request, "public_reports.html", {"reports": public_reports})
+
+def public_reports_votes(request):
+    public_reports = Report.objects.filter(private=False).order_by("-votes")
+    return render(request, "public_reports.html", {"reports": public_reports})
+
+
 def new_reports(request):
     new_reports = Report.objects.filter(status='New')
     return render(request, "new_reports.html", {"reports": new_reports})
@@ -239,6 +249,30 @@ def admin_specific_report_view(request, pk):
         {'report': report},
         )
 
+def public_specific_report_view(request, pk):
+    report = get_object_or_404(Report, pk=pk)
+    if request.method == 'POST':
+        if request.POST.get('Resolve',False): #if resolve button is clicked
+            feedback = request.POST.get('feedback')
+            print(f"Feedback received: [{feedback}]")
+            if feedback == "":
+                return render(
+                    request, 
+                    'specific_public_report.html', 
+                    {
+                        'report': report,
+                        # to include in html page
+                        'error_message': "The comment must not be empty.",
+                    },
+                )
+            Comments.objects.create(report=report, comment=feedback)
+        
+    return render(
+        request, 
+        'specific_public_report.html', 
+        {'report': report},
+        )
+
 def report_delete(request, pk):
     report = get_object_or_404(Report, pk=pk)  
 
@@ -246,6 +280,12 @@ def report_delete(request, pk):
         report.delete()                    
     return redirect('/userlanding/')            
     
+def report_delete_admin(request, pk):
+    report = get_object_or_404(Report, pk=pk)  
+
+    if request.method == 'POST':         
+        report.delete()                    
+    return redirect('/adminreportview/')  
 
 def email(request):
     return render(request, "email_sent.html")
