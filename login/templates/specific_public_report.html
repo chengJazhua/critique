@@ -4,7 +4,7 @@
 <html lang="en">
     {% include 'login/user_navbar.html' %}
    
-    <body style="margin-top: 120px;">
+    <body style="margin-top: 120px; background-color: rgb(224, 122, 95)">
         {% if error_message %}
         <div class="container"
               style="display: flex; justify-content: center; width: 710px; height: 100px0px; background-color: #ED4337; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
@@ -14,13 +14,26 @@
               </label>
         </div>
       {% endif %}
-        <div class="container mt-5">
-            <h1 class="mb-4">Report #{{ report.pk }}</h1>
-                <div class="card" style="background-color: #dbedff;">
-                    <div class="card-body">
-                  <strong>User ID:</strong> {{ report.userID }}<br>
-                  <strong>Comment:</strong>
-                  <textarea></textarea> <!-- take information from here--> <br>
+        <div class="container mt-5" style="display: flex; justify-content: center;">
+                <div class="card" style="width: 80vw; background-color: rgb(242, 204, 143); border: 0; padding: 10px;">
+                  <div class="summary"
+                    style="font-size: 30px; width: 100%; height: auto; padding-top: 5px; padding-bottom: 5px; border-radius: 5px; background-color: #f0f0f0; text-align: center; align-items: center; padding-top: 8px; margin-bottom: 1vh;">
+                    <strong>{{ report.studentName.capitalize }}</strong> was reported for their work in <strong>{{report.className }}</strong> taught by <strong>{{ report.professorName.capitalize}}</strong><br>
+                  </div>                  
+                  <form method="post">
+                    {% csrf_token %}
+                    <textarea id="feedback" name="feedback" style="width: 90%; height: 300px;"></textarea>
+                    <br>
+                    <input type="Submit" value="Comment" name="Resolve">
+                  </form>
+
+                  {% for comment in report.comments_set.all %}
+                    <div class="summary"
+                      style="font-size: 30px; width: 100%; height: auto; padding-top: 5px; padding-bottom: 5px; border-radius: 5px; background-color: #f0f0f0; text-align: center; align-items: center; padding-top: 8px; margin-bottom: 1vh;">
+                      {{ comment.comment }}<br>
+                    </div>   
+                  {% endfor %}
+                  
                   <strong>Class Name:</strong> {{ report.className }}<br>
                   <strong>Professor Name:</strong> {{ report.professorName }}<br>
                   <strong>Student Name:</strong> {{ report.studentName }}<br>
@@ -30,14 +43,7 @@
                     <strong>Attached Evidence:</strong>
                     <iframe id="display" src="{{ report.fileLink}}" overflow="hidden" frameborder="0" width=90% height="600" scrolling="yes"></iframe><br>
                   </div>
-                  <strong>Status:</strong> {{ report.status }}<br>
-                  <form method="post">
-                    {% csrf_token %}
-                    <textarea id="feedback" name="feedback" style="width: 90%; height: 300px;"></textarea>
-                    <br>
-                    <input type="Submit" value="Resolve" name="Resolve">
-                  </form>
-                  
+                  <strong>Status:</strong> {{ report.status }}<br>                  
                 </div>
             </div>
         </div>
