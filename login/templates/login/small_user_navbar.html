@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <style>
+    @media (max-width: 800px) {
+        .small_show {
+          opacity: 1;
+        }
+      }
+  </style>
+
+  {% load socialaccount %}
+  {% if user.is_authenticated %}
+  {% if user.groups.exists %}
+  {% for group in user.groups.all %}
+  {% if group.name == 'site admin' %}
+  <meta http-equiv="refresh" content="0; url=/adminlanding/" />
+  {% endif %}
+  {% endfor %}
+  {% else %}
+  {% endif %}
+  {% endif %}
+
+  <div id="expandableContainer" class="small_show" style="opacity: 0"
+    style="position: fixed; top: 10px; left: 10px; z-index: 1000; border-radius: 10px; border: 0px; background-color: rgb(244, 241, 222); margin-bottom: 50px; height: 70px; box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8); width: 140px; transition: height 0.5s ease;">
+    <button id="expandableButton" onclick="expandContainer()"
+      style="position: absolute; top: 0px; left: 10px; border-radius: 10px; border: 0px; width: 120px; height: 70px; background-color: rgb(244, 241, 222); padding-top: 10px; transition: height 0.5s ease;">
+      <img id="burgerExit"
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrtWqZvOz2bZ7rV4y86wDqRJmGyGiqE5L4OQKZSki2Ogc46TqYDM4VT9chZ9rlXkZNO_E_WwvdZc__-BXkbl5cie7kFJlYeGalI3mK26dtPLbwo3HweyRomP5aCJKmLeKQ1Esc5UYovo5QMEFC4fZyFbHC7ZapJ2o82djaxmriWMfv0_WPR4LmBGRyxqs/s1200/menu.png"
+        style="position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 40px; height: auto; margin-bottom: 5px;">
+    </button>
+  </div>
+
+  <li class="nav-item" id="YouReports"
+    style="opacity: 0; z-index: 1001; position: fixed; top: 80px; left: 33px; flex-direction: column; align-items: center; list-style-type: none; height: 70px; width: 120px;">
+    <a class="nav-link" aria-current="page" href="/userlanding"
+      style="height: calc(100% + 17px); position: relative; display: inline-block; transform: translateY(-7px)">
+      <img
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRs6cHIeudh7SlVmROJixN9Wu5P-TN8sjj603pRrOcM7amTTO6deY6neTea9HimG5VCfxHZRWNgtFsuOw3FI9KcDDZgSrtzFW80WQr3Th05-VUwsAtGPZ9EKGP5PGzQbZ6B_ldydoarfJM1ThKGV7nQtA3bvNXkB1ZsJ2frtzZJNJde7vNuvDwXBuC1oo/s512/headshot.png"
+        style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 20px; height: auto; margin-bottom: 5px;">
+      <span style="display: block; transform: translateY(45px); text-align: center;">Your Reports</span>
+    </a>
+  </li>
+
+  <li class="nav-item" id="SubReport"
+    style="opacity: 0; z-index: 1001; position: fixed; top: 150px; left: 16px; flex-direction: column; align-items: center; list-style-type: none; height: 70px; width: 140px;">
+    <a class="nav-link" aria-current="page" href="/report"
+      style="height: calc(100% + 17px); position: relative; display: inline-block; transform: translateY(-7px)">
+      <img
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0lyIWkJ454OwaoBCSgyrNPPicB6JOqyTxTIoJ4rty25mJURY-0p7Eeo_ykvKge1RLT0MUNlgCQBC87Xr0B9TXNWRtZukx2TtRTdggeBs9UW3yxJLmVFVqRMFR-jyCevuNqwr4oBRRrVGP3TaMgQAiZj1qVdliHX4eLTwFILCBcaQz5lWC1fbslbCqR-E/s614/pencil.png"
+        style="scale: 3; position: absolute; top: 20px; left: 45%; width: 20px; height: auto; margin-bottom: 5px;">
+      <span style="display: block; transform: translateY(45px); text-align: center;">Submit A Report</span>
+    </a>
+  </li>
+
+  <li class="nav-item" id="PubReports"
+    style="opacity: 0; z-index: 1001; position: fixed; top: 220px; left: 24px; flex-direction: column; align-items: center; list-style-type: none; height: 70px; width: 120px;">
+    <a class="nav-link" aria-current="page" href="/publicreports"
+      style="height: calc(100% + 17px); position: relative; display: inline-block; transform: translateY(-7px);">
+      <img
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjIISRMXWEfp_Ctaz3IUPolrJmAlXjjOtqZhFPed8X1PFde-96vck93aHFtqW202MxBut1Q3u-lDZgjrV7ecpZC7kRbgyqfd-o6IuQW-wIjSNo4sotzU1PjirLPdRo3AHlrUL1blpv7KMeKtN8ZNi5fGDyTr-DTL2uDocfElReS6E_XWKjVuRiRrgsC5pQ/s512/magnifying_glass.png"
+        style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 20px; height: auto; margin-bottom: 5px;">
+      <span style="display: block; transform: translateY(45px); text-align: center;">Public Reports</span>
+    </a>
+  </li>
+
+  {% if user.is_authenticated %}
+  <div class="small_show" style="opacity: 0"
+    style="position: fixed; top: 10px; right: 10px; z-index: 1000; border-radius: 10px; background-color: rgb(244, 241, 222); margin-bottom: 50px; height: 70px; box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8); width: 80px;">
+    <a class="nav-link" href="/logout">
+      <img
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzRxwymwRyfZJabfRMkxBYk47TdD8oWEXylA_o2panOwtdydVT-4eH3sn7i-GLstYBUnHp69BqiO8xS-agMdM7zYellNPOKZ82zZnvO7Uq0vbhcdWGPxUnOexd18ZBltHe6IzM4SgRZM6nIiZMecg1XkvKxspH_u41FhCrfnFgq5ZoeXJT6UhEs26N_JI/s512/logout.png"
+        style="position: absolute; top: 15px; right: 15px; width: 40px; height: 40px; margin-bottom: 5px;">
+    </a>
+  </div>
+  {% else %}
+  <a class="nav-link" href="{% provider_login_url 'google' %}" method="oauth2">Login</a>
+  {% endif %}
+  </div>
+
+  <script>
+    function expandContainer() {
+      changeImage();
+      loadLinks();
+      var container = document.getElementById('expandableContainer');
+      var button = document.getElementById('expandableButton');
+      var expandedHeight = 280;
+      var initialHeight = 70;
+
+      if (container.clientHeight === initialHeight) {
+        container.style.height = expandedHeight + 'px';
+        button.style.height = expandedHeight + 'px';
+      }
+
+      else {
+        container.style.height = initialHeight + 'px';
+        button.style.height = initialHeight + 'px';
+      }
+    }
+
+    function changeImage() {
+      var image = document.getElementById('burgerExit');
+      var currentSource = image.src;
+
+      if (currentSource.includes('menu.png')) {
+        image.src = 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhWxTjOzeV_m5RSmN9zb9dFM7rnZVq5cDkFml9nalwCHRX1biyC-XtJfs4Q5zO2x0B4ZHDzAOvI5TFX8ozahFMEhSnGD08OLyEZpXRrIoBStUoF8fqAtglGopPMM5aNSSX4wyoTZcO2pwKCJhUiLQxDy1Azpobfys_kfMLW3NSHdw45oMjV_S1zWFGvfd8/s512/x.png';
+      }
+
+      else {
+        image.src = 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrtWqZvOz2bZ7rV4y86wDqRJmGyGiqE5L4OQKZSki2Ogc46TqYDM4VT9chZ9rlXkZNO_E_WwvdZc__-BXkbl5cie7kFJlYeGalI3mK26dtPLbwo3HweyRomP5aCJKmLeKQ1Esc5UYovo5QMEFC4fZyFbHC7ZapJ2o82djaxmriWMfv0_WPR4LmBGRyxqs/s1200/menu.png';
+      }
+    }
+
+    function loadLinks() {
+      var YouReports = document.getElementById('YouReports');
+      var SubReport = document.getElementById('SubReport');
+      var PubReports = document.getElementById('PubReports');
+
+      if (YouReports.style.opacity === '0') {
+        setTimeout(function () {
+          YouReports.style.opacity = '1';
+        }, 100);
+        setTimeout(function () {
+          SubReport.style.opacity = '1';
+        }, 200);
+        setTimeout(function () {
+          PubReports.style.opacity = '1';
+        }, 300);
+      } 
+      
+      else {
+        PubReports.style.opacity = '0';
+        setTimeout(function () {
+          SubReport.style.opacity = '0';
+        }, 100);
+        setTimeout(function () {
+          YouReports.style.opacity = '0';
+        }, 200);
+      }
+    }
+  </script>
+</body>
+
+</html>
