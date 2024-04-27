@@ -89,6 +89,7 @@ def admin_landing_view(request):
 
 def report(request):
     if request.method == 'POST':
+        fileLink = ""
         try:
             upload=request.FILES['filename']
             print(upload)
@@ -100,18 +101,24 @@ def report(request):
                     "error_message": "File name cannot contain a space.",
                 },
                 )
-            evidence = Evidence(upload)
+            
+            evidence = Evidence(upload=upload)
+            print(evidence)
             fileLink = evidence.upload.url
+            print("filelink:" + fileLink)
             evidence.save()
         except Exception as e:
             fileLink=""
-            # return render(
-            #     request,
-            #     "report_page.html",
-            #     {
-            #         "error_message": "You are missing one or more fields",
-            #     },
-            #     )
+            print(str(e))
+            if (str(e) != "'filename'"):
+            
+                return render(
+                    request,
+                    "report_page.html",
+                    {
+                        "error_message": str(e),
+                    },
+                    )
         userID = request.POST['userID']
         className = request.POST['className']
         professorName = request.POST['professorName']
@@ -125,8 +132,8 @@ def report(request):
         status = "New"
         feedback = ""
         
-
-        print(privacy)
+        # print(fileLink)
+        # print(privacy)
         
         if privacy is None:
             privacy_boolean = True
