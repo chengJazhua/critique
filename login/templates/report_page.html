@@ -6,6 +6,7 @@
   <style>
     body {
         font-family: 'Lato', sans-serif;
+        background-color: #3D405B;
     }
     </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
@@ -15,7 +16,6 @@
 {% elif not user.is_authenticated %}
 {% include 'login/anon_navbar.html' %}
 {% endif %}
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
 <style>
   .report-text-portion {
     input, label {
@@ -37,8 +37,8 @@
     </label>
   </div>
   {% endif %}
-  <div id="report-guidelines" style="font-family:Arial, Helvetica, sans-serif">
-    <strong style="font-family:Arial, Helvetica, sans-serif; font-size:50px">Submitting a Report</strong>
+  <div id="report-guidelines" style="margin:5%; color:#F4F1DE">
+    <strong style="font-size:300%">Submitting a Report</strong>
     <p>guidelines on what to report about. dont be a cyberbully. can we please change the font. lorem de dipshit im so tired</p>
     <p>todo: center card + realign items, inputs should have ids not labels (which should have fors), font change, navbar color switch to dark blue w/white text + put "user" above the username, yippee also link color would have to change too </p>
     <p>also dont forgor the error modal, probs make it salmon lol</p>
@@ -47,7 +47,7 @@
     <form>
     <div class="card" style="margin-left:20%; margin-right:20%; max-width:100%px; max-height:100%; background-color:white; line-height: 25px; border-style:solid; border-color:#3D405B">
         <div class ="form-group">
-          <p style="margin-left:5%">1. Report Information</p>
+          <p style="margin-left:5%; margin-top:5%; color:#81B29A; font-size:150%">1. Report Information</p>
           <div class="report-text-portion">
             <label for="studentName">Who are you reporting?</label>
             <input id="studentName" type="text" placeholder="ex. John Doe">
@@ -65,27 +65,29 @@
             <input id="professor_email" type="text" placeholder="ex. xxxxxx@virginia.edu">
           </div>
           <hr class="solid" stle="color:#81B29A">
-          <p style="margin-left:5%">2. User Testimonial</p>
+          <p style="margin-left:5%; color:#81B29A; font-size:150%">2. User Testimonial</p>
           <div class="report-text-portion">
             <label for="report">Your experience:</label>
-            <textarea id="report" placeholder="Describe your experience with this student"></textarea>
+            <textarea id="report" placeholder="Describe your experience with this student" style="width:75%"></textarea>
             <label for="fileUpload">Submit evidence of your testimonial:</label>
             <input type="file" id="fileUpload" name="filename"
-              style="font-size: 20px; font-weight: 100; color: black; border-radius: 5px; width: 95%; height: 50px;">
+              style="font-size: 15px; font-weight: 100; color: black; border-radius: 5px; width: 95%; height: 50px;">
           </div>
           <hr class="solid">
-          <p style="margin-left:5%">3. After Submission</p>
-          <div style="margin-left:10%">
+          <p style="margin-left:5%; color:#81B29A; font-size:150%"">3. After Submission</p>
+          <div style="margin-left:10%; margin-bottom:10%">
             <input type="checkbox" id="public">
-            <label for="public">Post publicly</label>
+            <label for="public">Post publicly</label><br>
             <input type="checkbox" id="email">
             <label for="email">Email copy of report to professor</label>
           </div>
         </div>
       </div>
       <input type="hidden" name="userID" value="{{ user.email }}">
-      <input type="submit"
-            style="font-size:24px; font-weight: 100; color: white; border-radius: 5px; border: 0px; background-color: rgb(129, 178, 154); height: 5%; width: 50%;">
+      <div>
+        <input type="submit"
+            style="font-size:20px; font-weight: 100; color: white; border-radius: 5px; border: 0px; background-color: rgb(129, 178, 154); height: 5%; width: 50%;">
+      </div>
     </form>
   </body>
   <!----<meta charset="UTF-8">
