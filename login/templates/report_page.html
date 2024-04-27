@@ -21,6 +21,9 @@
     input, label {
       display:block;
     }
+    textarea,select,input {
+      margin-bottom:2%;
+    }
   }
   .report-text-portion {
     margin-left:10%;
@@ -44,13 +47,13 @@
     <p>also dont forgor the error modal, probs make it salmon lol</p>
     <p>add error tolerance, if someone submits a file with a space in the name, then either catch w/error or fix name after submission</p>
   </div>
-    <form>
+    <form method="post" enctype="multipart/form-data">
     <div class="card" style="margin-left:20%; margin-right:20%; max-width:100%px; max-height:100%; background-color:white; line-height: 25px; border-style:solid; border-color:#3D405B">
         <div class ="form-group">
           <p style="margin-left:5%; margin-top:5%; color:#81B29A; font-size:150%">1. Report Information</p>
           <div class="report-text-portion">
             <label for="studentName">Who are you reporting?</label>
-            <input id="studentName" type="text" placeholder="ex. John Doe">
+            <input name="studentName" id="studentName" type="text" placeholder="ex. John Doe">
             <label for="rating-select">What is your rating of the student?</label>
             <select name="rating" id="rating-select">
               <option value="Postive" id="positive">Positive</option>
@@ -58,27 +61,32 @@
               <option value="Negative" id="negative">Negative</option>
             </select><br>
             <label for="className">What course?</label>
-            <input id="className" type="text" placeholder="ex. CS 3240">
+            <input name="className" id="className" type="text" placeholder="ex. CS 3240">
+            <label for="work-select">What type of work did you do with this student?</label>
+            <select name="workType" id="work-select">
+              <option value="Postive" id="positive">Group Assignment</option>
+              <option value="Neutral" id="neutral">Project</option>
+            </select><br>
             <label for="professorName">Professor of the course</label>
-            <input id="professorName" type="text" placeholder="ex. Mark Sherriff">
+            <input name="professorName" id="professorName" type="text" placeholder="ex. Mark Sherriff">
             <label for="professor_email">Professor Email</label>
-            <input id="professor_email" type="text" placeholder="ex. xxxxxx@virginia.edu">
+            <input name="professor_email" id="professor_email" type="text" placeholder="ex. xxxxxx@virginia.edu">
           </div>
           <hr class="solid" stle="color:#81B29A">
           <p style="margin-left:5%; color:#81B29A; font-size:150%">2. User Testimonial</p>
           <div class="report-text-portion">
             <label for="report">Your experience:</label>
-            <textarea id="report" placeholder="Describe your experience with this student" style="width:75%"></textarea>
+            <textarea name="report" id="report" placeholder="Describe your experience with this student" style="width:75%"></textarea>
             <label for="fileUpload">Submit evidence of your testimonial:</label>
             <input type="file" id="fileUpload" name="filename"
               style="font-size: 15px; font-weight: 100; color: black; border-radius: 5px; width: 95%; height: 50px;">
           </div>
           <hr class="solid">
-          <p style="margin-left:5%; color:#81B29A; font-size:150%"">3. After Submission</p>
+          <p style="margin-left:5%; color:#81B29A; font-size:150%">3. After Submission</p>
           <div style="margin-left:10%; margin-bottom:10%">
-            <input type="checkbox" id="public">
+            <input type="checkbox" name="public" id="public">
             <label for="public">Post publicly</label><br>
-            <input type="checkbox" id="email">
+            <input type="checkbox" name="email" id="email">
             <label for="email">Email copy of report to professor</label>
           </div>
         </div>
