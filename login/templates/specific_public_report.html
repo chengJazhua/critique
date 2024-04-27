@@ -1,26 +1,9 @@
 <!DOCTYPE html>
 {% load socialaccount %}
-<head>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<style>
-    body {
-        font-family: 'Lato', sans-serif;
-    }
-    </style>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
-</head>
 <html lang="en">
-    {% include 'login/admin_navbar.html' %}
-    {% if user.is_authenticated %}
-        {% if user.groups.exists %}
-        {% for group in user.groups.all %}
-            {% if group.name == 'site admin' %}
-                {% endif %}
-            {% endfor %}
-        {% else %}
-            <meta http-equiv="refresh" content="0; url=/userlanding/" />
-        {% endif %}
-    {% endif %}
+    {% include 'login/user_navbar.html' %}
+   
     <body>
         {% if error_message %}
         <div class="container"
@@ -48,30 +31,11 @@
                   <strong>Status:</strong> {{ report.status }}<br>
                   <form method="post">
                     {% csrf_token %}
-                    {% if report.feedback == "" %}
-                        <strong>Feedback:</strong> No feedback. <br>
-                        <label for="feedback">Give Feedback:</label>
-                        <br>
-                        <textarea id="feedback" name="feedback" style="width: 90%; height: 300px;"></textarea>
-                    {% else %}
-                        <strong>Feedback:</strong> {{ report.feedback }}<br>
-                        <label for="feedback">Give New Feedback:</label>
-                        <br>
-                        <textarea id="feedback" name="feedback" style="width: 90%; height: 300px;"></textarea>
-                    {% endif %}
+                    <textarea id="feedback" name="feedback" style="width: 90%; height: 300px;"></textarea>
                     <br>
                     <input type="Submit" value="Resolve" name="Resolve">
                   </form>
-                  {% if report.email_prof %}
-                  <strong>This student would like to submit their report to the professor</strong><br>
-                  <strong>Professor Email:</strong> {{ report.professor_email }}<br>
-                  {% else %}
-                  <strong>This student does not want to submit their report to the professor</strong><br>
-                  {% endif %}
-                  <form method=post> 
-                    {% csrf_token %}
-                <input type="Submit" value= "Email" name="Email"> 
-                </form> 
+                  
                 </div>
             </div>
         </div>
