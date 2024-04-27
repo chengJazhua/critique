@@ -277,10 +277,11 @@ def public_specific_report_view(request, pk):
                 )
             Comments.objects.create(report=report, comment=feedback)
         
+    comments = report.comments_set.all().order_by("-pub_date")
     return render(
         request, 
         'specific_public_report.html', 
-        {'report': report},
+        {'report': report, 'comments': comments},
         )
 
 def report_delete(request, pk):

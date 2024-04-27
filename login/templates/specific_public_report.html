@@ -27,7 +27,7 @@
                     <input type="Submit" value="Comment" name="Resolve">
                   </form>
 
-                  {% for comment in report.comments_set.all %}
+                  {% for comment in comments %}
                     <div class="summary"
                       style="font-size: 30px; width: 100%; height: auto; padding-top: 5px; padding-bottom: 5px; border-radius: 5px; background-color: #f0f0f0; text-align: center; align-items: center; padding-top: 8px; margin-bottom: 1vh;">
                       {{ comment.comment }}<br>
