@@ -5,8 +5,9 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Google Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-heightS">
+        <title>Login Page</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     </head>
     {% if user.is_authenticated %}
     {% if user.groups.exists %}
@@ -22,15 +23,38 @@
 {% if user.is_authenticated %}
 {% include 'login/user_navbar.html' %}
 {% endif %}
-    <body>
-        <div class="position-absolute top-50 start-50 translate-middle">
-            <div class="container" style="display: flex; justify-content: center; width: 400px; height: 500px; background-color: #f0f0f0;">
-                <div style="width:300px;" class="position-absolute top-50 start-50 translate-middle">
-                    <p class="fs-1 d-flex justify-content-center">We're Cooked</p>
+    <body style="background-color: #F4F1DE">
+        <section class="container-fluid">
+            <!-- Jumbotron -->
+            <div class=" px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: #F4F1DE">
+              <div class="container">
+                <div class="row gx-lg-5 align-items-center">
+                  <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h1 class="my-5 display-3 fw-bold ls-tight" style="color: #E07A5F; text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);">
+                      Collab
+                      <span style="color: #F2CC8F">Critique </span>
+                    </h1>
+                    <p style="color: #3D405B">
+                      Your one stop shop for reading and writing reviews for your fellow classmates!
+                    </p>
+                    <p style="color: #3D405B">
+                      Not sure who to pick for a group project? Look up their reviews to see if they stack up! 
+                      Bored and want to see what the latest group project drama is? Look no further!
+                    </p>
+                    <p style="color: #3D405B">
+                      Feel free to leave reviews for anyone you've worked with in your classes. Whether they are
+                      scalding hot or filled with praise, all input is appreciated!
+                      You have the option to send an email to your class professor reporting a peer's conduct as well.
+                      If you choose so, your identity and/or report will remain completely anonymous.
+                    </p>
+                  </div>
+                  <div class="col-md-6 mb-5 mb-lg-0">
+                    <div class="card" style="box-shadow: 1px 3px 6px rgba(43, 34, 34, 0.5); ">
+                      <div class="card-body py-5 px-md-5">
                     <p class="fs-1 d-flex justify-content-center">Login</p>
                     <div>
                         <div style="display: flex; justify-content: center;">
-                            <a href="{% provider_login_url 'google' %}" method="oauth2" type="button" style="width:195px;" class="shadow p-2 btn btn-light d-flex gap-2">
+                            <a href="{% provider_login_url 'google' %}" method="oauth2" type="button" style="width:195px; background-color: #F2CC8F; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);" class="shadow p-2 btn btn-light d-flex gap-2" >
                                 <span class="mx-auto" style="width: 20px;">
                                     <!-- from google branding guidelines -->
                                     <div class="">
@@ -49,15 +73,20 @@
                             </a>
                         </div>
                         <div style="display: flex; justify-content: center;">
-                            <button type="button" style="width:195px;" class="mt-3 shadow p-2 btn btn-light d-flex gap-2">
+                            <button type="button" style="width:195px; background-color: #F2CC8F; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); " class="mt-3 shadow p-2 btn btn-light d-flex gap-2">
                                 <div>
                                     <a class="nav-link" href="/report/">Continue as anonymous</a>
                                 </div>
                             </button>
                         </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
+            <!-- Jumbotron -->
+          </section>
+        
     </body>
 </html>
