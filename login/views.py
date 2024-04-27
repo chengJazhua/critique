@@ -194,7 +194,7 @@ def new_reports(request):
     return render(request, "new_reports.html", {"reports": new_reports})
 
 def in_progress_reports(request):
-    inprogress_reports = Report.objects.filter(status='In Progress')
+    inprogress_reports = Report.objects.filter(status='Seen')
     return render(request, "inprogress_reports.html", {"reports": inprogress_reports})
 
 def resolved_reports(request):
