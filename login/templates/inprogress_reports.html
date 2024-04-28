@@ -128,7 +128,7 @@
         {% endif %}
     {% endif %}
     <div class="container mt-5">
-        <div class="row row-cols-1 g-4" style="justify-content: center; position: absolute; left: 12px;">
+        <div class="row row-cols-1 g-4" style="width: 100vw; position: absolute; justify-content: center; left: 0; right: 0; margin: 0 auto;">
             {% for report in reports %}
             <div class="col" style="width: calc(44.5vw - 18px); margin: 1vw;">
               <div class="card" id="report_card{{report.id}}"
@@ -222,7 +222,7 @@
               
             </div>
             {% empty %}
-            <p>No reports submitted.</p>
+              <p style="font-size: 200%; color: black; text-align: center;">No In Progress Reports</p>
             {% endfor %}
           </div>
         </div>
