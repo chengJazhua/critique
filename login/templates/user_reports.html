@@ -175,11 +175,21 @@
             </div>
 
             <div id="ReportDetails{{report.id}}" class="details"
-              style="display: none; width: 40.5vw; height: 400px; border: 0px; border-radius: 5px; background-color: #f0f0f0; margin-bottom: 1vh;">
+              style="display: none; width: 40.5vw; height: 50vh; border: 0px; border-radius: 5px; background-color: #f0f0f0; margin-bottom: 1vh;">
               <p style="padding-left: 5px; font-weight: bold;">Report: </p>
-              <p style="padding-left: 5px;">{{ report.report.capitalize }}</p>
-              <iframe id="display{{report.id}}" src="{{report.fileLink}}" overflow="hidden" frameborder="0" width="500"
-                height="300" scrolling="yes"></iframe>
+              <p style="overflow: auto; 
+              height: 15vh; 
+              width: 40vw;
+              padding-left: 5px;">{{ report.report.capitalize }}</p>
+              <style> 
+                iframe{
+                  width: 40vw;
+                  height: 28vh;
+                  padding-left: 5px;
+                }
+              </style>
+              <iframe id="display{{report.id}}" src="{{report.fileLink}}" overflow="hidden" frameborder="0" width="35vw"
+                height="12vh" scrolling="yes"></iframe>
             </div>
 
             <button class="expandcollapse"
@@ -211,7 +221,7 @@
         details.style.display = "block";
         button.textContent = "Collapse";
         image.style.transform = "rotate(180deg)";
-        report_card.style.height = "calc(57vh + 410px)";
+        report_card.style.height = "calc(57vh + 50vh)";
       }
 
       else {
@@ -237,7 +247,9 @@
         Your.style.borderBottomRightRadius = '8px';
       }
     });
+
   </script>
+  
 </body>
 
 </html>

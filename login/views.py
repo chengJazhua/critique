@@ -148,12 +148,12 @@ def report(request):
                     },
                     )
             
-        if len(report) > 500:
+        if len(report.split(" ")) > 500 or len(report) > 10000:
             return render(
                     request,
                     "report_page.html",
                     {
-                        "error_message": "Report must be under 200 characters.",
+                        "error_message": "Report must be under 500 words and 10000 characters.",
                     },
                     )
             

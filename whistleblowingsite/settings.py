@@ -35,7 +35,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'a-08-3e91aaebfb2c.herokuapp.com']
 
-SITE_ID = 6 #identifies which site we are using for login 
+SITE_ID = 3 #identifies which site we are using for login 
 # Application definition
 
 INSTALLED_APPS = [
