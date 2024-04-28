@@ -102,7 +102,7 @@ def report(request):
                 request,
                 "report_page.html",
                 {
-                    "error_message": "File name must be alphanumerical.",
+                    "error_message": "File name must be alphanumerical.","success_message":"",
                 },
                 )
             
@@ -144,7 +144,7 @@ def report(request):
                     request,
                     "report_page.html",
                     {
-                        "error_message": "Class name must be under 200 characters.",
+                        "error_message": "Class name must be under 200 characters.","success_message":"",
                     },
                     )
             
@@ -153,7 +153,7 @@ def report(request):
                     request,
                     "report_page.html",
                     {
-                        "error_message": "Report must be under 200 characters.",
+                        "error_message": "Report must be under 200 characters.","success_message":"",
                     },
                     )
             
@@ -162,7 +162,7 @@ def report(request):
                     request,
                     "report_page.html",
                     {
-                        "error_message": "Professor name must be under 200 characters.",
+                        "error_message": "Professor name must be under 200 characters.","success_message":"",
                     },
                     )
             
@@ -171,7 +171,7 @@ def report(request):
                     request,
                     "report_page.html",
                     {
-                        "error_message": "Student name must be under 200 characters.",
+                        "error_message": "Student name must be under 200 characters.", "success_message":"",
                     },
                     ) 
             
@@ -180,7 +180,7 @@ def report(request):
                     request,
                     "report_page.html",
                     {
-                        "error_message": "Professor email must be under 200 characters.",
+                        "error_message": "Professor email must be under 200 characters.","success_message":"",
                     },
                     ) 
         
@@ -207,7 +207,7 @@ def report(request):
                 request,
                 "report_page.html",
                 {
-                    "error_message": "You are missing one or more fields.",
+                    "error_message": "You are missing one or more fields.","success_message":"",
                 },
                 )
         if email_prof_boolean:
@@ -220,16 +220,23 @@ def report(request):
                     request,
                     "report_page.html",
                     {
-                        "error_message": "You must enter a valid email.",
+                        "error_message": "You must enter a valid email.","success_message":"",
                     },
                     )
         print("creating object")
         Report.objects.create(userID = userID, report = report, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink, status=status, feedback=feedback, email_prof = email_prof_boolean, professor_email = professor_email, private = privacy_boolean)
+        return render(
+                request,
+                "report_page.html",
+                {
+                    "error_message": "", "success_message":"Your report has successfully been submitted",
+                },
+                )
     return render(
                 request,
                 "report_page.html",
                 {
-                    "error_message": "",
+                    "error_message": "", "success_message":"",
                 },
                 )
             
@@ -398,7 +405,7 @@ def edit_report(request, pk):
                 request,
                 "report_page.html",
                 {
-                    "error_message": "File name must be alphanumerical.",
+                    "error_message": "File name must be alphanumerical.", 
                 },
                 )
             

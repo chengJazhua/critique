@@ -51,6 +51,24 @@
     }, 2000);
   </script>
   {% endif %}
+  {% if success_message != "" %}
+  <div id="errorDiv"
+    style="pointer-events: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+    width: 75%; height: 20%; background-color:#81B29A; padding: 2%; margin-bottom: 2%; 
+    z-index: 9999; text-align: center; opacity: 1; transition: opacity 1s;">
+    <label for="className" style="font-size: 250%; font-weight: 100; color:#F4F1DE;">
+      {{success_message}}
+    </label>
+  </div>
+  <script>
+    setTimeout(function () {
+      var errorDiv = document.getElementById('errorDiv');
+      if (errorDiv) {
+        errorDiv.style.opacity = '0';
+      }
+    }, 2000);
+  </script>
+  {% endif %}
   <div id="report-guidelines" style="margin:5%; color:#F4F1DE">
     <strong style="font-size:300%; color:#81B29A">Submitting a Report</strong>
     <p>Create a report regarding a student's performance in collaborative work you were part of.</p>
