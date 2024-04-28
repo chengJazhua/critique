@@ -394,8 +394,8 @@ def report_delete(request, pk):
     report = get_object_or_404(Report, pk=pk)  
 
     if request.method == 'POST':         
-        report.delete()                    
-    return redirect('/userlanding/')            
+        report.delete()     
+    return redirect(request.META['HTTP_REFERER'])         
     
 def report_delete_admin(request, pk):
     report = get_object_or_404(Report, pk=pk)  
