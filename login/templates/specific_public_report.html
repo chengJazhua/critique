@@ -58,11 +58,15 @@
               }
             
             </style>
+            {% if report.fileLink == '' %}
+            <p>No file uploaded</p>
+            {% else %}
             {% if report.file_type != 'jpg' %}
             <iframe class="frame" id="display{{report.id}}" src="{{report.fileLink}}" overflow="hidden" frameborder="0" width="100%" height="100%"
               scrolling="yes" allowfullscreen></iframe>
             {% else %}
             <img id="display{{report.id}}" src="{{report.fileLink}}" />
+            {% endif %}
             {% endif %}
             </div>
         </div>
