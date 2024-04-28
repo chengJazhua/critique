@@ -25,10 +25,16 @@
         <div class="iframe-wrapper" style="width: 50%; padding: 5px;">
           <p style="font-size: 30px; text-align: center; align-items: center; margin-bottom: 1vh;">Report:
           </p>
-          <div style="width: 100%;height: 290px; border: 0px; border-radius: 5px; background-color: #f0f0f0;">
-            <p style="padding-left: 5px;">{{ report.report.capitalize }}</p>
+          <div style="width: 100%;height: 50vh; border: 0px; border-radius: 5px; background-color: #f0f0f0;">
+            
+              <style> 
+                iframe{
+                  height: 100%;
+                  width: 99.8%;
+                }
+              </style>
             <iframe id="display" src="{{ report.fileLink }}"
-              style="width: 100%; height: 300px; overflow: hidden; border: 0;" scrolling="yes"></iframe>
+              style="width: 100%;  overflow: hidden; border: 0;" scrolling="yes"></iframe>
             </div>
         </div>
 
@@ -37,7 +43,12 @@
             Comment:</p>
           <form method="post">
             {% csrf_token %}
-            <textarea id="feedback" name="feedback" style="resize: none; width: 100%; padding: 5px; height: 250px; border: 0px; border-radius: 5px; background-color: #f0f0f0;"></textarea>
+            <div style="width: 100%;height: 25.5vh; border: 0px; border-radius: 5px; background-color: #f0f0f0; margin-bottom: 1vh;">
+            <p style="overflow: auto; 
+              height: 25vh; 
+              padding-left: 5px;">{{ report.report.capitalize }}</p>
+              </div>
+            <textarea id="feedback" name="feedback" style="resize: none; width: 100%; padding: 5px; height: 19.3vh; border: 0px; border-radius: 5px; background-color: #f0f0f0;"></textarea>
             <input type="Submit" value="Comment" name="Resolve" style="width: 100%; padding: 5px; height: auto; border: 0px; border-radius: 5px; background-color: rgb(129, 178, 154)">
           </form>
         </div>
@@ -48,7 +59,7 @@
         {% for comment in comments %}
         <div class="comment" style="width: 100%;">
           <div class="summary"
-            style="font-size: 16px; height: auto; padding: 5px; border-radius: 5px; background-color: #f0f0f0; text-align: center; align-items: center; margin: 5px;">
+            style="font-size: 16px; height: auto; padding: 5px; border-radius: 5px; background-color: #f0f0f0; align-items: center; margin: 5px;">
             <p>{{ comment.comment }}</p>
           </div>
         </div>
