@@ -192,7 +192,14 @@
               height: 15vh; 
               width: 40vw;
               padding-left: 5px;">{{ report.report.capitalize }}</p>
-              <iframe id="display{{report.id}}" src="{{report.fileLink}}" style="height: 28vh; padding-left: 5px; scale: 0.25; width: 400%;" overflow="hidden" frameborder="0"
+              <style>
+                iframe {
+                  width: 40vw;
+                  height: 28vh;
+                  padding-left: 5px;
+                }
+              </style>
+              <iframe id="display{{report.id}}" src="{{report.fileLink}}" style="height: 28vh; padding-left: 5px; scale: 0.25; width: 100%;" overflow="hidden" frameborder="0"
                 scrolling="yes"></iframe>
             </div>
 
