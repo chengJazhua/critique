@@ -226,6 +226,22 @@
             {% endfor %}
           </div>
         </div>
-        
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+        var newReports = document.getElementById('new');
+        var newreps = document.getElementById('New');
+        if (newReports) {
+          newReports.style.backgroundColor = 'rgb(242, 204, 143)';
+          newreps.style.height = '90px';
+          newReports.style.width = '120px';
+          newReports.style.transform = 'translateY(0px)';
+          newReports.style.borderBottomLeftRadius = '8px';
+          newReports.style.borderBottomRightRadius = '8px';
+          newreps.style.boxShadow = '0px 6px 10px rgba(0, 0, 0, 0.65)';
+          newreps.style.borderBottomLeftRadius = '8px';
+          newreps.style.borderBottomRightRadius = '8px';
+        }
+      });
+      </script>
 </body>
 </html>

@@ -226,6 +226,22 @@
             {% endfor %}
           </div>
         </div>
-        
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+        var inProgress = document.getElementById('inpReports');
+        var INP = document.getElementById('INP');
+        if (inProgress) {
+          inProgress.style.backgroundColor = 'rgb(242, 204, 143)';
+          INP.style.height = '90px';
+          inProgress.style.width = '120px';
+          inProgress.style.transform = 'translateY(0px)';
+          inProgress.style.borderBottomLeftRadius = '8px';
+          inProgress.style.borderBottomRightRadius = '8px';
+          INP.style.boxShadow = '0px 6px 10px rgba(0, 0, 0, 0.65)';
+          INP.style.borderBottomLeftRadius = '8px';
+          INP.style.borderBottomRightRadius = '8px';
+        }
+      });
+      </script>
 </body>
 </html>
