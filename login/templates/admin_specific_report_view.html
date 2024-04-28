@@ -41,9 +41,25 @@
                   <strong>Student Name:</strong> {{ report.studentName }}<br>
                   <strong>Rating:</strong> {{ report.rating }}<br>
                   <strong>Work Type:</strong> {{ report.workType }}<br>
-                  <div class="iframe-wrapper" width="500" height="600">
-                    <strong>Attached Evidence:</strong>
-                    <iframe id="display" src="{{ report.fileLink}}" overflow="hidden" frameborder="0" width=90% height="600" scrolling="yes"></iframe><br>
+                  <style>
+                    iframe {
+                      width: 60vw;
+                      height: 50vh;
+                    }
+                    img {
+                      width: 60vw;
+                      height: 50vh;
+                    }
+                  
+                  </style>
+                  
+                  <div class="iframe-wrapper" width="50vh" height="60vw">
+                    <strong>Attached Evidence:</strong><br>
+                    {% if report.file_type != 'jpg' %}
+                    <iframe id="display" src="{{ report.fileLink}}" overflow="hidden" frameborder="0" scrolling="yes"></iframe><br>
+                    {% else %}
+                    <img id="display{{report.id}}" src="{{report.fileLink}}" /><br>
+                    {% endif %}
                   </div>
                   <strong>Status:</strong> {{ report.status }}<br>
                   <form method="post">

@@ -34,6 +34,7 @@ class Report(models.Model):
     email_status= models.BooleanField(default=False)
     pub_date = models.DateTimeField(auto_now_add=True)
     votes = models.IntegerField(default=0)
+    file_type = models.CharField(max_length = 10, default="pdf")
 
 class Comments(models.Model):
     report = models.ForeignKey(Report, on_delete=models.CASCADE)

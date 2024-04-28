@@ -93,6 +93,7 @@ def admin_landing_view(request):
 
 def report(request):
     if request.method == 'POST':
+        filetype=""
         fileLink = ""
         try:
             upload=request.FILES['filename']
@@ -103,6 +104,16 @@ def report(request):
                 "report_page.html",
                 {
                     "error_message": "File name must be alphanumerical.","success_message":"",
+                },
+                )
+            filetype = upload.name.split(".")[-1]
+            print(filetype)
+            if filetype != "jpg" and filetype != "txt" and filetype != "pdf":
+                return render(
+                request,
+                "report_page.html",
+                {
+                    "error_message": "File type must be jpg, txt, or pdf.","success_message":"",
                 },
                 )
             
@@ -224,7 +235,7 @@ def report(request):
                     },
                     )
         print("creating object")
-        Report.objects.create(userID = userID, report = report, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink, status=status, feedback=feedback, email_prof = email_prof_boolean, professor_email = professor_email, private = privacy_boolean)
+        Report.objects.create(file_type=filetype, userID = userID, report = report, className = className, professorName = professorName, studentName = studentName, rating = rating, workType = workType, fileLink = fileLink, status=status, feedback=feedback, email_prof = email_prof_boolean, professor_email = professor_email, private = privacy_boolean)
         return render(
                 request,
                 "report_page.html",
@@ -397,15 +408,28 @@ def edit_report(request, pk):
     report = get_object_or_404(Report, pk=pk)
     userID = report.userID
     if request.method == 'POST':
+        filetype=""
         try:
             upload=request.FILES['filename']
             print(upload)
             if not check_file_name(upload.name):
                 return render(
                 request,
-                "report_page.html",
+                "edit_report.html",
                 {
-                    "error_message": "File name must be alphanumerical.", 
+                    'report': report,
+                    "error_message": "File name must be alphanumerical.", "success_message":"",
+                },
+                )
+            filetype = upload.name.split(".")[-1]
+            print(filetype)
+            if filetype != "jpg" and filetype != "txt" and filetype != "pdf":
+                return render(
+                request,
+                "edit_report.html",
+                {
+                    'report': report,
+                    "error_message": "File type must be jpg, txt, or pdf.", "success_message":"",
                 },
                 )
             
@@ -535,6 +559,7 @@ def edit_report(request, pk):
         report.email_prof = email_prof_boolean
         report.professor_email = professor_email
         report.private = privacy_boolean
+        report.file_type = filetype
         report.save()
         return redirect('/userlanding/')
         
