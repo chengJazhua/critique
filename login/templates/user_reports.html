@@ -117,8 +117,8 @@
                   style="width: 90%; height: 5px; border-radius: 3px; background-color: rgb(242, 204, 143); margin: auto;">
                 </div>
                 <div style="padding: 3px 10px; width: 100%; height: 80px; margin-top: 3px;">
-                  <p style="font-weight: bold; padding-left: 5px;">Feedback: </p>
-                  <textarea readonly style="background-color:rgb(237, 237, 237); border: 0px; padding: 3px 10px; width: 100%; height: 18vh; margin-top: -10px; resize: none; overflow-y: auto;">
+                  <p style="font-weight: bold; padding-left: 5px;">Admin Feedback: {% if report.feedback == "" %}Pending{% endif %}</p>
+                  <textarea readonly placeholder= "Admin feedback pending" style="background-color:rgb(237, 237, 237); border: 0px; padding: 3px 10px; width: 100%; height: 18vh; margin-top: -10px; resize: none; overflow-y: auto;">
                       {{ report.feedback }}
                   </textarea>
                 </div>
