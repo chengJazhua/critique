@@ -407,8 +407,10 @@ def email(request):
 def edit_report(request, pk):
     report = get_object_or_404(Report, pk=pk)
     userID = report.userID
+    change_file_type = False
     if request.method == 'POST':
         filetype=""
+        change_file_type = True
         try:
             upload=request.FILES['filename']
             print(upload)
@@ -440,6 +442,7 @@ def edit_report(request, pk):
             evidence.save()
         except Exception as e:
             fileLink=report.fileLink
+            change_file_type = False
         userID = request.POST['userID']
         className = request.POST['className']
         professorName = request.POST['professorName']
@@ -559,7 +562,9 @@ def edit_report(request, pk):
         report.email_prof = email_prof_boolean
         report.professor_email = professor_email
         report.private = privacy_boolean
-        report.file_type = filetype
+        print(change_file_type)
+        if (change_file_type):
+            report.file_type = filetype
         report.save()
         return redirect('/userlanding/')
         
