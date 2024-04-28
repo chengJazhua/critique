@@ -84,7 +84,7 @@
             <input name="studentName" id="studentName" type="text" placeholder="ex. John Doe">
             <label for="rating-select">What is your rating of the student?</label>
             <select name="rating" id="rating-select">
-              <option value="Postive" id="positive">Positive</option>
+              <option value="Positive" id="positive">Positive</option>
               <option value="Neutral" id="neutral">Neutral</option>
               <option value="Negative" id="negative">Negative</option>
             </select><br>
@@ -128,18 +128,18 @@
     </form>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-      var YourReports = document.getElementById('SubmitAReport');
-      var Your = document.getElementById('Submit');
-      if (YourReports) {
-        YourReports.style.backgroundColor = 'rgb(242, 204, 143)';
-        Your.style.height = '90px';
-        YourReports.style.width = '140px';
-        YourReports.style.transform = 'translateY(0px)';
-        YourReports.style.borderBottomLeftRadius = '8px';
-        YourReports.style.borderBottomRightRadius = '8px';
-        Your.style.boxShadow = '0px 6px 10px rgba(0, 0, 0, 0.65)';
-        Your.style.borderBottomLeftRadius = '8px';
-        Your.style.borderBottomRightRadius = '8px';
+      var submitReport = document.getElementById('SubmitAReport');
+      var submit = document.getElementById('Submit');
+      if (submitReport) {
+        submitReport.style.backgroundColor = 'rgb(242, 204, 143)';
+        submit.style.height = '90px';
+        submitReport.style.width = '140px';
+        submitReport.style.transform = 'translateY(0px)';
+        submitReport.style.borderBottomLeftRadius = '8px';
+        submitReport.style.borderBottomRightRadius = '8px';
+        submit.style.boxShadow = '0px 6px 10px rgba(0, 0, 0, 0.65)';
+        submit.style.borderBottomLeftRadius = '8px';
+        submit.style.borderBottomRightRadius = '8px';
       }
     });
     </script>

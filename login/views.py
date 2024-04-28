@@ -146,6 +146,8 @@ def report(request):
         privacy = request.POST.get('privacy')
         status = "New"
         feedback = ""
+
+        print(rating)
         
         # print(fileLink)
         # print(privacy)

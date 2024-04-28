@@ -122,21 +122,21 @@
               <div style="display: flex; align-items: center;">
                 <div style="width: 80px; height: 80px; margin-right: 10px;">
                   <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                    {% if report.rating.capitalize == "Positive" %}
+                    {% if report.rating.capitalize == 'Positive' %}
                     <img class="rating_email" style="rotate: 90deg; width: auto; height: 8vh;"
                       src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhD2a2uzprPRdusoiSCTdrF5I6j5T_nY4FD-PU4e62iy0B77leCdAAiBhAcwa5R_p40HiDPkoX0Q_cBKONCbj3O7tq-lxhO2paTdCivtc2lG9hL_w5aVHxhH6cz5zUnGqAEcpU0kt2cGPVf5V6DmIU9AOHWaQXNCyh7g4cR2GgmxqdJQA1mQHb0pas6ZW8/s334/Screenshot_2024-04-20_at_4.22.10_PM-removebg-preview.png">
-                    {% elif report.rating.capitalize == "Negative" %}
-                    <img class="rating_email" style="width: auto; height: 8vh;"
+                    {% elif report.rating.capitalize == 'Negative' %}
+                    <img class="rating_email" style="rotate: -90deg; width: auto; height: 8vh;"
                       src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhD2a2uzprPRdusoiSCTdrF5I6j5T_nY4FD-PU4e62iy0B77leCdAAiBhAcwa5R_p40HiDPkoX0Q_cBKONCbj3O7tq-lxhO2paTdCivtc2lG9hL_w5aVHxhH6cz5zUnGqAEcpU0kt2cGPVf5V6DmIU9AOHWaQXNCyh7g4cR2GgmxqdJQA1mQHb0pas6ZW8/s334/Screenshot_2024-04-20_at_4.22.10_PM-removebg-preview.png">
                     {% else %}
-                    <img class="rating_email" style="rotate: -90deg; width: auto; height: 8vh;"
+                    <img class="rating_email" style=" width: auto; height: 8vh;"
                       src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhD2a2uzprPRdusoiSCTdrF5I6j5T_nY4FD-PU4e62iy0B77leCdAAiBhAcwa5R_p40HiDPkoX0Q_cBKONCbj3O7tq-lxhO2paTdCivtc2lG9hL_w5aVHxhH6cz5zUnGqAEcpU0kt2cGPVf5V6DmIU9AOHWaQXNCyh7g4cR2GgmxqdJQA1mQHb0pas6ZW8/s334/Screenshot_2024-04-20_at_4.22.10_PM-removebg-preview.png">
                     {% endif %}
                   </div>
                 </div>
                 <div class="summary"
                   style="width: calc(100% - 80px); min-height: 80px; height: auto; padding-top: 5px; padding-bottom: 5px; border-radius: 5px; background-color: #f0f0f0; text-align: center; align-items: center; padding-top: 8px; margin-bottom: 1vh;">
-                  <strong>{{ report.studentName.capitalize }}</strong> was reported for their work in <strong>{{report.className }}</strong> taught by <strong>{{report.professorName.capitalize}}</strong><br>
+                  <strong>{{ report.rating.capitalize }}</strong> was reported for their work in <strong>{{report.className }}</strong> taught by <strong>{{report.professorName.capitalize}}</strong><br>
                 </div>
               </div>
             </div>
