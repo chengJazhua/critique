@@ -15,6 +15,10 @@ from django.db.models import Q
 from .forms import ReportForm
 from django.utils import timezone
 from django.template.defaulttags import register
+import re
+
+def check_file_name(s):
+    return bool(re.match(r'^[\w.]+$', s))
 
 @register.filter(name='isjpg')
 def split(value): 
@@ -93,12 +97,12 @@ def report(request):
         try:
             upload=request.FILES['filename']
             print(upload)
-            if " " in upload.name:
+            if not check_file_name(upload.name):
                 return render(
                 request,
                 "report_page.html",
                 {
-                    "error_message": "File name cannot contain a space.",
+                    "error_message": "File name must be alphanumerical.",
                 },
                 )
             
@@ -387,8 +391,21 @@ def edit_report(request, pk):
     userID = report.userID
     if request.method == 'POST':
         try:
-            evidence = Evidence(upload=request.FILES['filename'])
+            upload=request.FILES['filename']
+            print(upload)
+            if not check_file_name(upload.name):
+                return render(
+                request,
+                "report_page.html",
+                {
+                    "error_message": "File name must be alphanumerical.",
+                },
+                )
+            
+            evidence = Evidence(upload=upload)
+            print(evidence)
             fileLink = evidence.upload.url
+            print("filelink:" + fileLink)
             evidence.save()
         except Exception as e:
             fileLink=report.fileLink
