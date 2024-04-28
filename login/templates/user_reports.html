@@ -157,17 +157,10 @@
                 </div>
                 <div style="margin-top: 17px; height: 5vh;">
                   <div style="display: flex;">
-                    {% if report.status != "Resolved" %}
                     <a href="/editreport/{{report.pk}}/" class="edit"
                       style="font-size: 20px; font-weight: 300; width: 10vw; margin-right: 5px; height: 21vh; border-radius: 5px; display: flex; justify-content: center; align-items: center; background-color: rgb(61, 64, 91); text-decoration: none; color: white; word-break: break-all; text-align: center;">
                       Edit<br>Report
                     </a>
-                    {%else%}
-                    <p
-                      style="font-size: 20px; font-weight: 300; width: 10vw; margin-right: 5px; height: 21vh; border-radius: 5px; display: flex; justify-content: center; align-items: center; background-color: rgb(89, 89, 89); text-decoration: none; color: white; word-break: break-all; text-align: center;">
-                      Report<br>uneditable<br>after resolving
-                  </p>
-                    {% endif %}
                     <form action="{% url 'login:report_delete' report.id %}" method="post">
                       {% csrf_token %}
                       <button type="submit" class="delete"

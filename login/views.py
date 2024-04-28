@@ -420,7 +420,7 @@ def edit_report(request, pk):
         report_text = request.POST['report']
         privacy = request.POST.get('privacy')
         status = "New"
-        feedback = ""
+        feedback = report.feedback
         
         if len(className) > 200:
             return render(
