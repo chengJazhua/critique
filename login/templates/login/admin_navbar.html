@@ -124,45 +124,67 @@
 
   <div class="small_show">
     <div id="expandableContainer"
-      style="position: fixed; top: 10px; left: 10px; z-index: 1000; border-radius: 10px; border: 0px; background-color: rgb(244, 241, 222); margin-bottom: 50px; height: 50px; box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8); width: 100px; transition: height 0.5s ease;">
+      style="position: fixed; top: 10px; left: 10px; z-index: 1000; border-radius: 10px; border: 0px; background-color: rgb(244, 241, 222); margin-bottom: 50px; height: 50px; box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8); width: 100px; transition: height 0.83s ease;">
       <button id="expandableButton" onclick="expandContainer()"
-        style="position: absolute; top: 0px; left: 10px; border-radius: 10px; border: 0px; width: 100px; height: 50px; background-color: rgb(244, 241, 222); padding-top: 10px; transition: height 0.5s ease;">
+        style="position: absolute; top: 0px; left: 10px; border-radius: 10px; border: 0px; width: 100px; height: 50px; background-color: rgb(244, 241, 222); padding-top: 10px; transition: height 0.83s ease;">
         <img id="burgerExit"
           src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrtWqZvOz2bZ7rV4y86wDqRJmGyGiqE5L4OQKZSki2Ogc46TqYDM4VT9chZ9rlXkZNO_E_WwvdZc__-BXkbl5cie7kFJlYeGalI3mK26dtPLbwo3HweyRomP5aCJKmLeKQ1Esc5UYovo5QMEFC4fZyFbHC7ZapJ2o82djaxmriWMfv0_WPR4LmBGRyxqs/s1200/menu.png"
           style="position: absolute; top: 5px; left: 45%; transform: translateX(-45%); width: 40px; height: auto; margin-bottom: 5px;">
       </button>
     </div>
 
-    <li class="nav-item" id="YouReports"
+    <li class="nav-item" id="AllReports"
       style="opacity: 0; z-index: 1001; position: fixed; top: 50px; left: 30px; flex-direction: column; align-items: center; list-style-type: none; height: 50px; width: 100px;">
-      <a class="nav-link" aria-current="page" href="/userlanding"
-        style="height: calc(100% + 17px); position: relative; display: inline-block; transform: translateY(-7px)">
+      <a class="nav-link" aria-current="page" href="/adminreportview"
+        style="height: calc(100% + 17px); position: relative; display: inline-block; transform: translate(29px, -7px);">
         <img
           src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRs6cHIeudh7SlVmROJixN9Wu5P-TN8sjj603pRrOcM7amTTO6deY6neTea9HimG5VCfxHZRWNgtFsuOw3FI9KcDDZgSrtzFW80WQr3Th05-VUwsAtGPZ9EKGP5PGzQbZ6B_ldydoarfJM1ThKGV7nQtA3bvNXkB1ZsJ2frtzZJNJde7vNuvDwXBuC1oo/s512/headshot.png"
           style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 20px; height: auto; margin-bottom: 5px;">
-        <span style="font-size: 12px; display: block; transform: translateY(45px); text-align: center;">Your Reports</span>
+        <span style="font-size: 12px; display: block; transform: translateY(45px); text-align: center;">All</span>
       </a>
     </li>
 
-    <li class="nav-item" id="SubReport"
+    <li class="nav-item" id="NewReports"
       style="opacity: 0; z-index: 1001; position: fixed; top: 100px; left: 14px; flex-direction: column; align-items: center; list-style-type: none; height: 50px; width: 100px;">
-      <a class="nav-link" aria-current="page" href="/report"
-        style="height: calc(100% + 17px); position: relative; display: inline-block; transform: translateY(-7px)">
+      <a class="nav-link" aria-current="page" href="/new_reports"
+        style="height: calc(100% + 17px); position: relative; display: inline-block; transform: translate(29px, -7px);">
         <img
           src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0lyIWkJ454OwaoBCSgyrNPPicB6JOqyTxTIoJ4rty25mJURY-0p7Eeo_ykvKge1RLT0MUNlgCQBC87Xr0B9TXNWRtZukx2TtRTdggeBs9UW3yxJLmVFVqRMFR-jyCevuNqwr4oBRRrVGP3TaMgQAiZj1qVdliHX4eLTwFILCBcaQz5lWC1fbslbCqR-E/s614/pencil.png"
           style="scale: 3; position: absolute; top: 20px; left: 45%; width: 20px; height: auto; margin-bottom: 5px;">
-        <span style="font-size: 12px; display: block; transform: translateY(45px); text-align: center;">Submit A Report</span>
+        <span style="font-size: 12px; display: block; transform: translate(7px, 45px); text-align: center;">New</span>
+      </a>
+    </li>
+
+    <li class="nav-item" id="InpReports"
+      style="opacity: 0; z-index: 1001; position: fixed; top: 150px; left: 23px; flex-direction: column; align-items: center; list-style-type: none; height: 50px; width: 100px;">
+      <a class="nav-link" aria-current="page" href="/in_progress_reports"
+        style="height: calc(100% + 17px); position: relative; display: inline-block; transform: translate(10px, -7px);">
+        <img
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjIISRMXWEfp_Ctaz3IUPolrJmAlXjjOtqZhFPed8X1PFde-96vck93aHFtqW202MxBut1Q3u-lDZgjrV7ecpZC7kRbgyqfd-o6IuQW-wIjSNo4sotzU1PjirLPdRo3AHlrUL1blpv7KMeKtN8ZNi5fGDyTr-DTL2uDocfElReS6E_XWKjVuRiRrgsC5pQ/s512/magnifying_glass.png"
+          style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 20px; height: auto; margin-bottom: 5px;">
+        <span style="font-size: 12px; display: block; transform: translate(2px, 45px); text-align: center;">In Progress</span>
+      </a>
+    </li>
+
+    <li class="nav-item" id="ResReports"
+      style="opacity: 0; z-index: 1001; position: fixed; top: 200px; left: 23px; flex-direction: column; align-items: center; list-style-type: none; height: 50px; width: 100px;">
+      <a class="nav-link" aria-current="page" href="/resolved_reports"
+        style="height: calc(100% + 17px); position: relative; display: inline-block; transform: translate(15px, -7px);">
+        <img
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjIISRMXWEfp_Ctaz3IUPolrJmAlXjjOtqZhFPed8X1PFde-96vck93aHFtqW202MxBut1Q3u-lDZgjrV7ecpZC7kRbgyqfd-o6IuQW-wIjSNo4sotzU1PjirLPdRo3AHlrUL1blpv7KMeKtN8ZNi5fGDyTr-DTL2uDocfElReS6E_XWKjVuRiRrgsC5pQ/s512/magnifying_glass.png"
+          style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 20px; height: auto; margin-bottom: 5px;">
+        <span style="font-size: 12px; display: block; transform: translateY(45px); text-align: center;">Resolved</span>
       </a>
     </li>
 
     <li class="nav-item" id="PubReports"
-      style="opacity: 0; z-index: 1001; position: fixed; top: 150px; left: 23px; flex-direction: column; align-items: center; list-style-type: none; height: 50px; width: 100px;">
-      <a class="nav-link" aria-current="page" href="/publicreports"
-        style="height: calc(100% + 17px); position: relative; display: inline-block; transform: translateY(-7px);">
+      style="opacity: 0; z-index: 1001; position: fixed; top: 250px; left: 23px; flex-direction: column; align-items: center; list-style-type: none; height: 50px; width: 100px;">
+      <a class="nav-link" aria-current="page" href="/admin_public_reports"
+        style="height: calc(100% + 17px); position: relative; display: inline-block; transform: translate(22px, -7px);">
         <img
           src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjIISRMXWEfp_Ctaz3IUPolrJmAlXjjOtqZhFPed8X1PFde-96vck93aHFtqW202MxBut1Q3u-lDZgjrV7ecpZC7kRbgyqfd-o6IuQW-wIjSNo4sotzU1PjirLPdRo3AHlrUL1blpv7KMeKtN8ZNi5fGDyTr-DTL2uDocfElReS6E_XWKjVuRiRrgsC5pQ/s512/magnifying_glass.png"
           style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 20px; height: auto; margin-bottom: 5px;">
-        <span style="font-size: 12px; display: block; transform: translateY(45px); text-align: center;">Public Reports</span>
+        <span style="font-size: 12px; display: block; transform: translateY(45px); text-align: center;">Public</span>
       </a>
     </li>
 
@@ -187,7 +209,7 @@
       loadLinks();
       var container = document.getElementById('expandableContainer');
       var button = document.getElementById('expandableButton');
-      var expandedHeight = 210;
+      var expandedHeight = 310;
       var initialHeight = 50;
 
       if (container.clientHeight === initialHeight) {
@@ -215,30 +237,44 @@
     }
 
     function loadLinks() {
-      var YouReports = document.getElementById('YouReports');
-      var SubReport = document.getElementById('SubReport');
+      var AllReports = document.getElementById('AllReports');
+      var NewReports = document.getElementById('NewReports');
+      var InpReports = document.getElementById('InpReports');      
+      var ResReports = document.getElementById('ResReports');      
       var PubReports = document.getElementById('PubReports');      
 
-      if (YouReports.style.opacity === '0') {
+      if (AllReports.style.opacity === '0') {
         setTimeout(function () {
-          YouReports.style.opacity = '1';
+          AllReports.style.opacity = '1';
         }, 100);
         setTimeout(function () {
-          SubReport.style.opacity = '1';
+          NewReports.style.opacity = '1';
         }, 200);
         setTimeout(function () {
-          PubReports.style.opacity = '1';
+          InpReports.style.opacity = '1';
         }, 300);
+        setTimeout(function () {
+          ResReports.style.opacity = '1';
+        }, 400);
+        setTimeout(function () {
+          PubReports.style.opacity = '1';
+        }, 500);
       }
 
       else {
         PubReports.style.opacity = '0';
         setTimeout(function () {
-          SubReport.style.opacity = '0';
+          ResReports.style.opacity = '0';
         }, 100);
         setTimeout(function () {
-          YouReports.style.opacity = '0';
+          InpReports.style.opacity = '0';
         }, 200);
+        setTimeout(function () {
+          NewReports.style.opacity = '0';
+        }, 300);
+        setTimeout(function () {
+          AllReports.style.opacity = '0';
+        }, 400);
       }
     }
   </script>
