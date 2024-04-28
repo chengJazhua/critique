@@ -55,10 +55,14 @@
                   
                   <div class="iframe-wrapper" width="50vh" height="60vw">
                     <strong>Attached Evidence:</strong><br>
+                    {% if report.fileLink == '' %}
+                    <p>No file uploaded</p>
+                    {% else %}
                     {% if report.file_type != 'jpg' %}
                     <iframe id="display" src="{{ report.fileLink}}" overflow="hidden" frameborder="0" scrolling="yes"></iframe><br>
                     {% else %}
                     <img id="display{{report.id}}" src="{{report.fileLink}}" /><br>
+                    {% endif %}
                     {% endif %}
                   </div>
                   <strong>Status:</strong> {{ report.status }}<br>
