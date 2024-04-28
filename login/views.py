@@ -366,6 +366,7 @@ def admin_specific_report_view(request, pk):
 
 def public_specific_report_view(request, pk):
     report = get_object_or_404(Report, pk=pk)
+    comments = report.comments_set.all().order_by("-pub_date")
     if request.method == 'POST':
         if request.POST.get('Resolve',False): #if resolve button is clicked
             feedback = request.POST.get('feedback')
@@ -375,7 +376,7 @@ def public_specific_report_view(request, pk):
                     request, 
                     'specific_public_report.html', 
                     {
-                        'report': report,
+                        'report': report, 'comments': comments,
                         # to include in html page
                         'error_message': "The comment must not be empty.",
                     },
