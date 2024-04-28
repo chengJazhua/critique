@@ -3,113 +3,117 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
-        @media (max-width: 1085px) {
-          .body {
-            margin-right: -100px;
-            font-family: 'Lato', sans-serif;
-          }
-          
-    
-          .row.row-cols-1.g-4 {
-            width: 100%;
-            justify-content: center;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-          }
-    
-          .col {
-            width: 100% !important;
-            margin: 1vw 0;
-          }
-    
-          .card {
-            display: flex !important;
-            flex-direction: column;
-            align-items: center;
-        }
+  @media (max-width: 1085px) {
+    .body {
+      margin-right: -100px;
+      font-family: 'Lato', sans-serif;
+    }
 
-        .card-body {
-            flex: 1;
-            width: 100%;
-        }
-          .row {
-            width: calc(2 * 44.5vw - 40px) !important;
-          }
-          .card-body textarea {
-            width: calc(88vw - 105px) !important;
-            margin-bottom: 10px;
-            padding: 10px;
-            resize: vertical;
-            min-height: 100px;
-        }
-          .summary{
-            width: 90% !important;
-            margin: 0 auto 1vh auto; 
-          }
-          .details {
-            width: calc(88vw - 65px) !important;
-          }
-    
-          .expandcollapse {
-            width: calc(88vw - 65px) !important;
-          }
-    
-          .information {
-            width: 100% !important;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-          }
-    
-          .submit_status_and_update{
-            width: 80% !important;
-        height: auto !important;
-        display: flex;
-        justify-content: center;
-          }
-          .submit_status_and_update_box {
-            flex-wrap: wrap;
-            width: auto !important;
-            height: auto !important;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-          .quickinfo {
-            width: 80% !important;
-            height: auto !important;
-            margin-bottom: 10px;
-          }
-    
-          .edit,
-          .delete {
-            width: 19vw !important;
-          }
-    
-          .rating_email {
-            width: max(10vw, 20vh);
-            height: max(10vw, 20vh);
-          }
-    
-          .private {
-            width: auto;
-            height: 8vh;
-          }
-    
-          #ReportDetails,
-          #display,
-          #ExpandCollapse,
-          #arrowImage {
-            width: calc(2 * 40.5vw) !important;
-          }
-          .textarea-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin-top: 20px; 
-        }
-        }
+
+    .row.row-cols-1.g-4 {
+      width: 100%;
+      justify-content: center;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+    }
+
+    .report {
+      width: 100%;
+    }
+
+    .col {
+      width: 100% !important;
+      margin: 1vw 0;
+    }
+
+    .card,
+    .card-body,
+    .row {
+        width: calc(2 * 44.5vw - 40px) !important;
+      }
+
+    .card-body textarea {
+      width: calc(88vw - 105px) !important;
+      margin-bottom: 10px;
+      padding: 10px;
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .summary {
+      width: 90% !important;
+      margin: 0 auto 1vh auto;
+    }
+
+    .details {
+      width: calc(88vw - 65px) !important;
+    }
+
+    .expandcollapse {
+      width: calc(88vw - 65px) !important;
+    }
+
+    .information {
+      margin-left: auto;
+      margin-right: auto;
+      width: 90% !important;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .submit_status_and_update {
+      width: 45% !important;
+      height: auto !important;
+      display: flex;
+      justify-content: center;
+    }
+
+    .submit_status_and_update_box {
+      flex-wrap: wrap;
+      width: auto !important;
+      height: auto !important;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .quickinfo {
+      width: 45% !important;
+      height: auto !important;
+      margin-bottom: 10px;
+    }
+
+    .edit,
+    .delete {
+      width: 19vw !important;
+    }
+
+    .rating_email {
+      width: max(10vw, 20vh);
+      height: max(10vw, 20vh);
+    }
+
+    .private {
+      width: auto;
+      height: 8vh;
+    }
+
+    #ReportDetails,
+    #display,
+    #ExpandCollapse,
+    #arrowImage {
+      width: calc(2 * 40.5vw) !important;
+    }
+
+    .textarea-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  }
       </style>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
     <html lang="en">
@@ -198,12 +202,12 @@
                   </div>
                   
                 </div>
-                <strong style="margin-left: 5vw; margin-top: 10px; display: block;">Admin Feedback: {% if report.feedback == "" %}Pending{% endif %}</strong>
+                <strong style="margin-left: auto; margin-right: auto; margin-top: 10px; display: block;">Admin Feedback: {% if report.feedback == "" %}Pending{% endif %}</strong>
                 <div class="textarea-container" style="width: 100%; display: flex; justify-content: center;">
                     
-                    <textarea readonly placeholder= "View full report to give feedback" style="background-color:rgb(237, 237, 237);width: calc(40.5vw - 40px); border-radius: 5px; margin-bottom: 10px; padding: 10px; resize: vertical; min-height: 100px;" rows="4">{{report.feedback}}</textarea>
+                    <textarea readonly placeholder= "View full report to give feedback" style="background-color:rgb(237, 237, 237);width: 90%; border-radius: 5px; margin-bottom: 10px; padding: 10px; resize: vertical; min-height: 100px;" rows="4">{{report.feedback}}</textarea>
                   </div>
-                  <div style="margin-top: 10px; margin-bottom: 10px; margin-left: 5px; height: 5vh;">
+                  <div style="margin-top: 10px; margin-bottom: 10px; margin-left: auto; margin-right: auto; height: 5vh;">
                     <div style="display: flex;">
                       <a href="/adminreportview/{{report.pk}}/"
                         style="font-size: 20px; font-weight: 300; width: 10vw; border-radius: 5px; margin-right: 5px; height: 5vh; display: flex; justify-content: center; align-items: center; background-color: #81B29A; text-decoration: none; color: white; word-break: break-all; text-align: center;">
