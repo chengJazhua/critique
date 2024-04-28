@@ -126,5 +126,22 @@
             style="font-size:25px; font-weight: 100; color: white; border-radius: 5px; border: 0px; background-color: rgb(129, 178, 154); height: 5%; width: 50%;">
       </div>
     </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+      var YourReports = document.getElementById('SubmitAReport');
+      var Your = document.getElementById('Submit');
+      if (YourReports) {
+        YourReports.style.backgroundColor = 'rgb(242, 204, 143)';
+        Your.style.height = '90px';
+        YourReports.style.width = '140px';
+        YourReports.style.transform = 'translateY(0px)';
+        YourReports.style.borderBottomLeftRadius = '8px';
+        YourReports.style.borderBottomRightRadius = '8px';
+        Your.style.boxShadow = '0px 6px 10px rgba(0, 0, 0, 0.65)';
+        Your.style.borderBottomLeftRadius = '8px';
+        Your.style.borderBottomRightRadius = '8px';
+      }
+    });
+    </script>
   </body>
 </html>

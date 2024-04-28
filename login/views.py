@@ -431,48 +431,52 @@ def edit_report(request, pk):
         
         if len(className) > 200:
             return render(
-                    request,
-                    "report_page.html",
-                    {
-                        "error_message": "Class name must be under 200 characters.",
-                    },
-                    )
+                request,
+                "edit_report.html",
+                {
+                    'report': report,
+                    "error_message": "Class name must be under 200 characters.", "success_message":"",
+                },
+                )
             
-        if len(report_text) > 500:
+        if len(report_text.split(" ")) > 500 or len(report_text) > 10000:
             return render(
                     request,
                     "report_page.html",
                     {
-                        "error_message": "Report must be under 200 characters.",
+                        "error_message": "Report must be under 500 words and 10000 characters.","success_message":"",
                     },
                     )
             
         if len(professorName) > 200:
             return render(
-                    request,
-                    "report_page.html",
-                    {
-                        "error_message": "Professor name must be under 200 characters.",
-                    },
-                    )
+                request,
+                "edit_report.html",
+                {
+                    'report': report,
+                    "error_message": "Professor name must be under 200 characters.", "success_message":"",
+                },
+                )
             
         if len(studentName) > 200:
             return render(
-                    request,
-                    "report_page.html",
-                    {
-                        "error_message": "Student name must be under 200 characters.",
-                    },
-                    ) 
+                request,
+                "edit_report.html",
+                {
+                    'report': report,
+                    "error_message": "Student name must be under 200 characters.", "success_message":"",
+                },
+                )
             
         if len(professor_email) > 200:
             return render(
-                    request,
-                    "report_page.html",
-                    {
-                        "error_message": "Professor email must be under 200 characters.",
-                    },
-                    ) 
+                request,
+                "edit_report.html",
+                {
+                    'report': report,
+                    "error_message": "Professor email must be under 200 characters.", "success_message":"",
+                },
+                )
         
         print(privacy)
         
@@ -500,7 +504,7 @@ def edit_report(request, pk):
                 "edit_report.html",
                 {
                     'report': report,
-                    "error_message": "You are missing one or more fields.",
+                    "error_message": "You are missing one or more fields.", "success_message":"",
                 },
                 )
         if email_prof_boolean:
@@ -513,7 +517,7 @@ def edit_report(request, pk):
                     request,
                     "edit_report.html",
                     {
-                        "error_message": "You must enter a valid email.",
+                        "error_message": "You must enter a valid email.", "success_message":"",
                         'report': report,
                     },
                     )
@@ -540,5 +544,6 @@ def edit_report(request, pk):
         {
             "error_message": "",
             'report': report,
+            "success_message":"",
         },
         )
