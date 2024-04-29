@@ -1,8 +1,27 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/qgEWmaMc)
-# Django Practice Assessment
+# CollabCritique
 
-__Name:__
+__Name: Alisha Qian, Jazhua Cheng, Blair Zhao, Jacob Hyunh, Colin Bitz__
 
-__Computing ID:__
+__Computing ID: Sta2fu, ajd8xe, zfj4ee, sff8qc, wuh4xg__
 
-test
+Made for CS 3240
+
+Welcome to CollabCritique, your one stop shop for submitting and viewing reviews/reports for other students you have worked with in group settings!
+
+Check it out: https://a-08-3e91aaebfb2c.herokuapp.com/
+
+Key features:
+- optional anonymous reports
+- keeping track of all reports you have submitted and being able to edit and update them
+- viewing and searching for public reports from other users and commenting on them
+- having your report emailed by admins to the class professor, if you so choose
+- option of keeping your reports private or public
+
+Built with:
+- Python
+- Django
+- Google login
+- HTML / CSS
+- Javascript
+- AWS3 Storage Buckets
+- Heroku
