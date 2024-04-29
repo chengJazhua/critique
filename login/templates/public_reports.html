@@ -90,7 +90,7 @@
 
 </head>
 
-<body style="background-color: #3d405b; margin-top: 120px; height: auto;">
+<body style="background-color: #3d405b; margin-top: 120px; height: auto; width: 100vw; overflow-x: hidden;">
   <div
     style="background-color: rgb(242, 204, 143); padding: 5px; border-radius: 5px; width: calc(91vw - 36px); margin: 0 auto; height: 40px; margin-bottom: -35px;">
     <form method="post" style="display: flex; align-items: center; width: 100%;">
@@ -184,12 +184,12 @@
                 height="600" scrolling="yes"></iframe>
             </div>
 
-            <div class="comments"
-              style="width: 40.5vw; height: 45px; background-color: #f0f0f0; border: 0; border-radius: 5px; display: flex; justify-content: center; align-items: center;">
-              <a href="/publicreports/{{report.pk}}/"
-                style="text-decoration: none; color: black; font-size: 16px; font-weight: 500;">Comments</a>
-            </div>
-
+            <a href="/publicreports/{{report.pk}}/" style="text-decoration: none; color: black;">
+              <div class="comments"
+                   style="width: 40.5vw; height: 45px; background-color: #f0f0f0; border: 0; border-radius: 5px; display: flex; justify-content: center; align-items: center;">
+                  Comments
+              </div>
+          </a>
           </div>
         </div>
       </div>
